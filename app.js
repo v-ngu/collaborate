@@ -1,25 +1,30 @@
+// basic configs
 require('dotenv').config();
 require('express-async-errors');
 
+const express = require('express');
+const app = express();
+
 //const connectDB = require('./db/connect');
+
+// import middlewares
 const morgan = require('morgan');
 const notFoundMiddleware = require('./middlewares/not-found');
 const errorHandlerMiddleWare = require('./middlewares/error-handler')
 const checkJwt = require('./middlewares/checkJwt');
 
-const express = require('express');
-const app = express();
-
 // middlewares
 app.use(morgan("tiny"));
 app.use(express.json());
 
-// routes
+// public routes
 app.get('/api/public', (req, res) => {
   res.json('This is the public api');
 });
 
-app.get('/api/private', checkJwt, (req, res) => {
+// private routes + authentification
+app.use(checkJwt);
+app.get('/api/private', (req, res) => {
   res.json('This is the private api');
 });
 
