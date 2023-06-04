@@ -2,9 +2,16 @@
 require('dotenv').config();
 require('express-async-errors');
 
-// express setup
+// server setup
 const express = require('express');
 const app = express();
+
+const http = require('http');
+const server = http.createServer(app);
+
+// Socket.io setup to mount on express server
+const { Server } = require('socket.io');
+const io = new Server(server);
 
 // mongoDB instance and handlers
 const DatabaseHandler = require('./db/dbHandler');
@@ -26,6 +33,12 @@ app.get('/api/private', (req, res) => {
   res.json('This is the private api');
 });
 
+// handling socket connection
+io.on('connection', socket => {
+  socket.on('join', () => {});
+  socket.on('update', () => {});
+});
+
 // error handling middlewares
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleWare);
@@ -35,7 +48,7 @@ const port = process.env.PORT || 8000;
 const start = async () => {
   try {
     await client.connect()
-    app.listen(port, () =>
+    server.listen(port, () =>
       console.log(`Server is listening to port ${port}`)
     );
   } catch (error) {
