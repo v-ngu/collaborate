@@ -11,7 +11,7 @@ const app = express();
 const morgan = require('morgan');
 const notFoundMiddleware = require('./middlewares/not-found');
 const errorHandlerMiddleWare = require('./middlewares/error-handler')
-const checkJwt = require('./middlewares/checkJwt');
+const authMiddleware = require('./middlewares/auth');
 
 // middlewares
 app.use(morgan("tiny"));
@@ -23,7 +23,7 @@ app.get('/api/public', (req, res) => {
 });
 
 // private routes + authentification
-app.use(checkJwt);
+app.use(authMiddleware);
 app.get('/api/private', (req, res) => {
   res.json('This is the private api');
 });
