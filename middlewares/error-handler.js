@@ -7,7 +7,8 @@ const errorHandlerMiddleWare = (err, _req, res, _next) => {
     return res.status(err.statusCode).json({ msg: err.message })
   };
 
-  return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ err });
+  const defaultErrorStatus = (err.status || StatusCodes.INTERNAL_SERVER_ERROR);
+  return res.status(defaultErrorStatus).json({ err });
 };
 
 module.exports = errorHandlerMiddleWare;
