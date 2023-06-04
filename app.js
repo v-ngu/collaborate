@@ -2,10 +2,13 @@
 require('dotenv').config();
 require('express-async-errors');
 
+// express setup
 const express = require('express');
 const app = express();
 
-//const connectDB = require('./db/connect');
+// mongoDB instance and handlers
+const DatabaseHandler = require('./db/dbHandler');
+const client = new DatabaseHandler();
 
 // import middlewares
 const morgan = require('morgan');
@@ -13,17 +16,12 @@ const notFoundMiddleware = require('./middlewares/not-found');
 const errorHandlerMiddleWare = require('./middlewares/error-handler')
 const authMiddleware = require('./middlewares/auth');
 
-// middlewares
+// use middlewares
 app.use(morgan("tiny"));
 app.use(express.json());
-
-// public routes
-app.get('/api/public', (req, res) => {
-  res.json('This is the public api');
-});
-
-// private routes + authentification
 app.use(authMiddleware);
+
+// routes
 app.get('/api/private', (req, res) => {
   res.json('This is the private api');
 });
@@ -32,12 +30,12 @@ app.get('/api/private', (req, res) => {
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleWare);
 
-// starting server
+// starting server and connecting to database
 const port = process.env.PORT || 8000;
-const start = async() => {
+const start = async () => {
   try {
-    // await will have to connect to DB
-    app.listen(port, () => 
+    await client.connect()
+    app.listen(port, () =>
       console.log(`Server is listening to port ${port}`)
     );
   } catch (error) {
