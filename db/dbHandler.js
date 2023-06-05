@@ -6,10 +6,10 @@ class DatabaseHandler {
   constructor() {
     this.client = new MongoClient(process.env.MONGO_URI);
     this.db = this.client.db('collaborate');
-    this.collections = {
-      users: this.db.collection('users'),
-      projects: this.db.collection('projects')
-    }
+
+    // collections
+    this.users = this.db.collection('users');
+    this.projects = this.db.collection('projects');
   }
 
   connect() {

@@ -29,7 +29,7 @@ app.use(express.json());
 app.use(authMiddleware);
 
 // routes
-app.get('/api/private', (req, res) => {
+app.get('/api/user', (req, res) => {
   res.json('This is the private api');
 });
 
