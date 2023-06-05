@@ -1,22 +1,9 @@
-import { useEffect } from "react";
-
 import { useProfile } from "../contexts/ProfileContext";
-
 import LogoutButton from "../components/buttons/LogoutButton";
-import makeFetchRequest from "../services/make-fetch-request";
-import { getPrivate } from "../services/api";
 
 const Dashboard = () => {
-  const { user, isLoading, accessToken } = useProfile();
-  
-  useEffect(() => {
-    (async () => {
-      if (accessToken) {
-        const privateData = await makeFetchRequest(getPrivate, accessToken);
-        console.log(privateData)
-      }
-    })();
-  }, [accessToken]);
+  const { user, isLoading, profile } = useProfile();
+  console.log(profile)
 
   if (isLoading) {
     return <div>Loading ...</div>;

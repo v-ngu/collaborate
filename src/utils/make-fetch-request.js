@@ -1,6 +1,6 @@
-const makeFetchRequest = async(api, accessToken) => {
+const makeFetchRequest = async(api) => {
   try {
-    const data = await api(accessToken);
+    const data = await api();
     if (data.error) throw new Error(data.error);
     return data;
 
@@ -10,3 +10,4 @@ const makeFetchRequest = async(api, accessToken) => {
 };
 
 export default makeFetchRequest;
+

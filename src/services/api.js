@@ -1,11 +1,8 @@
-export const getPrivate = async (accessToken) => {
-  const res = await fetch('/api/private', {
-      method: "GET",
-      headers: {
-        "authorization": `Bearer ${accessToken}`,
-        "content-type": "application/json",
-      },
-    }
-  );
+export const getProfile = async (headers) => {
+  const res = await fetch('/api/user', {
+    method: "GET",
+    headers: headers
+  });
+
   return await res.json();
 };

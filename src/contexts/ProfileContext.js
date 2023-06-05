@@ -1,32 +1,19 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext } from "react";
 import { useAuth0 } from '@auth0/auth0-react';
+import useFetch from "../hooks/useFetch";
+import { getProfile } from "../services/api";
 
 const ProfileContext = createContext(null);
 
-export const useProfile = () => {
-  return useContext(ProfileContext)
-};
+// export context as a custom hook
+export const useProfile = () => useContext(ProfileContext);
 
+// provider
 export const ProfileProvider = ({ children }) => {
+  const { user, isAuthenticated } = useAuth0();
+  const [profile, isLoading] = useFetch(getProfile);
 
-  const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
-
-  const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
-  const [accessToken, setAccessToken] = useState("")
-
-  useEffect(() => {
-    (async () => {
-      if (isAuthenticated) {
-        setAccessToken(
-          await getAccessTokenSilently({
-            authorizationParams: { audience: audience, }
-          })
-        );
-      }
-    })();
-  }, [isAuthenticated, audience, getAccessTokenSilently]);
-
-  const value = { user, isAuthenticated, isLoading, accessToken };
+  const value = { user, isAuthenticated, isLoading, profile };
 
   return (
     <ProfileContext.Provider value={value}>
