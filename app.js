@@ -33,7 +33,7 @@ app.use(express.json());
 app.use(authMiddleware);
 
 // routes
-app.post('/api/user', login);
+app.post('/api/users', login);
 app.use('/api/projects', projectsRouter);
 
 // handling socket connection
