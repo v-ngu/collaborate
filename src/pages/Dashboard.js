@@ -2,8 +2,8 @@ import { useProfile } from "../contexts/ProfileContext";
 import LogoutButton from "../components/buttons/LogoutButton";
 
 const Dashboard = () => {
-  const { user, isLoading, profile } = useProfile();
-  console.log(profile)
+  const { isLoading, profile } = useProfile();
+  const { email } = profile || {};
 
   if (isLoading) {
     return <div>Loading ...</div>;
@@ -14,9 +14,8 @@ const Dashboard = () => {
       <h1>Dashboard</h1>
       <LogoutButton />
       <div>
-        <img src={user.picture} alt={user.name} />
-        <h2>{user.name}</h2>
-        <p>{user.email}</p>
+        <h2>{email}</h2>
+        <p>{email}</p>
       </div>
     </div>
   );

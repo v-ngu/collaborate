@@ -4,13 +4,13 @@ import makeFetchRequest from "../utils/make-fetch-request";
 
 const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
 
-const useFetch = (api) => {
+const useFetch = (api, extra) => {
   // states
   const [state, setState] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
-  console.log("trying")
+  
   // effect: the access token is retreived from Auth0 for 
   // authentification before making a fetch request to the server
   useEffect(() => {
@@ -24,7 +24,7 @@ const useFetch = (api) => {
           "content-type": "application/json",
         };
 
-        const data = await makeFetchRequest(() => api(headers));
+        const data = await makeFetchRequest(() => api(headers, extra));
 
         setState(data);
         setIsLoading(false);
@@ -32,7 +32,7 @@ const useFetch = (api) => {
     })();
   }, [isAuthenticated, api, getAccessTokenSilently]);
 
-  return ([state, isLoading]);
+  return ([state, isLoading, setState]);
 };
 
 export default useFetch;
