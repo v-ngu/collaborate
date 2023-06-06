@@ -1,5 +1,6 @@
 require('dotenv').config({ path: '../.env' });
 const { MongoClient } = require('mongodb');
+const { NotFoundError } = require('../errors');
 
 // DatabaseHandler is used to handle MongoDB and its connection
 class DatabaseHandler {
@@ -7,25 +8,33 @@ class DatabaseHandler {
     this.client = new MongoClient(process.env.MONGO_URI);
     this.db = this.client.db('collaborate');
 
-    // collections
+    // databse collections
     this.users = this.db.collection('users');
     this.projects = this.db.collection('projects');
   }
-
+  
+  // connection method
   connect() {
     this.client.connect();
   };
 
+  // users collections handlers
   async findUser(id) {
-    const result = await this.users.findOne({ _id: id });
-    if (!result) console.log(`No user with id ${id}`)
-    return result;
+    return await this.users.findOne({ _id: id });
   };
 
   async createUser(newUser) {
-    const result = await this.users.insertOne(newUser);
-    console.log(`New user created with id: ${result.insertedId}`)
+    return await this.users.insertOne(newUser);
   }
+
+  // projects collections handlers
+  async findProject(id) {
+    return await this.projects.findOne({ _id: id });
+  }
+
+  async createProject(newProject) {
+    return await this.projects.insertOne(newProject);
+  };
 }
 
 module.exports = DatabaseHandler;

@@ -17,7 +17,8 @@ const io = new Server(server);
 const DatabaseHandler = require('./db/dbHandler');
 const client = new DatabaseHandler();
 
-// import routes and controllers
+// import routes andcontrollers
+const projectsRouter = require('./routes/projects');
 const { login } = require('./controllers/users');
 
 // import middlewares
@@ -33,6 +34,7 @@ app.use(authMiddleware);
 
 // routes
 app.post('/api/user', login);
+app.use('/api/projects', projectsRouter);
 
 // handling socket connection
 io.on('connection', socket => {
