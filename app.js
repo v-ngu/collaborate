@@ -13,9 +13,12 @@ const server = http.createServer(app);
 const { Server } = require('socket.io');
 const io = new Server(server);
 
-// mongoDB instance and handlers
+// mongoDB instance, handlers, and schemas
 const DatabaseHandler = require('./db/dbHandler');
 const client = new DatabaseHandler();
+
+// import routes and controllers
+const { login } = require('./controllers/users');
 
 // import middlewares
 const morgan = require('morgan');
@@ -29,14 +32,12 @@ app.use(express.json());
 app.use(authMiddleware);
 
 // routes
-app.get('/api/user', (req, res) => {
-  res.json('This is the private api');
-});
+app.post('/api/user', login);
 
 // handling socket connection
 io.on('connection', socket => {
-  socket.on('join', () => {});
-  socket.on('update', () => {});
+  socket.on('join', () => { });
+  socket.on('update', () => { });
 });
 
 // error handling middlewares
