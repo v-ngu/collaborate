@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import makeFetchRequest from "../utils/make-fetch-request";
 import useHeaders from "./useHeaders";
 
-const useFetch = (api, extraData) => {
+const useFetch = (api, otherParams) => {
   // states
   const [state, setState] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -11,7 +11,7 @@ const useFetch = (api, extraData) => {
   useEffect(() => {
     (async () => {
       if (!isLoadingHeaders) {
-        const data = await makeFetchRequest(() => api(headers, extraData));
+        const data = await makeFetchRequest(() => api(headers, otherParams));
         setState(data);
         setIsLoading(false);
       }

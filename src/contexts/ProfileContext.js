@@ -10,13 +10,13 @@ export const useProfile = () => useContext(ProfileContext);
 
 // provider
 export const ProfileProvider = ({ children }) => {
-  const { user: userAuth0, isAuthenticated } = useAuth0();
-  const [profile, isLoading] = useFetch(login, userAuth0);
-
-  const value = { isAuthenticated, isLoading, profile };
+  const { user: userFromAuth0, isAuthenticated } = useAuth0();
+  const [profile, isLoadingProfile] = useFetch(login, userFromAuth0);
 
   return (
-    <ProfileContext.Provider value={value}>
+    <ProfileContext.Provider
+      value={{ profile, isLoadingProfile, isAuthenticated }}
+    >
       {children}
     </ProfileContext.Provider>
   )
