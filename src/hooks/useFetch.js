@@ -4,7 +4,7 @@ import makeFetchRequest from "../utils/make-fetch-request";
 
 const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
 
-const useFetch = (api, extra) => {
+const useFetch = (api, extraData) => {
   // states
   const [state, setState] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -24,13 +24,14 @@ const useFetch = (api, extra) => {
           "content-type": "application/json",
         };
 
-        const data = await makeFetchRequest(() => api(headers, extra));
+        const data = await makeFetchRequest(() => api(headers, extraData));
 
         setState(data);
         setIsLoading(false);
       }
     })();
-  }, [isAuthenticated, api, getAccessTokenSilently]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated]);
 
   return ([state, isLoading, setState]);
 };

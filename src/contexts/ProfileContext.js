@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 import { useAuth0 } from '@auth0/auth0-react';
 import useFetch from "../hooks/useFetch";
-import { login } from "../services/api";
+import { login } from "../services/users-api";
 
 const ProfileContext = createContext(null);
 
@@ -13,7 +13,7 @@ export const ProfileProvider = ({ children }) => {
   const { user: userAuth0, isAuthenticated } = useAuth0();
   const [profile, isLoading] = useFetch(login, userAuth0);
 
-  const value = { userAuth0, isAuthenticated, isLoading, profile };
+  const value = { isAuthenticated, isLoading, profile };
 
   return (
     <ProfileContext.Provider value={value}>

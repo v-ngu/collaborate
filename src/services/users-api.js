@@ -1,7 +1,7 @@
 export const login = async (headers, userAuth0) => {
   const { sub: id, email } = userAuth0 || {};
 
-  const res = await fetch(`/api/user`, {
+  const res = await fetch(`/api/users`, {
     method: "POST",
     headers: headers,
     body: JSON.stringify({ id, email })
