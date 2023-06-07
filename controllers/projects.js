@@ -1,6 +1,5 @@
 const Project = require('../models/ProjectSchema');
 const { StatusCodes } = require('http-status-codes');
-const { NotFoundError } = require('../errors');
 
 const DatabaseHandler = require('../db/dbHandler');
 const client = new DatabaseHandler();
@@ -15,8 +14,6 @@ const createProject = async (req, res) => {
   console.log(`New project created with id: ${createdProjectId}`);
 
   const project = await client.findProject(createdProjectId);
-  if (!project) throw new NotFoundError(`No project with id ${createdProjectId}`);
-
   res.status(StatusCodes.CREATED).json(project);
 };
 
