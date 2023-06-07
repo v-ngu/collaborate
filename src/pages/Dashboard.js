@@ -1,22 +1,24 @@
 import { useNavigate } from "react-router-dom";
 import { useProfile } from "../contexts/ProfileContext";
+import makeFetchRequest from "../utils/make-fetch-request";
+import useHeaders from "../hooks/useHeaders";
 import LogoutButton from "../components/buttons/LogoutButton";
+import { createProject } from "../services/projects-api";
 
 const Dashboard = () => {
-  // get current user profile information
-  const { isLoading, profile } = useProfile();
-  const { email } = profile || {};
+  const [headers, isLoadingHeaders] = useHeaders();
+  const { profile } = useProfile();
+  const { _id: userId, email } = profile || {};
 
   const navigate = useNavigate();
 
   // utils
-  const createNewProject = (e) => {
+  const createNewProject = async (e) => {
     e.preventDefault();
-    navigate(`/new/project`)
-  }
-
-  if (isLoading) {
-    return <div>Loading ...</div>;
+    if (!isLoadingHeaders) {
+      const newProjectId = await makeFetchRequest(() => createProject(headers, { userId }))
+      navigate(`/project/${newProjectId}`)
+    }
   }
 
   return (

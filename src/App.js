@@ -11,7 +11,6 @@ import Dashboard from './pages/Dashboard';
 import LoadingPage from './pages/LoadingPage';
 import NotFound from './pages/NotFound';
 import Project from './pages/Project';
-import NewProject from './pages/NewProject';
 
 // App component
 const App = () => {
@@ -27,7 +26,6 @@ const App = () => {
           isAuthenticated &&
           <>
             <Route path='/dashboard' element={<Dashboard />} />
-            <Route path='/new/project' element={<NewProject />} />
             <Route path='/project/:projectId' element={<Project />} />
           </>
         }

@@ -1,5 +1,5 @@
-export const login = async (headers, userAuth0) => {
-  const { sub: id, email } = userAuth0 || {};
+export const login = async (headers, userFromAuth0) => {
+  const { sub: id, email } = userFromAuth0 || {};
 
   const res = await fetch(`/api/users`, {
     method: "POST",
