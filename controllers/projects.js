@@ -13,8 +13,7 @@ const createProject = async (req, res) => {
   const createdProjectId = createdProject.insertedId
   console.log(`New project created with id: ${createdProjectId}`);
 
-  const project = await client.findProject(createdProjectId);
-  res.status(StatusCodes.CREATED).json(project);
+  res.status(StatusCodes.CREATED).json(createdProjectId);
 };
 
 module.exports = {
