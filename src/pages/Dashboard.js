@@ -1,5 +1,5 @@
 // import basics
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // import custom hooks and contexts
 import { useProfile } from "../contexts/ProfileContext";
@@ -43,7 +43,10 @@ const Dashboard = () => {
         <p>{email}</p>
         <button onClick={createNewProject}>Crate a new project</button>
         <p>List of projects</p>
-        {!isLoadingProjects && projects.map(project => <p key={project["_id"]}>{project["_id"]}</p>)}
+        {
+          !isLoadingProjects &&
+          projects.map(project => <p><Link key={project["_id"]} to={`/project/${project["_id"]}`}>{project["_id"]}</Link></p>)
+        }
       </div>
     </div>
   );
