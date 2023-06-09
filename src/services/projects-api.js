@@ -9,7 +9,7 @@ export const createProject = async (headers, body) => {
 };
 
 export const getAllProjectsFromUser = async (headers, userId) => {
-  const res = await fetch(`/api/projects/${userId}`, {
+  const res = await fetch(`/api/projects/user/${userId}`, {
     method: "GET",
     headers: headers
   });
