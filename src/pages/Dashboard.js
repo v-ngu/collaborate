@@ -1,14 +1,28 @@
+// import basics
 import { useNavigate } from "react-router-dom";
-import { useProfile } from "../contexts/ProfileContext";
-import makeFetchRequest from "../utils/make-fetch-request";
-import useHeaders from "../hooks/useHeaders";
-import LogoutButton from "../components/buttons/LogoutButton";
-import { createProject } from "../services/projects-api";
 
+// import custom hooks and contexts
+import { useProfile } from "../contexts/ProfileContext";
+import useHeaders from "../hooks/useHeaders";
+import useFetch from "../hooks/useFetch";
+
+// import utils
+import makeFetchRequest from "../utils/make-fetch-request";
+
+// import APIs
+import { createProject, getAllProjectsFromUser } from "../services/projects-api";
+
+// import components
+import LogoutButton from "../components/buttons/LogoutButton";
+
+// Dashboard component
 const Dashboard = () => {
   const [headers, isLoadingHeaders] = useHeaders();
-  const { profile } = useProfile();
+
+  const { profile, isLoadingProfile } = useProfile();
   const { _id: userId, email } = profile || {};
+
+  const [projects, isLoadingProjects] = useFetch(getAllProjectsFromUser, userId, isLoadingProfile)
 
   const navigate = useNavigate();
 
@@ -28,6 +42,8 @@ const Dashboard = () => {
       <div>
         <p>{email}</p>
         <button onClick={createNewProject}>Crate a new project</button>
+        <p>List of projects</p>
+        {!isLoadingProjects && projects.map(project => <p key={project["_id"]}>{project["_id"]}</p>)}
       </div>
     </div>
   );
