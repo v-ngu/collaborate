@@ -16,6 +16,12 @@ const createProject = async (req, res) => {
   res.status(StatusCodes.CREATED).json(createdProjectId);
 };
 
+const getProject = async (req, res) => {
+  const { projectId } = req.params;
+  const project = await client.findProject(projectId);
+  res.status(StatusCodes.ACCEPTED).json(project);
+}
+
 const getAllProjectsFromUser = async (req, res) => {
   const { userId } = req.params;
   const allProjects = await client.findAllProjectsFromUser(userId);
@@ -24,5 +30,6 @@ const getAllProjectsFromUser = async (req, res) => {
 
 module.exports = {
   createProject,
+  getProject,
   getAllProjectsFromUser
 }
