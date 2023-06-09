@@ -16,6 +16,13 @@ const createProject = async (req, res) => {
   res.status(StatusCodes.CREATED).json(createdProjectId);
 };
 
+const getAllProjectsFromUser = async (req, res) => {
+  const { userId } = req.params;
+  const allProjects = await client.findAllProjectsFromUser(userId);
+  res.status(StatusCodes.ACCEPTED).json(allProjects);
+}
+
 module.exports = {
-  createProject
+  createProject,
+  getAllProjectsFromUser
 }

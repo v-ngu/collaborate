@@ -12,7 +12,7 @@ class DatabaseHandler {
     this.users = this.db.collection('users');
     this.projects = this.db.collection('projects');
   }
-  
+
   // connection method
   connect() {
     this.client.connect();
@@ -35,6 +35,12 @@ class DatabaseHandler {
   async createProject(newProject) {
     return await this.projects.insertOne(newProject);
   };
+
+  async findAllProjectsFromUser(userID) {
+    const cursor =  await this.projects.find({ createdBy: userID });
+    const results = await cursor.toArray();
+    return results;
+  }
 }
 
 module.exports = DatabaseHandler;
