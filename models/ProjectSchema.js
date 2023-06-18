@@ -3,9 +3,21 @@ const isRequired = require('../utils/isRequired');
 class ProjectSchema {
   constructor(userId = isRequired("userId")) {
     this.createdBy = userId;
-    this.toDo = [];
-    this.inProgress=[];
-    this.done = [];
+    this.projectName = "";
+    this.project = [
+      {
+        column: "To Do",
+        tasks: []
+      },
+      {
+        column: "In Progress",
+        tasks: []
+      },
+      {
+        column: "Done",
+        tasks: []
+      },
+    ];
     this.authorizedUsers = [];
   }
 }
