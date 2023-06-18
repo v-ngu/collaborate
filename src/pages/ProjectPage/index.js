@@ -1,4 +1,5 @@
 // import basics
+import { createContext, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
 
@@ -13,6 +14,10 @@ import { getProject } from "../../services/projects-api";
 import LoadingCircle from "../../components/LoadingCircle";
 import TasksColumn from "./TasksColumn";
 
+// create ProjectContext and its custom hook
+const ProjectContext = createContext(null);
+export const useProject = () => useContext(ProjectContext);
+
 // ProjectPage component
 const ProjectPage = () => {
   const { projectId } = useParams();
@@ -24,16 +29,14 @@ const ProjectPage = () => {
   return (
     <Wrapper>
       <p>{_id}</p>
-      <ActiveFormProvider>
-        <Container>
-          <TasksColumn
-            setProject={setProject}
-          />
-          <TasksColumn
-            setProject={setProject}
-          />
-        </Container>
-      </ActiveFormProvider>
+      <ProjectContext.Provider value={{ project, setProject }}>
+        <ActiveFormProvider>
+          <Container>
+            <TasksColumn />
+            <TasksColumn />
+          </Container>
+        </ActiveFormProvider>
+      </ProjectContext.Provider>
     </Wrapper>
   );
 };

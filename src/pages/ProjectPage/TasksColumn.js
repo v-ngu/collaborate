@@ -1,7 +1,7 @@
 import { useActiveForm } from "../../contexts/ActiveFormContext";
 import NewTaskForm from "./NewTaskForm";
 
-const TasksColumn = ({ setProject }) => {
+const TasksColumn = () => {
   const { activeNewForm, setActiveNewForm } = useActiveForm();
   
   // utils
@@ -17,9 +17,7 @@ const TasksColumn = ({ setProject }) => {
       <button onClick={showNewTaskForm}>Add issue</button>
       {
         activeNewForm !== "none" &&
-        <NewTaskForm
-          setProject={setProject}
-        />
+        <NewTaskForm />
       }
     </div>
   );
