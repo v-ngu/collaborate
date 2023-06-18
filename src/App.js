@@ -10,7 +10,7 @@ import HomePage from './pages/HomePage';
 import Dashboard from './pages/Dashboard';
 import LoadingPage from './pages/LoadingPage';
 import NotFound from './pages/NotFound';
-import Project from './pages/Project';
+import ProjectPage from './pages/ProjectPage';
 
 // App component
 const App = () => {
@@ -26,7 +26,7 @@ const App = () => {
           isAuthenticated &&
           <>
             <Route path='/dashboard' element={<Dashboard />} />
-            <Route path='/project/:projectId' element={<Project />} />
+            <Route path='/project/:projectId' element={<ProjectPage />} />
           </>
         }
         <Route path='*' element={<NotFound />} />

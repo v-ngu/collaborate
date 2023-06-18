@@ -2,10 +2,13 @@
 import { useParams } from "react-router-dom";
 
 // import custom hooks and contexts
-import useFetch from "../hooks/useFetch";
+import useFetch from "../../hooks/useFetch";
 
 // import APIs
-import { getProject } from "../services/projects-api";
+import { getProject } from "../../services/projects-api";
+
+// import components
+import LoadingCircle from "../../components/LoadingCircle";
 
 const Project = () => {
   const { projectId } = useParams();
@@ -13,7 +16,13 @@ const Project = () => {
   const { _id } = project || {};
 
   return (
-    <div>{_id} taken from db</div>
+    <div>
+      {
+        isLoadingProject
+        ? <LoadingCircle />
+        : <p>{_id}</p>
+      }
+    </div>
   );
 };
 
