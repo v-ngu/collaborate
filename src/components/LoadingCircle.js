@@ -1,13 +1,13 @@
 import { styled } from 'styled-components';
 import CircularProgress from '@mui/material/CircularProgress';
 
-const Loading = () => {
+const LoadingCircle = () => {
   return (
     <CustomLoading />
   );
 };
 
-export default Loading;
+export default LoadingCircle;
 
 const CustomLoading = styled(CircularProgress)`
   && {

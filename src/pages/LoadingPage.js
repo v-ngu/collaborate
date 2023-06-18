@@ -1,8 +1,8 @@
-import Loading from '../components/Loading';
+import LoadingCircle from '../components/LoadingCircle';
 
 const LoadingPage = () => {
   return (
-    <Loading />
+    <LoadingCircle />
   );
 };
 

@@ -14,6 +14,7 @@ import { createProject, getAllProjectsFromUser } from "../services/projects-api"
 
 // import components
 import LogoutButton from "../components/buttons/LogoutButton";
+import LoadingCircle from "../components/LoadingCircle";
 
 // Dashboard component
 const Dashboard = () => {
@@ -44,8 +45,11 @@ const Dashboard = () => {
         <button onClick={createNewProject}>Crate a new project</button>
         <p>List of projects</p>
         {
-          !isLoadingProjects &&
-          projects.map(project => <p><Link key={project["_id"]} to={`/project/${project["_id"]}`}>{project["_id"]}</Link></p>)
+          isLoadingProjects 
+          ? <LoadingCircle />
+          : projects.map(project =>
+              (<p><Link key={project["_id"]} to={`/project/${project["_id"]}`}>{project["_id"]}</Link></p>)
+            )
         }
       </div>
     </div>
