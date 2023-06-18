@@ -1,16 +1,17 @@
 // import basics
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { styled } from "styled-components";
 
 // import custom hooks and contexts
 import useFetch from "../../hooks/useFetch";
+import { ActiveFormProvider } from "../../contexts/ActiveFormContext";
 
 // import APIs
 import { getProject } from "../../services/projects-api";
 
 // import components
 import LoadingCircle from "../../components/LoadingCircle";
-import NewTaskForm from "./NewTaskForm";
+import TasksColumn from "./TasksColumn";
 
 // ProjectPage component
 const ProjectPage = () => {
@@ -18,44 +19,29 @@ const ProjectPage = () => {
   const [project, isLoadingProject, setProject] = useFetch(getProject, projectId, false);
   const { _id } = project || {};
 
-  const [taskFormIsActive, setTaskFormIsActive] = useState(false);
-
-  // utils
-  const showNewTaskForm = (event) => {
-    event.stopPropagation();
-    event.preventDefault();
-    setTaskFormIsActive(true);
-  };
-
-  // effects
-  useEffect(() => {
-    const onBackDropClick = () => {
-      setTaskFormIsActive(false);
-    };
-
-    window.addEventListener("click", onBackDropClick)
-    return () => window.removeEventListener("click", onBackDropClick);
-  }, []);
-
-  // conditional rendering
   if (isLoadingProject) return <LoadingCircle />
 
   return (
-    <div>
+    <Wrapper>
       <p>{_id}</p>
-      <div>
-        <p>Task Column</p>
-        <button onClick={showNewTaskForm}>Add issue</button>
-        {
-          taskFormIsActive &&
-          <NewTaskForm
+      <ActiveFormProvider>
+        <Container>
+          <TasksColumn
             setProject={setProject}
-            taskFormIsActive={taskFormIsActive}
           />
-        }
-      </div>
-    </div>
+          <TasksColumn
+            setProject={setProject}
+          />
+        </Container>
+      </ActiveFormProvider>
+    </Wrapper>
   );
 };
 
 export default ProjectPage;
+
+const Wrapper = styled.div`
+`;
+const Container = styled.div`
+  display: flex;
+`;

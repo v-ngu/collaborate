@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useActiveForm } from "../../contexts/ActiveFormContext";
 
-const NewTaskForm = ({ setProject, taskFormIsActive }) => {
+const NewTaskForm = ({ setProject }) => {
   const [formData, setFormData] = useState("");
+  const { activeNewForm } = useActiveForm();
 
   // utils
   const handleChange = (event) => {
@@ -15,10 +17,10 @@ const NewTaskForm = ({ setProject, taskFormIsActive }) => {
 
   // effects
   useEffect(() => {
-    if (!taskFormIsActive) {
+    if (activeNewForm === "none") {
       setFormData("");
     }
-  }, [taskFormIsActive])
+  }, [activeNewForm])
 
   // rendering
   return (
