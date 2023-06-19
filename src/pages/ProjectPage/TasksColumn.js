@@ -1,22 +1,22 @@
 import { useActiveForm } from "../../contexts/ActiveFormContext";
 import NewTaskForm from "./NewTaskForm";
 
-const TasksColumn = () => {
+const TasksColumn = ({ column }) => {
   const { activeNewForm, setActiveNewForm } = useActiveForm();
-  
+
   // utils
   const showNewTaskForm = (event) => {
     event.stopPropagation();
     event.preventDefault();
-    setActiveNewForm(true);
+    setActiveNewForm(column);
   };
 
   return (
     <div>
-      <p>Task Column</p>
+      <h3>{column}</h3>
       <button onClick={showNewTaskForm}>Add issue</button>
       {
-        activeNewForm !== "none" &&
+        activeNewForm === column &&
         <NewTaskForm />
       }
     </div>

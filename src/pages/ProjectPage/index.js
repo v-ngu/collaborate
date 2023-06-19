@@ -22,7 +22,7 @@ export const useProject = () => useContext(ProjectContext);
 const ProjectPage = () => {
   const { projectId } = useParams();
   const [project, isLoadingProject, setProject] = useFetch(getProject, projectId, false);
-  const { _id } = project || {};
+  const { _id, projectLists } = project || {};
 
   if (isLoadingProject) return <LoadingCircle />
 
@@ -32,8 +32,7 @@ const ProjectPage = () => {
       <ProjectContext.Provider value={{ project, setProject }}>
         <ActiveFormProvider>
           <Container>
-            <TasksColumn />
-            <TasksColumn />
+            {projectLists.map(list => <TasksColumn key={list.column} column={list.column} />)}
           </Container>
         </ActiveFormProvider>
       </ProjectContext.Provider>
