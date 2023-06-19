@@ -4,7 +4,7 @@ class ProjectSchema {
   constructor(userId = isRequired("userId")) {
     this.createdBy = userId;
     this.projectName = "";
-    this.project = [
+    this.projectLists = [
       {
         column: "To Do",
         tasks: []
