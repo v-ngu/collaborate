@@ -30,7 +30,7 @@ const authMiddleware = require('./middlewares/auth');
 // use middlewares
 app.use(morgan("tiny"));
 app.use(express.json());
-// app.use(authMiddleware);
+app.use(authMiddleware);
 
 // routes
 app.post('/api/users', login);
