@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useActiveForm } from "../../contexts/ActiveFormContext";
 import { useProject } from "./index";
 
-const NewTaskForm = () => {
+const NewTaskForm = ({ column, columnIndex }) => {
   const [formData, setFormData] = useState("");
-  const { activeNewForm } = useActiveForm();
-  const { setProject } = useProject();
+  const { activeNewForm, setActiveNewForm } = useActiveForm();
+  const { project, setProject } = useProject();
 
   // utils
   const handleChange = (event) => {
@@ -13,9 +13,15 @@ const NewTaskForm = () => {
     setFormData(value);
   };
 
-  const handleClick = (event) => {
-    event.stopPropagation();
-  }
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      const newState = {...project};
+      newState.projectLists[columnIndex].tasks.unshift(formData);
+      setProject(newState);
+      setActiveNewForm("none");
+    };
+  };
 
   // effects
   useEffect(() => {
@@ -31,7 +37,8 @@ const NewTaskForm = () => {
         autoFocus
         value={formData}
         onChange={handleChange}
-        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        onClick={event => event.stopPropagation()}
         placeholder="What needs to be done?"
       />
     </form>

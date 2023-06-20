@@ -32,7 +32,9 @@ const ProjectPage = () => {
       <ProjectContext.Provider value={{ project, setProject }}>
         <ActiveFormProvider>
           <Container>
-            {projectLists.map(list => <TasksColumn key={list.column} column={list.column} />)}
+            {projectLists.map((list, index) => (
+              <TasksColumn key={list.column} column={list.column} columnIndex={index} />
+            ))}
           </Container>
         </ActiveFormProvider>
       </ProjectContext.Provider>
