@@ -28,8 +28,16 @@ const getAllProjectsFromUser = async (req, res) => {
   res.status(StatusCodes.ACCEPTED).json(allProjects);
 }
 
+const addTask = async (req, res) => {
+  const { projectId } = req.params;
+  const { column, body } = req.body;
+  await client.addTask(projectId, column, body);
+  res.status(StatusCodes.OK).json({ status: 'ok', msg: `Project ${projectId} has been updated` })
+}
+
 module.exports = {
   createProject,
   getProject,
-  getAllProjectsFromUser
+  getAllProjectsFromUser,
+  addTask
 }

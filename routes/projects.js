@@ -6,11 +6,12 @@ const {
   createProject,
   getProject,
   getAllProjectsFromUser,
+  addTask,
  } = require('../controllers/projects');
 
 // routes
 router.route('/').post(createProject);
 router.route('/user/:userId').get(getAllProjectsFromUser)
-router.route('/:projectId').get(getProject)
+router.route('/:projectId').get(getProject).patch(addTask)
 
 module.exports = router;

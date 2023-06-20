@@ -28,10 +28,6 @@ class DatabaseHandler {
   }
 
   // projects collections handlers
-  async findProject(id) {
-    return await this.projects.findOne({ _id: id });
-  }
-
   async createProject(newProject) {
     return await this.projects.insertOne(newProject);
   };
@@ -46,6 +42,23 @@ class DatabaseHandler {
     const cursor = await this.projects.find({ createdBy: userID });
     const results = await cursor.toArray();
     return results;
+  }
+
+  async addTask(projectId, column, body) {
+    console.log(body);
+    const result = await this.projects.updateOne(
+      { _id: new ObjectId(projectId), "projectLists.column": column },
+      {
+        $push: {
+          "projectLists.$.tasks": {
+            $each: [body],
+            $position: 0
+          }
+        }
+      }
+    )
+    if (!result) throw new NotFoundError(`No project with id ${projectId}`)
+    return result;
   }
 }
 
