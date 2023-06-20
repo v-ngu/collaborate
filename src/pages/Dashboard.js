@@ -2,7 +2,7 @@
 import { Link, useNavigate } from "react-router-dom";
 
 // import custom hooks and contexts
-import { useProfile } from "../contexts/ProfileContext";
+import { useProfileContext } from "../contexts/ProfileContext";
 import useHeaders from "../hooks/useHeaders";
 import useFetch from "../hooks/useFetch";
 
@@ -20,7 +20,7 @@ import LoadingCircle from "../components/LoadingCircle";
 const Dashboard = () => {
   const [headers, isLoadingHeaders] = useHeaders();
 
-  const { profile, isLoadingProfile } = useProfile();
+  const { profile, isLoadingProfile } = useProfileContext();
   const { _id: userId, email } = profile || {};
 
   const [projects, isLoadingProjects] = useFetch(getAllProjectsFromUser, userId, isLoadingProfile)

@@ -2,7 +2,7 @@
 import { Routes, Route } from 'react-router-dom';
 
 // import contexts
-import { useProfile } from './contexts/ProfileContext';
+import { useProfileContext } from './contexts/ProfileContext';
 
 // import components
 import GlobalStyle from './styles/GlobalStyles';
@@ -14,7 +14,7 @@ import ProjectPage from './pages/ProjectPage';
 
 // App component
 const App = () => {
-  const { isAuthenticated, isLoadingProfile } = useProfile();
+  const { isAuthenticated, isLoadingProfile } = useProfileContext();
 
   return (
     <>

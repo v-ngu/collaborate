@@ -6,7 +6,7 @@ import { login } from "../services/users-api";
 const ProfileContext = createContext(null);
 
 // export context as a custom hook
-export const useProfile = () => useContext(ProfileContext);
+export const useProfileContext = () => useContext(ProfileContext);
 
 // provider
 export const ProfileProvider = ({ children }) => {

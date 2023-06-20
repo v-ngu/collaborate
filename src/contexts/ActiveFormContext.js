@@ -8,7 +8,7 @@ import {
 const ActiveFormContext = createContext(null);
 
 // export context as a custom hook
-export const useActiveForm = () => useContext(ActiveFormContext);
+export const useActiveFormContext = () => useContext(ActiveFormContext);
 
 // provider
 export const ActiveFormProvider = ({ children }) => {

@@ -1,11 +1,27 @@
+// import basics
 import { useEffect, useState } from "react";
-import { useActiveForm } from "../../contexts/ActiveFormContext";
-import { useProject } from "./index";
 
+// import custom hooks and contexts
+import useHeaders from "../../hooks/useHeaders";
+import { useActiveFormContext } from "../../contexts/ActiveFormContext";
+import { useProjectContext } from "./index";
+
+// import utils
+import makeFetchRequest from "../../utils/make-fetch-request";
+
+// api
+import { addTask } from "../../services/projects-api";
+
+// NewTaskForm component
 const NewTaskForm = ({ column, columnIndex }) => {
+  // states
   const [formData, setFormData] = useState("");
-  const { activeNewForm, setActiveNewForm } = useActiveForm();
-  const { project, setProject } = useProject();
+  const { activeNewForm, setActiveNewForm } = useActiveFormContext();
+
+  const { project, setProject } = useProjectContext();
+  const { _id: projectId } = project || {};
+
+  const [headers, isLoadingHeaders] = useHeaders();
 
   // utils
   const handleChange = (event) => {
@@ -13,13 +29,24 @@ const NewTaskForm = ({ column, columnIndex }) => {
     setFormData(value);
   };
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = async (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      const newState = {...project};
+
+      const newState = { ...project };
       newState.projectLists[columnIndex].tasks.unshift(formData);
       setProject(newState);
       setActiveNewForm("none");
+
+      if (!isLoadingHeaders) {
+        const result = await makeFetchRequest(() => (
+          addTask(headers, projectId, {
+            column,
+            body: formData
+          })
+        ));
+        console.log(result.msg)
+      }
     };
   };
 

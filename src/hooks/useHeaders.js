@@ -13,17 +13,21 @@ const useHeaders = () => {
 
   useEffect(() => {
     (async () => {
-      if (isAuthenticated) {
-        const accessToken = await getAccessTokenSilently({
-          authorizationParams: { audience: audience, }
-        });
+      try {
+        if (isAuthenticated) {
+          const accessToken = await getAccessTokenSilently({
+            authorizationParams: { audience: audience, }
+          });
 
-        setHeaders({
-          "authorization": `Bearer ${accessToken}`,
-          "content-type": "application/json",
-        })
+          setHeaders({
+            "authorization": `Bearer ${accessToken}`,
+            "content-type": "application/json",
+          })
 
-        setIsLoadingHeaders(false);
+          setIsLoadingHeaders(false);
+        }
+      } catch (error) {
+        console.log(error);
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps

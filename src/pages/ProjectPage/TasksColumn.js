@@ -1,8 +1,8 @@
-import { useActiveForm } from "../../contexts/ActiveFormContext";
+import { useActiveFormContext } from "../../contexts/ActiveFormContext";
 import NewTaskForm from "./NewTaskForm";
 
 const TasksColumn = ({ column, columnIndex }) => {
-  const { activeNewForm, setActiveNewForm } = useActiveForm();
+  const { activeNewForm, setActiveNewForm } = useActiveFormContext();
 
   // utils
   const showNewTaskForm = (event) => {

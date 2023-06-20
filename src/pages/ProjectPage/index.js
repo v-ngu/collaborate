@@ -16,7 +16,7 @@ import TasksColumn from "./TasksColumn";
 
 // create ProjectContext and its custom hook
 const ProjectContext = createContext(null);
-export const useProject = () => useContext(ProjectContext);
+export const useProjectContext = () => useContext(ProjectContext);
 
 // ProjectPage component
 const ProjectPage = () => {
