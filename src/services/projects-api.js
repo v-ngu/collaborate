@@ -5,7 +5,8 @@ export const createProject = async (headers, body) => {
     body: JSON.stringify(body)
   });
 
-  return await res.json();
+  const json = await res.json();
+  return json.data;
 };
 
 export const getProject = async (headers, projectId) => {
@@ -14,7 +15,8 @@ export const getProject = async (headers, projectId) => {
     headers: headers
   });
 
-  return await res.json();
+  const json = await res.json();
+  return json.data;
 };
 
 export const getAllProjectsFromUser = async (headers, userId) => {
@@ -23,10 +25,11 @@ export const getAllProjectsFromUser = async (headers, userId) => {
     headers: headers
   });
 
-  return await res.json();
+  const json = await res.json();
+  return json.data;
 };
 
-export const addTask = async(headers, projectId, body) => {
+export const addTask = async (headers, projectId, body) => {
   const res = await fetch(`/api/projects/${projectId}`, {
     method: "PATCH",
     headers: headers,

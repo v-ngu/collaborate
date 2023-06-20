@@ -31,8 +31,9 @@ const Dashboard = () => {
   const createNewProject = async (e) => {
     e.preventDefault();
     if (!isLoadingHeaders) {
-      const newProjectId = await makeFetchRequest(() => createProject(headers, { userId }))
-      navigate(`/project/${newProjectId}`)
+      const newProjectId = await makeFetchRequest(() => createProject(headers, { userId }));
+      console.log(`New project ${newProjectId} has been created`);
+      navigate(`/project/${newProjectId}`);
     }
   }
 
@@ -45,11 +46,11 @@ const Dashboard = () => {
         <button onClick={createNewProject}>Crate a new project</button>
         <p>List of projects</p>
         {
-          isLoadingProjects 
-          ? <LoadingCircle />
-          : projects.map(project =>
-              (<p><Link key={project["_id"]} to={`/project/${project["_id"]}`}>{project["_id"]}</Link></p>)
-            )
+          isLoadingProjects
+            ? <LoadingCircle />
+            : projects.map(project => (
+              <p><Link key={project["_id"]} to={`/project/${project["_id"]}`}>{project["_id"]}</Link></p>
+            ))
         }
       </div>
     </div>
