@@ -17,12 +17,13 @@ const io = new Server(server);
 const DatabaseHandler = require('./db/dbHandler');
 const client = new DatabaseHandler();
 
-// import routes andcontrollers
+// import routes and controllers
 const projectsRouter = require('./routes/projects');
 const { login } = require('./controllers/users');
 
 // import middlewares
 const morgan = require('morgan');
+const cors = require('cors');
 const notFoundMiddleware = require('./middlewares/not-found');
 const errorHandlerMiddleWare = require('./middlewares/error-handler')
 const authMiddleware = require('./middlewares/auth');
@@ -30,6 +31,7 @@ const authMiddleware = require('./middlewares/auth');
 // use middlewares
 app.use(morgan("tiny"));
 app.use(express.json());
+app.use(cors());
 app.use(authMiddleware);
 
 // routes
