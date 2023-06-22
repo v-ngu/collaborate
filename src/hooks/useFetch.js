@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import makeFetchRequest from "../utils/make-fetch-request";
 import useHeaders from "./useHeaders";
 
-const useFetch = (api, otherParams, wait) => {
+const useFetch = (api, otherParams, wait = false, initialValue = {}) => {
+  // the parameter wait is used when dependant on another state
+
   // states
-  const [state, setState] = useState([]);
+  const [state, setState] = useState(initialValue);
   const [isLoading, setIsLoading] = useState(true);
   const [headers, isLoadingHeaders] = useHeaders();
 

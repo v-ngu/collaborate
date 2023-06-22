@@ -1,51 +1,19 @@
-// import basics
-import { createContext, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { styled } from "styled-components";
-
-// import custom hooks and contexts
-import useFetch from "../../hooks/useFetch";
 import { ActiveFormProvider } from "../../contexts/ActiveFormContext";
+import { ProjectProvider } from "../../contexts/ProjectContext";
+import Project from "./Project";
 
-// import APIs
-import { getProject } from "../../services/projects-api";
-
-// import components
-import LoadingCircle from "../../components/LoadingCircle";
-import TasksColumn from "./TasksColumn";
-
-// create ProjectContext and its custom hook
-const ProjectContext = createContext(null);
-export const useProjectContext = () => useContext(ProjectContext);
-
-// ProjectPage component
 const ProjectPage = () => {
   const { projectId } = useParams();
-  const [project, isLoadingProject, setProject] = useFetch(getProject, projectId, false);
-  const { _id, projectLists } = project || {};
-
-  if (isLoadingProject) return <LoadingCircle />
 
   return (
-    <Wrapper>
-      <p>{_id}</p>
-      <ProjectContext.Provider value={{ project, setProject }}>
-        <ActiveFormProvider>
-          <Container>
-            {projectLists.map((list, index) => (
-              <TasksColumn key={list.column} column={list.column} columnIndex={index} />
-            ))}
-          </Container>
-        </ActiveFormProvider>
-      </ProjectContext.Provider>
-    </Wrapper>
-  );
+    <ProjectProvider projectId={projectId}>
+      <ActiveFormProvider>
+        <Project />
+      </ActiveFormProvider>
+    </ProjectProvider>
+  )
+
 };
 
 export default ProjectPage;
-
-const Wrapper = styled.div`
-`;
-const Container = styled.div`
-  display: flex;
-`;

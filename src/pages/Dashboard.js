@@ -21,7 +21,7 @@ const Dashboard = () => {
   const [headers, isLoadingHeaders] = useHeaders();
 
   const { profile, isLoadingProfile } = useProfileContext();
-  const { _id: userId, email } = profile || {};
+  const { _id: userId, email } = profile;
 
   const [projects, isLoadingProjects] = useFetch(getAllProjectsFromUser, userId, isLoadingProfile)
 

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 // import custom hooks and contexts
 import useHeaders from "../../hooks/useHeaders";
 import { useActiveFormContext } from "../../contexts/ActiveFormContext";
-import { useProjectContext } from "./index";
+import { useProjectContext } from "../../contexts/ProjectContext";
 
 // import utils
 import makeFetchRequest from "../../utils/make-fetch-request";

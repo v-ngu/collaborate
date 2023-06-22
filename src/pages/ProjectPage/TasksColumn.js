@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { useActiveFormContext } from "../../contexts/ActiveFormContext";
-import { useProjectContext } from "./index";
+import { useProjectContext } from "../../contexts/ProjectContext";
 import NewTaskForm from "./NewTaskForm";
 
 const TasksColumn = ({ column, columnIndex }) => {
