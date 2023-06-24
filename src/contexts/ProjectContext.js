@@ -16,7 +16,6 @@ export const ProjectProvider = ({ projectId, children }) => {
       project,
       isLoadingProject,
       setProject,
-      test: 'test'
     }}>
       {children}
     </ProjectContext.Provider>

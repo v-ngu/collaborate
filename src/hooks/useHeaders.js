@@ -20,8 +20,8 @@ const useHeaders = () => {
           });
 
           setHeaders({
-            "authorization": `Bearer ${accessToken}`,
-            "content-type": "application/json",
+            "Authorization": `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
           })
 
           setIsLoadingHeaders(false);
