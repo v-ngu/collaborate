@@ -11,7 +11,12 @@ const server = http.createServer(app);
 
 // Socket.io setup to mount on express server
 const { Server } = require('socket.io');
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: 'http://localhost:3000',
+    allowedHeaders: ["Authorization"],
+  }
+});
 
 // mongoDB instance, handlers, and schemas
 const DatabaseHandler = require('./db/dbHandler');
@@ -26,7 +31,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const notFoundMiddleware = require('./middlewares/not-found');
 const errorHandlerMiddleWare = require('./middlewares/error-handler')
-const authMiddleware = require('./middlewares/auth');
+const { authMiddleware, socketAuthMiddleware } = require('./middlewares/auth');
 
 // use middlewares
 app.use(morgan("tiny"));
@@ -39,8 +44,15 @@ app.post('/api/users', login);
 app.use('/api/projects', projectsRouter);
 
 // handling socket connection
+io.use(socketAuthMiddleware);
+
 io.on('connection', socket => {
-  socket.on('join', () => { });
+  const roomId = socket.handshake.query.roomId;
+
+  socket.join(roomId);
+  console.log(`Joined socket room ${roomId}`);
+
+  socket.emit('joined', roomId)
   socket.on('update', () => { });
 });
 
