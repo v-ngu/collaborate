@@ -26,6 +26,9 @@ const client = new DatabaseHandler();
 const projectsRouter = require('./routes/projects');
 const { login } = require('./controllers/users');
 
+// import event listeners
+const onConnect = require('./events/socket-connection');
+
 // import middlewares
 const morgan = require('morgan');
 const cors = require('cors');
@@ -45,16 +48,7 @@ app.use('/api/projects', projectsRouter);
 
 // handling socket connection
 io.use(socketAuthMiddleware);
-
-io.on('connection', socket => {
-  const roomId = socket.handshake.query.roomId;
-
-  socket.join(roomId);
-  console.log(`Joined socket room ${roomId}`);
-
-  socket.emit('joined', roomId)
-  socket.on('update', () => { });
-});
+io.on('connection', onConnect);
 
 // error handling middlewares
 app.use(notFoundMiddleware);
