@@ -4,7 +4,7 @@ const LoginButton = () => {
   const { loginWithRedirect } = useAuth0();
 
   const handleClick = async () => {
-    await window.localStorage.setItem("userAccessState", "In Progress")
+    await window.sessionStorage.setItem("userAccessState", "In Progress")
     loginWithRedirect()
   };
 

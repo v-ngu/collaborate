@@ -4,7 +4,7 @@ const LogoutButton = () => {
   const { logout } = useAuth0();
 
   const handleClick = async () => {
-    await window.localStorage.removeItem("userAccessState")
+    await window.sessionStorage.removeItem("userAccessState")
     logout({ logoutParams: { returnTo: window.location.origin } })
   };
 

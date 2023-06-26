@@ -10,12 +10,12 @@ export const useProfileContext = () => useContext(ProfileContext);
 
 // provider
 export const ProfileProvider = ({ children }) => {
-  // Local storage is used to determine the sign up stage
+  // Session storage is used to determine the sign up stage
   const userAcessInitialValue = () => {
-    const value = window.localStorage.getItem("userAccessState");
+    const value = window.sessionStorage.getItem("userAccessState");
     
     if (value == null) {
-      window.localStorage.setItem("userAccessState", "Logged Out");
+      window.sessionStorage.setItem("userAccessState", "Logged Out");
       return "Logged Out"
     }
 
@@ -32,7 +32,7 @@ export const ProfileProvider = ({ children }) => {
     if (userAccess === "In Progress") {
       const removeProgress = setTimeout(() => {
         setUserAccess("Logged Out");
-        window.localStorage.setItem("userAccessState", "Logged Out")
+        window.sessionStorage.setItem("userAccessState", "Logged Out")
       }, 3000);
 
       return () => clearTimeout(removeProgress);
@@ -43,7 +43,7 @@ export const ProfileProvider = ({ children }) => {
   useEffect(() => {
     if (isAuthenticated) {
       setUserAccess("Logged In");
-      window.localStorage.setItem("userAccessState", "Logged In")
+      window.sessionStorage.setItem("userAccessState", "Logged In")
     }
   }, [isAuthenticated])
 
