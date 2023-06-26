@@ -39,9 +39,18 @@ export const ProfileProvider = ({ children }) => {
     }
   }, [userAccess]);
 
+  // Set user access to logged in after successful sign up
+  useEffect(() => {
+    if (isAuthenticated) {
+      setUserAccess("Logged In");
+      window.localStorage.setItem("userAccessState", "Logged In")
+    }
+  }, [isAuthenticated])
+
+  // rendering provider
   return (
     <ProfileContext.Provider
-      value={{ userAccess, profile, isLoadingProfile, isAuthenticated }}
+      value={{ userAccess, profile, isLoadingProfile }}
     >
       {children}
     </ProfileContext.Provider>

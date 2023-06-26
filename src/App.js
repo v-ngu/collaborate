@@ -14,7 +14,7 @@ import ProjectPage from './pages/ProjectPage';
 
 // App component
 const App = () => {
-  const { userAccess, isAuthenticated, isLoadingProfile } = useProfileContext();
+  const { userAccess, isLoadingProfile } = useProfileContext();
 
   return (
     <>
@@ -23,7 +23,7 @@ const App = () => {
         <Route path='/' element={<HomePage />} />
         {isLoadingProfile && userAccess !== "Logged Out" && <Route path='*' element={<LoadingPage />} />}
         {
-          isAuthenticated && userAccess !== "Logged Out" &&
+          !isLoadingProfile && userAccess !== "Logged Out" &&
           <>
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/project/:projectId' element={<ProjectPage />} />
