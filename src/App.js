@@ -14,16 +14,16 @@ import ProjectPage from './pages/ProjectPage';
 
 // App component
 const App = () => {
-  const { isAuthenticated, isLoadingProfile } = useProfileContext();
+  const { userAccess, isAuthenticated, isLoadingProfile } = useProfileContext();
 
   return (
     <>
       <GlobalStyle />
       <Routes>
         <Route path='/' element={<HomePage />} />
-        {isLoadingProfile && <Route path='*' element={<LoadingPage />} />}
+        {isLoadingProfile && userAccess !== "Logged Out" && <Route path='*' element={<LoadingPage />} />}
         {
-          isAuthenticated &&
+          isAuthenticated && userAccess !== "Logged Out" &&
           <>
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/project/:projectId' element={<ProjectPage />} />
