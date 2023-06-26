@@ -16,19 +16,27 @@ import ProjectPage from './pages/ProjectPage';
 const App = () => {
   const { userAccess, isLoadingProfile } = useProfileContext();
 
+  // function to rendre private routes
+  const renderPrivateRoutes = () => {
+    if (userAccess !== "Logged Out") {
+      if (isLoadingProfile) return <Route path='*' element={<LoadingPage />} />
+
+      return (
+        <>
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/project/:projectId' element={<ProjectPage />} />
+        </>
+      )
+    }
+  };
+
+  // rendering
   return (
     <>
       <GlobalStyle />
       <Routes>
         <Route path='/' element={<HomePage />} />
-        {isLoadingProfile && userAccess !== "Logged Out" && <Route path='*' element={<LoadingPage />} />}
-        {
-          !isLoadingProfile && userAccess !== "Logged Out" &&
-          <>
-            <Route path='/dashboard' element={<Dashboard />} />
-            <Route path='/project/:projectId' element={<ProjectPage />} />
-          </>
-        }
+        {renderPrivateRoutes()}
         <Route path='*' element={<NotFound />} />
       </Routes>
     </>
