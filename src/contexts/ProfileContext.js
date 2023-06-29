@@ -22,6 +22,7 @@ export const ProfileProvider = ({ children }) => {
     return value;
   };
 
+  // states
   const [userAccess, setUserAccess] = useState(userAcessInitialValue());
   const { user: userFromAuth0, isAuthenticated } = useAuth0();
   const [profile, isLoadingProfile] = useFetch(login, userFromAuth0);

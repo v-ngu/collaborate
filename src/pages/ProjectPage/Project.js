@@ -3,7 +3,6 @@ import { styled } from "styled-components";
 
 // import custom hooks and contexts
 import { useProjectContext } from "../../contexts/ProjectContext";
-import useSocketListeners from "../../hooks/useSocketListeners";
 
 // import components
 import LoadingCircle from "../../components/LoadingCircle";
@@ -13,9 +12,7 @@ import TasksColumn from "./TasksColumn";
 const ProjectPage = () => {
   const { project, isLoadingProject } = useProjectContext();
   const { projectLists } = project;
-  
-  useSocketListeners();
-  
+
   if (isLoadingProject) return <LoadingCircle />
 
   return (
