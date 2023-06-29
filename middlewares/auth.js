@@ -31,7 +31,6 @@ const socketAuthMiddleware = async (socket, next) => {
         console.log(error)
         return next(new UnauthenticatedError('Authentication invalid for socket'))
       };
-      socket.decoded = decoded;
       next();
     }
 
