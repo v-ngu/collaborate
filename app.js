@@ -27,7 +27,7 @@ const projectsRouter = require('./routes/projects');
 const { login } = require('./controllers/users');
 
 // import event listeners
-const onConnect = require('./events/socket-connection');
+const handleConnection = require('./events/handle-connection');
 
 // import middlewares
 const morgan = require('morgan');
@@ -48,7 +48,7 @@ app.use('/api/projects', projectsRouter);
 
 // handling socket connection
 io.use(socketAuthMiddleware);
-io.on('connection', onConnect);
+io.on('connection', (socket) => handleConnection(io, socket));
 
 // error handling middlewares
 app.use(notFoundMiddleware);

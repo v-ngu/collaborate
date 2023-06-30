@@ -45,7 +45,6 @@ class DatabaseHandler {
   }
 
   async addTask(projectId, column, body) {
-    console.log(body);
     const result = await this.projects.updateOne(
       { _id: new ObjectId(projectId), "projectLists.column": column },
       {

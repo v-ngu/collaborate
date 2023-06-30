@@ -5,13 +5,12 @@ const router = express.Router();
 const { 
   createProject,
   getProject,
-  getAllProjectsFromUser,
-  addTask,
+  getAllProjectsFromUser
  } = require('../controllers/projects');
 
 // routes
 router.route('/').post(createProject);
 router.route('/user/:userId').get(getAllProjectsFromUser)
-router.route('/:projectId').get(getProject).patch(addTask)
+router.route('/:projectId').get(getProject)
 
 module.exports = router;
