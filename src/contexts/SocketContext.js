@@ -31,16 +31,16 @@ export const SocketProvider = ({ roomId, children }) => {
   // handle joining a socket room
   useEffect(() => {
     if (!socket) return;
+    
+    const handleJoined = (roomId) => console.log(`Joined project ${roomId}`);
+    const handleConnectionError = (error) => console.log(error.message);
 
-    const onJoined = (roomId) => console.log(`Joined project ${roomId}`);
-    const onConnectError = (error) => console.log(error.message);
-
-    socket.on("joined", onJoined);
-    socket.on("connect_error", onConnectError);
+    socket.on("joined", handleJoined);
+    socket.on("connect_error", handleConnectionError);
 
     return () => {
-      socket.off("joined", onJoined)
-      socket.off("connect_error", onConnectError)
+      socket.off("joined", handleJoined)
+      socket.off("connect_error", handleConnectionError)
     };
   }, [socket])
 

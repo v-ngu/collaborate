@@ -28,13 +28,3 @@ export const getAllProjectsFromUser = async (headers, userId) => {
   const json = await res.json();
   return json.data;
 };
-
-export const addTask = async (headers, projectId, body) => {
-  const res = await fetch(`/api/projects/${projectId}`, {
-    method: "PATCH",
-    headers: headers,
-    body: JSON.stringify(body)
-  })
-
-  return await res.json();
-};

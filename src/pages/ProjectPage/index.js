@@ -8,13 +8,13 @@ const ProjectPage = () => {
   const { projectId } = useParams();
 
   return (
-    <ProjectProvider projectId={projectId}>
-      <SocketProvider roomId={projectId}>
+    <SocketProvider roomId={projectId}>
+      <ProjectProvider projectId={projectId}>
         <ActiveFormProvider>
           <Project />
         </ActiveFormProvider>
-      </SocketProvider>
-    </ProjectProvider>
+      </ProjectProvider>
+    </SocketProvider>
   )
 
 };

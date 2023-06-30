@@ -2,15 +2,9 @@
 import { useEffect, useState } from "react";
 
 // import custom hooks and contexts
-import useHeaders from "../../hooks/useHeaders";
 import { useActiveFormContext } from "../../contexts/ActiveFormContext";
 import { useProjectContext } from "../../contexts/ProjectContext";
-
-// import utils
-import makeFetchRequest from "../../utils/make-fetch-request";
-
-// api
-import { addTask } from "../../services/projects-api";
+import { useSocketContext } from "../../contexts/SocketContext";
 
 // NewTaskForm component
 const NewTaskForm = ({ column, columnIndex }) => {
@@ -18,10 +12,10 @@ const NewTaskForm = ({ column, columnIndex }) => {
   const [formData, setFormData] = useState("");
   const { activeNewForm, setActiveNewForm } = useActiveFormContext();
 
-  const { project, setProject } = useProjectContext();
+  const { project } = useProjectContext();
   const { _id: projectId } = project || {};
 
-  const [headers, isLoadingHeaders] = useHeaders();
+  const socket = useSocketContext();
 
   // utils
   const handleChange = (event) => {
@@ -33,24 +27,18 @@ const NewTaskForm = ({ column, columnIndex }) => {
     if (event.key === 'Enter') {
       event.preventDefault();
 
-      const newState = { ...project };
-      newState.projectLists[columnIndex].tasks.unshift(formData);
-      setProject(newState);
-      setActiveNewForm("none");
+      socket.emit("projects:add-task", {
+        projectId,
+        column,
+        columnIndex,
+        body: formData
+      });
 
-      if (!isLoadingHeaders) {
-        const result = await makeFetchRequest(() => (
-          addTask(headers, projectId, {
-            column,
-            body: formData
-          })
-        ));
-        console.log(result.msg)
-      }
+      setActiveNewForm("none");
     };
   };
 
-  // effects
+  // effect to clear the form data
   useEffect(() => {
     if (activeNewForm === "none") {
       setFormData("");
