@@ -1,7 +1,9 @@
 import { createContext, useContext, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { getProject } from "../services/projects-api";
 import { useSocketContext } from "./SocketContext";
+import { useProfileContext } from "./ProfileContext";
 
 const ProjectContext = createContext(null);
 
@@ -11,6 +13,14 @@ export const useProjectContext = () => useContext(ProjectContext);
 // provider
 export const ProjectProvider = ({ projectId, children }) => {
   const [project, isLoadingProject, setProject] = useFetch(getProject, projectId);
+  const { authorizedUsers, createdBy } = project;
+  const { profile: { _id: userId } } = useProfileContext();
+  const navigate = useNavigate();
+  
+  // verify that the user is authorized on the project
+  if (!isLoadingProject && !authorizedUsers.includes(userId) && createdBy !== userId) {
+    navigate("/404");
+  };
 
   const socket = useSocketContext();
 
