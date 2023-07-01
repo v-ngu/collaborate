@@ -44,6 +44,12 @@ class DatabaseHandler {
     return results;
   }
 
+  async findAuthorizedProjectsForUser(userId) {
+    const cursor = await this.projects.find({ authorizedUsers: userId });
+    const results = await cursor.toArray();
+    return results;
+  }
+
   async addTask(projectId, column, body) {
     const result = await this.projects.updateOne(
       { _id: new ObjectId(projectId), "projectLists.column": column },

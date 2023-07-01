@@ -5,12 +5,14 @@ const router = express.Router();
 const { 
   createProject,
   getProject,
-  getAllProjectsFromUser
+  getAllProjectsFromUser,
+  getAuthorizedProjectsForUser
  } = require('../controllers/projects');
 
 // routes
 router.route('/').post(createProject);
 router.route('/user/:userId').get(getAllProjectsFromUser)
+router.route('/shared/:userId').get(getAuthorizedProjectsForUser)
 router.route('/:projectId').get(getProject)
 
 module.exports = router;

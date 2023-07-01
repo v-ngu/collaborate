@@ -36,8 +36,18 @@ const getAllProjectsFromUser = async (req, res) => {
   });
 }
 
+const getAuthorizedProjectsForUser = async (req, res) => {
+  const { userId } = req.params;
+  const sharedProjects = await client.findAuthorizedProjectsForUser(userId);
+
+  res.status(StatusCodes.ACCEPTED).json({
+    status: StatusCodes.ACCEPTED, data: sharedProjects
+  });
+}
+
 module.exports = {
   createProject,
   getProject,
-  getAllProjectsFromUser
+  getAllProjectsFromUser,
+  getAuthorizedProjectsForUser
 }
