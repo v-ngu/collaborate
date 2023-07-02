@@ -25,7 +25,7 @@ const getProject = async (req, res) => {
   res.status(StatusCodes.ACCEPTED).json({
     status: StatusCodes.ACCEPTED, data: project
   });
-}
+};
 
 const getAllProjectsFromUser = async (req, res) => {
   const { userId } = req.params;
@@ -34,7 +34,7 @@ const getAllProjectsFromUser = async (req, res) => {
   res.status(StatusCodes.ACCEPTED).json({
     status: StatusCodes.ACCEPTED, data: allProjects
   });
-}
+};
 
 const getAuthorizedProjectsForUser = async (req, res) => {
   const { userId } = req.params;
@@ -43,11 +43,21 @@ const getAuthorizedProjectsForUser = async (req, res) => {
   res.status(StatusCodes.ACCEPTED).json({
     status: StatusCodes.ACCEPTED, data: sharedProjects
   });
-}
+};
+
+const addAuthorizedUser = async (req, res) => {
+  const { projectId, userId } = req.params;
+  await client.addAuthorizedUser(projectId, userId);
+
+  res.status(StatusCodes.ACCEPTED).json({
+    status: StatusCodes.ACCEPTED, data: {}, msg: `User ${userId} has been authorized`
+  })
+};
 
 module.exports = {
   createProject,
   getProject,
   getAllProjectsFromUser,
-  getAuthorizedProjectsForUser
-}
+  getAuthorizedProjectsForUser,
+  addAuthorizedUser
+};

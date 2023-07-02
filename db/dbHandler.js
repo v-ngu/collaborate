@@ -11,7 +11,7 @@ class DatabaseHandler {
     // databse collections
     this.users = this.db.collection('users');
     this.projects = this.db.collection('projects');
-  }
+  };
 
   // connection method
   connect() {
@@ -36,35 +36,45 @@ class DatabaseHandler {
     const result = await this.projects.findOne(new ObjectId(projectId));
     if (!result) throw new NotFoundError(`No project with id ${projectId}`)
     return result;
-  }
+  };
 
   async findAllProjectsFromUser(userID) {
     const cursor = await this.projects.find({ createdBy: userID });
     const results = await cursor.toArray();
     return results;
-  }
+  };
 
   async findAuthorizedProjectsForUser(userId) {
     const cursor = await this.projects.find({ authorizedUsers: userId });
     const results = await cursor.toArray();
     return results;
-  }
+  };
 
   async addTask(projectId, column, body) {
     const result = await this.projects.updateOne(
-      { _id: new ObjectId(projectId), "projectLists.column": column },
+      { _id: new ObjectId(projectId), 'projectLists.column': column },
       {
         $push: {
-          "projectLists.$.tasks": {
+          'projectLists.$.tasks': {
             $each: [body],
             $position: 0
           }
         }
       }
     )
-    if (!result) throw new NotFoundError(`No project with id ${projectId}`)
+    if (!result) throw new NotFoundError(`No project with id ${projectId}`);
     return result;
-  }
-}
+  };
+
+  async addAuthorizedUser(projectId, userId) {
+    const result = await this.projects.updateOne(
+      { _id: new ObjectId(projectId) },
+      { $push: { 'authorizedUsers': userId } }
+    );
+    if (!result) throw new NotFoundError(`No project with id ${projectId}`);
+    return;
+  };
+
+};
 
 module.exports = DatabaseHandler;
