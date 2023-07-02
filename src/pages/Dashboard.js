@@ -10,7 +10,11 @@ import useFetch from "../hooks/useFetch";
 import makeFetchRequest from "../utils/make-fetch-request";
 
 // import APIs
-import { createProject, getAllProjectsFromUser } from "../services/projects-api";
+import { 
+  createProject, 
+  getAllProjectsFromUser, 
+  getSharedProjects 
+} from "../services/projects-api";
 
 // import components
 import LogoutButton from "../components/buttons/LogoutButton";
@@ -23,8 +27,9 @@ const Dashboard = () => {
   const { profile, isLoadingProfile } = useProfileContext();
   const { _id: userId, email } = profile;
 
-  const [projects, isLoadingProjects] = useFetch(getAllProjectsFromUser, userId, isLoadingProfile)
-
+  const [projects, isLoadingProjects] = useFetch(getAllProjectsFromUser, userId, isLoadingProfile, [])
+  const [sharedProjects, isLoadingSharedProjects] = useFetch(getSharedProjects, userId, isLoadingProfile, [])
+  
   const navigate = useNavigate();
 
   // utils
@@ -49,8 +54,16 @@ const Dashboard = () => {
           isLoadingProjects
             ? <LoadingCircle />
             : projects.map(project => (
-              <p><Link key={project["_id"]} to={`/project/${project["_id"]}`}>{project["_id"]}</Link></p>
+              <p key={project["_id"]}><Link to={`/project/${project["_id"]}`}>{project["_id"]}</Link></p>
             ))
+        }
+        <p>Projects Shared with me</p>
+        {
+          isLoadingSharedProjects
+          ? <LoadingCircle />
+          : sharedProjects.map(project => (
+            <p key={project["_id"]}><Link to={`/project/${project["_id"]}`}>{project["_id"]}</Link></p>
+          ))
         }
       </div>
     </div>

@@ -28,3 +28,13 @@ export const getAllProjectsFromUser = async (headers, userId) => {
   const json = await res.json();
   return json.data;
 };
+
+export const getSharedProjects = async (headers, userId) => {
+  const res = await fetch(`/api/projects/shared/${userId}`, {
+    method: "GET",
+    headers: headers
+  });
+
+  const json = await res.json();
+  return json.data;
+};
