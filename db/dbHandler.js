@@ -19,6 +19,12 @@ class DatabaseHandler {
   };
 
   // users collections handlers
+  async findTeamMembers() {
+    // this is only a mvp, therefore all users are actually listed
+    const cursor = await this.users.find();
+    return await cursor.toArray();
+  }
+
   async findUser(id) {
     return await this.users.findOne({ _id: id });
   };

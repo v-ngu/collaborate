@@ -19,4 +19,15 @@ const login = async (req, res) => {
   res.status(StatusCodes.CREATED).json(newUser);
 }
 
-module.exports = { login };
+const getTeamMembers = async (req, res) => {
+  const allMembers = await client.findTeamMembers();
+
+  res.status(StatusCodes.ACCEPTED).json({
+    status: StatusCodes.ACCEPTED, data: allMembers
+  });
+};
+
+module.exports = { 
+  login,
+  getTeamMembers
+ };

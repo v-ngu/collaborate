@@ -24,7 +24,7 @@ const client = new DatabaseHandler();
 
 // import routes and controllers
 const projectsRouter = require('./routes/projects');
-const { login } = require('./controllers/users');
+const { login, getTeamMembers } = require('./controllers/users');
 
 // import event listeners
 const handleConnection = require('./events/handle-connection');
@@ -40,10 +40,11 @@ const { authMiddleware, socketAuthMiddleware } = require('./middlewares/auth');
 app.use(morgan("tiny"));
 app.use(express.json());
 app.use(cors());
-// app.use(authMiddleware);
+app.use(authMiddleware);
 
 // routes
 app.post('/api/users', login);
+app.get('/api/team', getTeamMembers);
 app.use('/api/projects', projectsRouter);
 
 // handling socket connection

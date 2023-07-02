@@ -6,7 +6,7 @@ const registerProjectsHandlers = (io, socket) => {
   const onAddTask = async ({ projectId, column, columnIndex, body }) => {
     await client.addTask(projectId, column, body);
     io.to(socket.activeRoom).emit('projects:task-added', {
-      columnIndex, 
+      columnIndex,
       addedTask: body
     });
   };
