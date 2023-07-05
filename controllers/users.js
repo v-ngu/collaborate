@@ -19,8 +19,9 @@ const login = async (req, res) => {
   res.status(StatusCodes.CREATED).json(newUser);
 }
 
-const getTeamMembers = async (req, res) => {
-  const allMembers = await client.findTeamMembers();
+const getTeamMembersForProject = async (req, res) => {
+  const {projectId} = req.params;
+  const allMembers = await client.findTeamMembers(projectId);
 
   res.status(StatusCodes.ACCEPTED).json({
     status: StatusCodes.ACCEPTED, data: allMembers
@@ -29,5 +30,5 @@ const getTeamMembers = async (req, res) => {
 
 module.exports = { 
   login,
-  getTeamMembers
+  getTeamMembersForProject
  };

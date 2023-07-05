@@ -19,10 +19,35 @@ class DatabaseHandler {
   };
 
   // users collections handlers
-  async findTeamMembers() {
-    // this is only a mvp, therefore all users are actually listed
-    const cursor = await this.users.find();
-    return await cursor.toArray();
+  async findTeamMembers(projectId) {
+    const pipeline = [
+      {
+        '$lookup': {
+          'from': 'projects', 
+          'localField': '_id', 
+          'foreignField': 'authorizedUsers', 
+          'as': 'projects'
+        }
+      }, {
+        '$addFields': {
+          'projectIds': '$projects._id'
+        }
+      }, {
+        '$project': {
+          '_id': 1, 
+          'firstName': 1, 
+          'lastName': 1, 
+          'email': 1, 
+          'isAuthorized': {
+            '$in': [
+              new ObjectId(projectId), '$projectIds'
+            ]
+          }
+        }
+      }
+    ];
+    const aggCursor = await this.users.aggregate(pipeline);
+    return await aggCursor.toArray();
   }
 
   async findUser(id) {

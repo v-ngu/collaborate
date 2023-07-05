@@ -24,7 +24,7 @@ const client = new DatabaseHandler();
 
 // import routes and controllers
 const projectsRouter = require('./routes/projects');
-const { login, getTeamMembers } = require('./controllers/users');
+const { login, getTeamMembersForProject } = require('./controllers/users');
 
 // import event listeners
 const handleConnection = require('./events/handle-connection');
@@ -44,7 +44,7 @@ app.use(authMiddleware);
 
 // routes
 app.post('/api/users', login);
-app.get('/api/team', getTeamMembers);
+app.get('/api/team/project/:projectId', getTeamMembersForProject);
 app.use('/api/projects', projectsRouter);
 
 // handling socket connection
