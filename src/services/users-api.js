@@ -10,3 +10,13 @@ export const login = async (headers, userFromAuth0) => {
 
   return await res.json();
 };
+
+export const getTeamMembersForProject = async (headers, projectId) => {
+  const res = await fetch(`/api/team/project/${projectId}`, {
+    method: "GET",
+    headers: headers
+  });
+
+  const json = await res.json();
+  return json.data;
+};
