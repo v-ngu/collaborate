@@ -45,19 +45,9 @@ const getAuthorizedProjectsForUser = async (req, res) => {
   });
 };
 
-const addAuthorizedUser = async (req, res) => {
-  const { projectId, userId } = req.params;
-  await client.addAuthorizedUser(projectId, userId);
-
-  res.status(StatusCodes.ACCEPTED).json({
-    status: StatusCodes.ACCEPTED, data: {}, msg: `User ${userId} has been authorized`
-  })
-};
-
 module.exports = {
   createProject,
   getProject,
   getAllProjectsFromUser,
   getAuthorizedProjectsForUser,
-  addAuthorizedUser
 };

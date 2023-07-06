@@ -1,7 +1,7 @@
 require('dotenv').config({ path: '../.env' });
 const { MongoClient, ObjectId } = require('mongodb');
 const { NotFoundError } = require('../errors');
-const {findTeamMembersPipeline} = require('./pipelines');
+const { findTeamMembersPipeline } = require('./pipelines');
 
 // DatabaseHandler is used to handle MongoDB and its connection
 class DatabaseHandler {
@@ -80,6 +80,13 @@ class DatabaseHandler {
     );
     if (!result) throw new NotFoundError(`No project with id ${projectId}`);
     return;
+  };
+
+  async removeAuthorizedUser(projectId, userId) {
+    const result = await this.projects.updateOne(
+      { _id: new ObjectId(projectId) },
+      { $pull: { 'authorizedUsers': userId } }
+    )
   };
 
 };
