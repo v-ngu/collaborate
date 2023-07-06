@@ -1,6 +1,7 @@
 require('dotenv').config({ path: '../.env' });
 const { MongoClient, ObjectId } = require('mongodb');
 const { NotFoundError } = require('../errors');
+const {findTeamMembersPipeline} = require('./pipelines');
 
 // DatabaseHandler is used to handle MongoDB and its connection
 class DatabaseHandler {
@@ -20,32 +21,7 @@ class DatabaseHandler {
 
   // users collections handlers
   async findTeamMembers(projectId) {
-    const pipeline = [
-      {
-        '$lookup': {
-          'from': 'projects', 
-          'localField': '_id', 
-          'foreignField': 'authorizedUsers', 
-          'as': 'projects'
-        }
-      }, {
-        '$addFields': {
-          'projectIds': '$projects._id'
-        }
-      }, {
-        '$project': {
-          '_id': 1, 
-          'firstName': 1, 
-          'lastName': 1, 
-          'email': 1, 
-          'isAuthorized': {
-            '$in': [
-              new ObjectId(projectId), '$projectIds'
-            ]
-          }
-        }
-      }
-    ];
+    const pipeline = findTeamMembersPipeline(projectId);
     const aggCursor = await this.users.aggregate(pipeline);
     return await aggCursor.toArray();
   }
