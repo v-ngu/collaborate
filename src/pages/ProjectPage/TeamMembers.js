@@ -1,29 +1,63 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { styled } from "styled-components";
+import { useSocketContext } from "../../contexts/SocketContext";
 
-const TeamMembers = ({ teamMembers, setTeamMembers }) => {
+const TeamMembers = ({ teamMembers, setTeamMembers, projectId }) => {
+  const socket = useSocketContext();
 
-  const handleClick = (event, index, isOwner) => {
+  const teamRef = useRef();
+  teamRef.current = teamMembers;
+
+  // utils
+  const handleClick = (event, index, userId, isOwner, isAuthorized) => {
     event.preventDefault();
-    // socket to update project with authorized user
     if (isOwner) return;
 
-    const newState = [...teamMembers];
-    newState[index].isAuthorized = !newState[index].isAuthorized
-    setTeamMembers(newState);
+    isAuthorized
+      ? socket.emit("projects:remove-user", { projectId, userId, index })
+      : socket.emit("projects:add-user", { projectId, userId, index })
   };
-  
+
+  // update authorized users on project
+  useEffect(() => {
+    if (!socket) return;
+
+    const handleUser = ({ index }) => {
+      const newState = [...teamRef.current];
+      newState[index].isAuthorized = !newState[index].isAuthorized
+      setTeamMembers(newState);
+    };
+
+    // listners
+    socket.on("projects:user-added", handleUser);
+    socket.on("projects:user-removed", handleUser);
+
+    return () => {
+      socket.off("projects:user-added");
+      socket.off("projects:user-removed");
+    }
+  }, [socket, setTeamMembers])
+
+  // rendering
   return (
     <>
       {
         teamMembers.map((teamMember, index) => {
-          const { _id, firstName, lastName, isOwner, isAuthorized } = teamMember;
+          const {
+            _id: userId,
+            firstName,
+            lastName,
+            isOwner,
+            isAuthorized
+          } = teamMember;
 
           return (
-            <Wrapper key={`TM${_id}`}>
+            <Wrapper key={`TM${userId}`}>
               <p>{firstName} {lastName}</p>
               <button
-                onClick={event => handleClick(event, index, isOwner)}
+                onClick={event => {
+                  handleClick(event, index, userId, isOwner, isAuthorized)
+                }}
               >
                 {
                   isOwner

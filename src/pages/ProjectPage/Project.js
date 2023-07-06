@@ -34,7 +34,11 @@ const ProjectPage = () => {
         ))}
         <div>
           <p>Team Members</p>
-          <TeamMembers teamMembers={teamMembers} setTeamMembers={setTeamMembers} />
+          <TeamMembers
+            projectId={projectId}
+            teamMembers={teamMembers}
+            setTeamMembers={setTeamMembers}
+          />
         </div>
       </Container>
     </Wrapper>
