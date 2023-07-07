@@ -1,9 +1,16 @@
+const { v4: uuidv4 } = require("uuid");
+
 const DatabaseHandler = require('../db/dbHandler');
 const client = new DatabaseHandler();
 
 const registerProjectsHandlers = (io, socket) => {
   // handlers
-  const onAddTask = async ({ projectId, column, columnIndex, body }) => {
+  const onAddTask = async ({ projectId, column, columnIndex, data }) => {
+    const body = {
+      taskId: uuidv4(),
+      content: data
+    }
+
     await client.addTask(projectId, column, body);
     io.to(socket.activeRoom).emit('projects:task-added', {
       columnIndex,
