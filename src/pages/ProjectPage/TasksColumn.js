@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import { useActiveFormContext } from "../../contexts/ActiveFormContext";
 import { useProjectContext } from "../../contexts/ProjectContext";
 import NewTaskForm from "./NewTaskForm";
+import Task from "./Task";
 
 const TasksColumn = ({ column, columnIndex }) => {
   const { activeNewForm, setActiveNewForm } = useActiveFormContext();
@@ -23,7 +24,7 @@ const TasksColumn = ({ column, columnIndex }) => {
         activeNewForm === column &&
         <NewTaskForm column={column} columnIndex={columnIndex} />
       }
-      {tasks.map((task, index) => <p key={`${column}-${index}`}>{task}</p>)}
+      {tasks.map((task, index) => <Task key={`${column}-${index}`} task={task.content} />)}
     </Wrapper>
   );
 };
@@ -32,4 +33,7 @@ export default TasksColumn;
 
 const Wrapper = styled.div`
   padding: var(--standard-padding);
+  width: 200px;
+  border: solid 1px #DBDADB;
+  margin: 10px;
 `;

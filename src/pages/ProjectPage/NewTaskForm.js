@@ -31,7 +31,7 @@ const NewTaskForm = ({ column, columnIndex }) => {
         projectId,
         column,
         columnIndex,
-        body: formData
+        data: formData
       });
 
       setActiveNewForm("none");
