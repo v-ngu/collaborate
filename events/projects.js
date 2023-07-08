@@ -28,10 +28,16 @@ const registerProjectsHandlers = (io, socket) => {
     io.to(socket.activeRoom).emit('projects:user-removed', { index });
   };
 
+  const onTaskDragged = async ({ projectId, projectLists }) => {
+    await client.updateProject(projectId, 'projectLists', projectLists);
+    socket.to(socket.activeRoom).emit('projects:dnd-updated', { projectLists });
+  };
+
   // listeners and emitters
   socket.on('projects:add-task', onAddTask);
   socket.on('projects:add-user', onAddUser);
   socket.on('projects:remove-user', onRemoveUser);
+  socket.on('projects:task-dragged', onTaskDragged);
 };
 
 module.exports = registerProjectsHandlers;

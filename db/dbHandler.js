@@ -73,6 +73,15 @@ class DatabaseHandler {
     return result;
   };
 
+  async updateProject(projectId, field, data) {
+    const result = await this.projects.updateOne(
+      { _id: new ObjectId(projectId) },
+      { $set: { [field]: data } }
+    );
+    if (!result) throw new NotFoundError(`No project with id ${projectId}`);
+    return;
+  };
+
   async addAuthorizedUser(projectId, userId) {
     const result = await this.projects.updateOne(
       { _id: new ObjectId(projectId) },
