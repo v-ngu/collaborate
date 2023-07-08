@@ -40,10 +40,21 @@ export const ProjectProvider = ({ projectId, children }) => {
       setProject(newState);
     };
 
+    const handleDndUpdated = ({ projectLists }) => {
+      console.log("getting it")
+      const newState = { ...projectRef.current };
+      newState.projectLists = projectLists;
+      setProject(newState);
+    };
+
     // listeners
     socket.on("projects:task-added", handleAddedTask);
+    socket.on("projects:dnd-updated", handleDndUpdated);
 
-    return () => socket.off("projects:task-added");
+    return () => {
+      socket.off("projects:task-added");
+      socket.off("projects:dnd-updated");
+    }
 
   }, [socket])
 

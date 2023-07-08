@@ -1,10 +1,11 @@
 // import basics
 import { styled } from "styled-components";
-import { DragDropContext } from "react-beautiful-dnd";
 
-// import custom hooks and contexts
+// import hooks and contexts
 import useFetch from "../../hooks/useFetch";
 import { useProjectContext } from "../../contexts/ProjectContext";
+import { DragDropContext } from "react-beautiful-dnd";
+import { useSocketContext } from "../../contexts/SocketContext";
 
 // import components
 import LoadingCircle from "../../components/LoadingCircle";
@@ -24,19 +25,23 @@ const ProjectPage = () => {
     getTeamMembersForProject, projectId, isLoadingProject, []
   );
 
+  const socket = useSocketContext();
+
   // utils
   const handleDragEnd = (result) => {
     const { destination, source } = result;
 
     if (!destination) return;
 
-    if (
-      destination.droppableId === source.droppableId
-      && destination.index === source.index
-    ) return;
+    const noChange = (
+      destination.droppableId === source.droppableId && 
+      destination.index === source.index
+    );
+
+    if (noChange) return;
 
     const newState = { ...project };
-    console.log(destination.droppableId)
+
     // remove task from initial list
     const sourceColumnIndex = newState.projectLists.findIndex(column => column.columnId === source.droppableId);
     const sourceTasks = newState.projectLists[sourceColumnIndex].tasks;
@@ -48,6 +53,12 @@ const ProjectPage = () => {
     const destinationTasks = newState.projectLists[destinationColumnIndex].tasks;
     destinationTasks.splice(destination.index, 0, task)
     setProject(newState);
+
+    // emit event to server to update db
+    socket.emit("projects:task-dragged", { 
+      projectId,
+      projectLists: newState.projectLists 
+    })
   };
 
   // rendering
