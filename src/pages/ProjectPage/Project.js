@@ -6,10 +6,12 @@ import useFetch from "../../hooks/useFetch";
 import { useProjectContext } from "../../contexts/ProjectContext";
 import { DragDropContext } from "react-beautiful-dnd";
 import { useSocketContext } from "../../contexts/SocketContext";
+import { DrawerProvider } from "../../contexts/DrawerContext";
 
 // import components
 import LoadingCircle from "../../components/LoadingCircle";
 import TasksColumn from "./TasksColumn";
+import TaskDrawer from "./TaskDrawer";
 import TeamMembers from "./TeamMembers";
 
 // import API
@@ -34,7 +36,7 @@ const ProjectPage = () => {
     if (!destination) return;
 
     const noChange = (
-      destination.droppableId === source.droppableId && 
+      destination.droppableId === source.droppableId &&
       destination.index === source.index
     );
 
@@ -55,9 +57,9 @@ const ProjectPage = () => {
     setProject(newState);
 
     // emit event to server to update db
-    socket.emit("projects:task-dragged", { 
+    socket.emit("projects:task-dragged", {
       projectId,
-      projectLists: newState.projectLists 
+      projectLists: newState.projectLists
     })
   };
 
@@ -66,26 +68,32 @@ const ProjectPage = () => {
 
   return (
     <Wrapper>
-      <DragDropContext onDragEnd={handleDragEnd}>
-        <Container>
-          {projectLists.map((list, index) => (
-            <TasksColumn
-              key={list.columnId}
-              columnId={list.columnId}
-              column={list.column}
-              columnIndex={index}
-            />
-          ))}
-        </Container>
-      </DragDropContext>
-      <div>
-        <p>Team Members</p>
-        <TeamMembers
-          projectId={projectId}
-          teamMembers={teamMembers}
-          setTeamMembers={setTeamMembers}
-        />
-      </div>
+      <Toolbar>
+        <p>This is a toolar</p>
+      </Toolbar>
+      <DrawerProvider>
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <Container>
+            {projectLists.map((list, index) => (
+              <TasksColumn
+                key={list.columnId}
+                columnId={list.columnId}
+                column={list.column}
+                columnIndex={index}
+              />
+            ))}
+          </Container>
+        </DragDropContext>
+        <div>
+          <p>Team Members</p>
+          <TeamMembers
+            projectId={projectId}
+            teamMembers={teamMembers}
+            setTeamMembers={setTeamMembers}
+          />
+        </div>
+        <TaskDrawer />
+      </DrawerProvider>
     </Wrapper>
   );
 };
@@ -97,3 +105,11 @@ const Wrapper = styled.div`
 const Container = styled.div`
   display: flex;
 `;
+
+const Toolbar = styled.div`
+  width: 100%;
+  height: 50px;
+  background-color: yellow;
+  position: 'relative';
+  z-Index: 1400;
+`
