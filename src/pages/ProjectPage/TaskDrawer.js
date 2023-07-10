@@ -10,9 +10,17 @@ const TaskDrawer = () => {
     setDrawerContent
   } = useDrawercontext();
 
+  const {
+    task,
+    assignee,
+    dueDate,
+    labels,
+    description
+  } = drawerContent;
+
   const handleClose = () => {
     setIsDrawerOpen(false);
-    setDrawerContent([]);
+    setDrawerContent({});
   };
 
   return (
@@ -20,9 +28,13 @@ const TaskDrawer = () => {
       anchor="right"
       open={isDrawerOpen}
       onClose={handleClose}
-      elevation={3}
+      elevation={5}
     >
-      <p>{drawerContent}</p>
+      <p>{task}</p>
+      <p>Assignee: {assignee}</p>
+      <p>Due Date: {dueDate}</p>
+      <p>Labels:</p>
+      <p>Description: {description}</p>
     </StyledDrawer>
   );
 };
@@ -33,7 +45,7 @@ const StyledDrawer = styled(Drawer)`
   && {
     & .MuiBackdrop-root {
       margin-top: 50px;
-      background-color: rgba(255, 255, 255, 0.3);
+      background-color: rgba(255, 255, 255, 0.4);
     };
 
     & .MuiDrawer-paper {

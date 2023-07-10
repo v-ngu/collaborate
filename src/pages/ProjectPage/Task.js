@@ -2,13 +2,19 @@ import { styled } from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
 import { useDrawercontext } from "../../contexts/DrawerContext";
 
-const Task = ({ task, index }) => {
-  const { taskId, content } = task;
+const Task = ({ taskObject, index }) => {
+  const { 
+    taskId, 
+    task,
+    assignee,
+    dueDate
+  } = taskObject;
+  
   const { setIsDrawerOpen, setDrawerContent } = useDrawercontext();
 
   const handleClick = () => {
     setIsDrawerOpen(true);
-    setDrawerContent(content);
+    setDrawerContent(taskObject);
   };
 
   return (
@@ -21,7 +27,9 @@ const Task = ({ task, index }) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <p>{content}</p>
+          <p>{task}</p>
+          <p>{assignee}</p>
+          <p>{dueDate}</p>
         </Wrapper>
       )}
     </Draggable>

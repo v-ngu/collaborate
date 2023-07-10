@@ -32,8 +32,8 @@ const TasksColumn = ({ columnId, column, columnIndex }) => {
             $isDraggingOver={snapshot.isDraggingOver}
             {...provided.droppableProps}
           >
-            {tasks.map((task, index) => (
-              <Task key={task.taskId} task={task} index={index} />
+            {tasks.map((taskObject, index) => (
+              <Task key={taskObject.taskId} taskObject={taskObject} index={index} />
             ))}
             {provided.placeholder}
           </TaskList>
