@@ -41,7 +41,6 @@ export const ProjectProvider = ({ projectId, children }) => {
     };
 
     const handleDndUpdated = ({ projectLists }) => {
-      console.log("getting it")
       const newState = { ...projectRef.current };
       newState.projectLists = projectLists;
       setProject(newState);

@@ -20,6 +20,9 @@ root.render(
     <Auth0Provider
       domain={domain}
       clientId={clientId}
+      // using local storage here is not the safest,
+      // used for dev to have two users on the same browser
+      cacheLocation="localstorage"
       authorizationParams={{
         redirect_uri: redirectUri,
         audience: audience,
