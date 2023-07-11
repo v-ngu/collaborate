@@ -1,8 +1,8 @@
 import { styled } from "styled-components";
 
-const Button = ({ children, $color, handleClick }) => {
+const Button = ({ className, children, $color, handleClick }) => {
   return (
-    <StyledButton onClick={handleClick} $color={$color}>
+    <StyledButton onClick={handleClick} $color={$color} className={className}>
       {children}
     </StyledButton>
   );
@@ -11,7 +11,6 @@ const Button = ({ children, $color, handleClick }) => {
 export default Button;
 
 const StyledButton = styled.button`
-  align-self: flex-start;
   padding: var(--small-padding) var(--standard-padding);
   border: none;
   border-radius: 5px;

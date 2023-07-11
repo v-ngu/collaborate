@@ -18,7 +18,7 @@ const HomePage = () => {
           <Subtitle>
             Manage your projects from anywhere. You'll see who is online and offline, live updates, and what task is being edited.
           </Subtitle>
-          <Button>Get Started</Button>
+          <CallToAction>Get Started</CallToAction>
         </Textfield>
         <Img src={homepage} alt="Home Image" />
       </Container>
@@ -67,4 +67,8 @@ const Img = styled.img`
   position: relative;
   left: 55%;
   top: 135px;
+`;
+
+const CallToAction = styled(Button)`
+  align-self: flex-start;
 `;
