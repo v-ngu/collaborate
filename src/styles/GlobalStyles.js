@@ -2,14 +2,19 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
     :root {
-      --primary-color: #0B6A54;
+      --light-green: #59E4A8;
+      --gray-blue: #1B2E35;
       --secondary-color: hsl(258deg, 100%, 50%, 0.15);
       --third-color: #CFD9DE;
       --neutral-color: #536471;
-      --border-color: solid 1px #CFD9DE;
+      --border: solid 1px #CFD9DE;
       --large-border-color: solid 8px #CFD9DE;
+
+      --small-padding: 10px;
       --standard-padding: 20px;
-      --standard-margin: 10px;
+      --large-padding: 65px;
+
+      --small-margin: 10px;
     }
 
     /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -43,11 +48,23 @@ const GlobalStyle = createGlobalStyle`
         display: block;
     }
     body {
-      font-family: sans-serif;
+      font-family: "Open Sans", sans-serif;
       line-height: 1.5;
+      margin: 0px auto;
+      max-width: 1200px;
+      color: var(--gray-blue);
     }
     h1 {
-      font-size: 2em;
+      font-size: 1.5em;
+    }
+    h2 {
+      font-size: 1.375em;
+    }
+    h3 {
+      font-size: 1.25em;
+    }
+    h4 {
+      font-size: 1.125em;
     }
     ol, ul {
         list-style: none;
@@ -63,6 +80,11 @@ const GlobalStyle = createGlobalStyle`
     table {
         border-collapse: collapse;
         border-spacing: 0;
+    }
+    button {
+        font-family: "Open Sans", sans-serif;
+        font-size: 1em;
+        font-weight: 500;
     }
 `;
 
