@@ -16,7 +16,7 @@ const HomePage = () => {
         <Textfield>
           <Title>Create Kanban boards, collaborate in real-time</Title>
           <Subtitle>
-            Manage your projects from anywhere. You'll see who is online and offline, live updates, and what task is being editing.
+            Manage your projects from anywhere. You'll see who is online and offline, live updates, and what task is being edited.
           </Subtitle>
           <Button>Get Started</Button>
         </Textfield>
@@ -61,10 +61,10 @@ const Subtitle = styled.h3`
 `;
 
 const Img = styled.img`
-  width: 44%;
+  width: 41%;
   max-width: 650px;
   align-self: flex-end;
   position: relative;
   left: 55%;
-  top: 120px;
+  top: 135px;
 `;
