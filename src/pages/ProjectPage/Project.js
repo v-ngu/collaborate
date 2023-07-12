@@ -2,7 +2,6 @@
 import { styled } from "styled-components";
 
 // import hooks and contexts
-import useFetch from "../../hooks/useFetch";
 import { useProjectContext } from "../../contexts/ProjectContext";
 import { DragDropContext } from "react-beautiful-dnd";
 import { useSocketContext } from "../../contexts/SocketContext";
@@ -15,18 +14,17 @@ import TasksColumn from "./TasksColumn";
 import TaskDrawer from "./TaskDrawer";
 import TeamMembers from "./TeamMembers";
 
-// import API
-import { getTeamMembersForProject } from "../../services/users-api";
-
 // ProjectPage component
 const ProjectPage = () => {
   // states and contexts
-  const { project, isLoadingProject, setProject } = useProjectContext();
+  const { 
+    project, 
+    isLoadingProject, 
+    setProject,
+    teamMembers,
+    setTeamMembers
+  } = useProjectContext();
   const { _id: projectId, projectLists } = project;
-
-  const [teamMembers, _isLoadingTeamMembers, setTeamMembers] = useFetch(
-    getTeamMembersForProject, projectId, isLoadingProject, []
-  );
 
   const socket = useSocketContext();
 

@@ -6,8 +6,7 @@ import LogoutButton from "../buttons/LogoutButton";
 
 const AccountMenu = ({ anchorEl, setAnchorEl }) => {
   const {
-    profile: { firstName, lastName, email },
-    isLoadingProfile
+    profile: { firstName, lastName, email }
   } = useProfileContext();
 
 

@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { getProject } from "../services/projects-api";
+import { getTeamMembersForProject } from "../services/users-api";
 import { useSocketContext } from "./SocketContext";
 import { useProfileContext } from "./ProfileContext";
 
@@ -12,11 +13,16 @@ export const useProjectContext = () => useContext(ProjectContext);
 
 // provider
 export const ProjectProvider = ({ projectId, children }) => {
-  const [project, isLoadingProject, setProject] = useFetch(getProject, projectId);
+  const [project, isLoadingProject, setProject, setReloadProject] = useFetch(getProject, projectId);
   const { authorizedUsers, createdBy } = project;
+
+  const [teamMembers, isLoadingTeamMembers, setTeamMembers, setReloadTeam] = useFetch(
+    getTeamMembersForProject, projectId, false, []
+  );
+
   const { profile: { _id: userId } } = useProfileContext();
   const navigate = useNavigate();
-  
+
   // verify that the user is authorized on the project
   if (!isLoadingProject && !authorizedUsers.includes(userId) && createdBy !== userId) {
     navigate("/404");
@@ -55,13 +61,18 @@ export const ProjectProvider = ({ projectId, children }) => {
       socket.off("projects:dnd-updated");
     }
 
-  }, [socket])
+  }, [socket, setProject])
 
   return (
     <ProjectContext.Provider value={{
       project,
       isLoadingProject,
       setProject,
+      setReloadProject,
+      teamMembers, 
+      isLoadingTeamMembers, 
+      setTeamMembers, 
+      setReloadTeam
     }}>
       {children}
     </ProjectContext.Provider>
