@@ -62,7 +62,7 @@ const Name = styled.p`
   font-weight: bold;
 `;
 const Email = styled.p`
-  font-size: 0.8em;
+  font-size: 0.7em;
   color: gray;
 `;
 const Action = styled.li`
