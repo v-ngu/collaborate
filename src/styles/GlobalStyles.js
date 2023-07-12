@@ -4,6 +4,7 @@ const GlobalStyle = createGlobalStyle`
     :root {
       --light-green: #59E4A8;
       --light-gray: #DBDADB;
+      --light-gray-blue: #294A56;
       --gray-blue: #1B2E35;
 
       --small-padding: 10px;
@@ -48,7 +49,6 @@ const GlobalStyle = createGlobalStyle`
       font-family: "Open Sans", sans-serif;
       line-height: 1.5;
       margin: 0px auto;
-      max-width: 1200px;
       color: var(--gray-blue);
     }
     h1 {

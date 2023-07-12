@@ -7,7 +7,7 @@ import Button from "../components/buttons/Button";
 
 const HomePage = () => {
   return (
-    <div>
+    <Wrapper>
       <Toolbar>
         <Logo>Collaborate</Logo>
         <LoginButton />
@@ -22,11 +22,16 @@ const HomePage = () => {
         </Textfield>
         <Img src={homepage} alt="Home Image" />
       </Container>
-    </div>
+    </Wrapper>
   );
 };
 
 export default HomePage;
+
+const Wrapper = styled.div`
+  margin: auto;
+  max-width: 1200px;
+`;
 
 const Container = styled.div`
   padding: var(--large-padding);
