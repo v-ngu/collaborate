@@ -3,18 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 
 // import custom hooks and contexts
 import { useProfileContext } from "../contexts/ProfileContext";
+import { useUserProjectsContext } from "../contexts/UserProjectsContext";
 import useHeaders from "../hooks/useHeaders";
-import useFetch from "../hooks/useFetch";
 
 // import utils
 import makeFetchRequest from "../utils/make-fetch-request";
 
 // import APIs
-import {
-  createProject,
-  getAllProjectsFromUser,
-  getSharedProjects
-} from "../services/projects-api";
+import { createProject } from "../services/projects-api";
 
 // import components
 import LoadingCircle from "../components/LoadingCircle";
@@ -24,11 +20,15 @@ import TransitionWrapper from "../components/TransitionWrapper";
 const Dashboard = () => {
   const [headers, isLoadingHeaders] = useHeaders();
 
-  const { profile, isLoadingProfile } = useProfileContext();
+  const { profile } = useProfileContext();
   const { _id: userId, email } = profile;
 
-  const [projects, isLoadingProjects] = useFetch(getAllProjectsFromUser, userId, isLoadingProfile, [])
-  const [sharedProjects, isLoadingSharedProjects] = useFetch(getSharedProjects, userId, isLoadingProfile, [])
+  const {
+    projects,
+    isLoadingProjects,
+    sharedProjects,
+    isLoadingSharedProjects
+  } = useUserProjectsContext();
 
   const navigate = useNavigate();
 

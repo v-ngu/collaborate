@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { ProfileProvider } from './contexts/ProfileContext';
 import { MenuDrawerProvider } from './contexts/MenuDrawerContext';
+import { UserProjectsProvider } from './contexts/UserProjectsContext';
 
 // environment constants
 const {
@@ -30,9 +31,11 @@ root.render(
       }}
     >
       <ProfileProvider>
-        <MenuDrawerProvider>
-          <App />
-        </MenuDrawerProvider>
+        <UserProjectsProvider>
+          <MenuDrawerProvider>
+            <App />
+          </MenuDrawerProvider>
+        </UserProjectsProvider>
       </ProfileProvider>
     </Auth0Provider>
   </BrowserRouter>
