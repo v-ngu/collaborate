@@ -14,6 +14,7 @@ const useFetch = (api, otherParams, wait = false, initialValue = {}) => {
   useEffect(() => {
     (async () => {
       if (!isLoadingHeaders && !wait) {
+        setIsLoading(true);
         const data = await makeFetchRequest(() => api(headers, otherParams));
         setState(data);
         setIsLoading(false);
