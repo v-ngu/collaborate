@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { useDrawercontext } from '../../contexts/DrawerContext';
+import { useTaskDrawercontext } from '../../contexts/TaskDrawerContext';
 import { Drawer } from '@mui/material';
 
 const TaskDrawer = () => {
@@ -8,7 +8,7 @@ const TaskDrawer = () => {
     setIsDrawerOpen,
     drawerContent,
     setDrawerContent
-  } = useDrawercontext();
+  } = useTaskDrawercontext();
 
   const {
     task,

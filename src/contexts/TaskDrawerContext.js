@@ -1,12 +1,12 @@
 import { createContext, useContext, useState } from "react";
 
-const DrawerContext = createContext(null);
+const TaskDrawerContext = createContext(null);
 
 // export context as a custom hook
-export const useDrawercontext = () => useContext(DrawerContext);
+export const useTaskDrawercontext = () => useContext(TaskDrawerContext);
 
 // provider
-export const DrawerProvider = ({ children }) => {
+export const TaskDrawerProvider = ({ children }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [drawerContent, setDrawerContent] = useState({});
 
@@ -18,8 +18,8 @@ export const DrawerProvider = ({ children }) => {
   };
 
   return (
-    <DrawerContext.Provider value={value}>
+    <TaskDrawerContext.Provider value={value}>
       {children}
-    </DrawerContext.Provider>
+    </TaskDrawerContext.Provider>
   );
 };

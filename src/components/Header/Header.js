@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { styled } from "styled-components";
-import { useProfileContext } from "../contexts/ProfileContext";
-import setAvatar from "../utils/set-avatar";
-import Toolbar from "./Toolbar";
-import LogoutButton from "./buttons/LogoutButton";
+import { useProfileContext } from "../../contexts/ProfileContext";
+import setAvatar from "../../utils/set-avatar";
+import Toolbar from "../Toolbar";
+import LogoutButton from "../buttons/LogoutButton";
 import { Avatar, Menu } from "@mui/material";
 import { FiMenu } from "react-icons/fi"
 
@@ -31,15 +31,8 @@ const Header = () => {
   return (
     <HeaderToolbar>
       <MenuIcon />
-      <ProfileAvatar
-        onClick={handleAvatarClick}
-        {...setAvatar(firstName, lastName)}
-      />
-      <AccountMenu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleAvatarClose}
-      >
+      <ProfileAvatar onClick={handleAvatarClick} {...setAvatar(firstName, lastName)}/>
+      <AccountMenu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleAvatarClose}>
         <AccountInfo>
           <ProfileAvatar $large={true} {...setAvatar(firstName, lastName)} />
           <div>

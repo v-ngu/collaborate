@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
-import { useDrawercontext } from "../../contexts/DrawerContext";
+import { useTaskDrawercontext } from "../../contexts/TaskDrawerContext";
 
 const Task = ({ taskObject, index }) => {
   const { 
@@ -10,7 +10,7 @@ const Task = ({ taskObject, index }) => {
     dueDate
   } = taskObject;
   
-  const { setIsDrawerOpen, setDrawerContent } = useDrawercontext();
+  const { setIsDrawerOpen, setDrawerContent } = useTaskDrawercontext();
 
   const handleClick = () => {
     setIsDrawerOpen(true);

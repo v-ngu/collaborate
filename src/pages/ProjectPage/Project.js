@@ -6,7 +6,7 @@ import useFetch from "../../hooks/useFetch";
 import { useProjectContext } from "../../contexts/ProjectContext";
 import { DragDropContext } from "react-beautiful-dnd";
 import { useSocketContext } from "../../contexts/SocketContext";
-import { DrawerProvider } from "../../contexts/DrawerContext";
+import { TaskDrawerProvider } from "../../contexts/TaskDrawerContext";
 
 // import components
 import LoadingCircle from "../../components/LoadingCircle";
@@ -68,7 +68,7 @@ const ProjectPage = () => {
 
   return (
     <Wrapper>
-      <DrawerProvider>
+      <TaskDrawerProvider>
         <DragDropContext onDragEnd={handleDragEnd}>
           <Container>
             {projectLists.map((list, index) => (
@@ -90,7 +90,7 @@ const ProjectPage = () => {
           />
         </div>
         <TaskDrawer />
-      </DrawerProvider>
+      </TaskDrawerProvider>
     </Wrapper>
   );
 };
