@@ -3,18 +3,15 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
     :root {
       --light-green: #59E4A8;
+      --light-gray: #DBDADB;
       --gray-blue: #1B2E35;
-      --secondary-color: hsl(258deg, 100%, 50%, 0.15);
-      --third-color: #CFD9DE;
-      --neutral-color: #536471;
-      --border: solid 1px #CFD9DE;
-      --large-border-color: solid 8px #CFD9DE;
 
       --small-padding: 10px;
       --standard-padding: 20px;
       --large-padding: 65px;
 
       --small-margin: 10px;
+      --standard-margin: 20px;
     }
 
     /* http://meyerweb.com/eric/tools/css/reset/ 

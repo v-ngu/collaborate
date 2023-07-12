@@ -1,8 +1,8 @@
 import { styled } from "styled-components";
 
-const Toolbar = ({ children }) => {
+const Toolbar = ({ className, children }) => {
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       {children}
     </Wrapper>
   );

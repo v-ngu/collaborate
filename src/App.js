@@ -1,5 +1,5 @@
 // import basics
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 // import contexts
 import { useProfileContext } from './contexts/ProfileContext';
@@ -11,10 +11,25 @@ import Dashboard from './pages/Dashboard';
 import LoadingPage from './pages/LoadingPage';
 import NotFound from './pages/NotFound';
 import ProjectPage from './pages/ProjectPage';
+import Header from './components/Header';
 
 // App component
 const App = () => {
   const { userAccess, isLoadingProfile } = useProfileContext();
+  const location = useLocation();
+
+  // utils
+  const isPathMatching = () => {
+    const path = location.pathname;
+
+    if (userAccess === "Logged In") {
+      if (path.startsWith("/dashboard") || path.startsWith("/project")) {
+        return true;
+      }
+    }
+
+    return false;
+  };
 
   // function to rendre private routes
   const renderPrivateRoutes = () => {
@@ -34,6 +49,7 @@ const App = () => {
   return (
     <>
       <GlobalStyle />
+      {isPathMatching() && <Header />}
       <Routes>
         <Route path='/' element={<HomePage />} />
         {renderPrivateRoutes()}

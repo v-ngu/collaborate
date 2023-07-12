@@ -68,9 +68,6 @@ const ProjectPage = () => {
 
   return (
     <Wrapper>
-      <Toolbar>
-        <p>This is a toolar</p>
-      </Toolbar>
       <DrawerProvider>
         <DragDropContext onDragEnd={handleDragEnd}>
           <Container>
@@ -105,11 +102,3 @@ const Wrapper = styled.div`
 const Container = styled.div`
   display: flex;
 `;
-
-const Toolbar = styled.div`
-  width: 100%;
-  height: 50px;
-  background-color: yellow;
-  position: 'relative';
-  z-Index: 1400;
-`

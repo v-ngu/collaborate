@@ -10,14 +10,13 @@ import useFetch from "../hooks/useFetch";
 import makeFetchRequest from "../utils/make-fetch-request";
 
 // import APIs
-import { 
-  createProject, 
-  getAllProjectsFromUser, 
-  getSharedProjects 
+import {
+  createProject,
+  getAllProjectsFromUser,
+  getSharedProjects
 } from "../services/projects-api";
 
 // import components
-import LogoutButton from "../components/buttons/LogoutButton";
 import LoadingCircle from "../components/LoadingCircle";
 
 // Dashboard component
@@ -29,7 +28,7 @@ const Dashboard = () => {
 
   const [projects, isLoadingProjects] = useFetch(getAllProjectsFromUser, userId, isLoadingProfile, [])
   const [sharedProjects, isLoadingSharedProjects] = useFetch(getSharedProjects, userId, isLoadingProfile, [])
-  
+
   const navigate = useNavigate();
 
   // utils
@@ -44,28 +43,24 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h1>Dashboard</h1>
-      <LogoutButton />
-      <div>
-        <p>{email}</p>
-        <button onClick={createNewProject}>Crate a new project</button>
-        <p>List of projects</p>
-        {
-          isLoadingProjects
-            ? <LoadingCircle />
-            : projects.map(project => (
-              <p key={project["_id"]}><Link to={`/project/${project["_id"]}`}>{project["_id"]}</Link></p>
-            ))
-        }
-        <p>Projects Shared with me</p>
-        {
-          isLoadingSharedProjects
+      <p>{email}</p>
+      <button onClick={createNewProject}>Crate a new project</button>
+      <p>List of projects</p>
+      {
+        isLoadingProjects
+          ? <LoadingCircle />
+          : projects.map(project => (
+            <p key={project["_id"]}><Link to={`/project/${project["_id"]}`}>{project["_id"]}</Link></p>
+          ))
+      }
+      <p>Projects Shared with me</p>
+      {
+        isLoadingSharedProjects
           ? <LoadingCircle />
           : sharedProjects.map(project => (
             <p key={project["_id"]}><Link to={`/project/${project["_id"]}`}>{project["_id"]}</Link></p>
           ))
-        }
-      </div>
+      }
     </div>
   );
 };

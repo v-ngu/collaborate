@@ -1,20 +1,25 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import { styled } from "styled-components"
 
 const LogoutButton = () => {
   const { logout } = useAuth0();
 
-  const handleClick = async () => {
+  const handleClick = async (event) => {
+    event.preventDefault();
     await window.sessionStorage.removeItem("userAccessState")
     logout({ logoutParams: { returnTo: window.location.origin } })
   };
 
   return (
-    <button 
-      onClick={handleClick}
-    >
+    <Anchor href="" onClick={handleClick}>
       Log Out
-    </button>
+    </Anchor>
   );
 };
 
 export default LogoutButton;
+
+const Anchor = styled.a`
+  text-decoration: none;
+  color: var(--gray-blue);
+`;

@@ -39,7 +39,7 @@ const Task = ({ taskObject, index }) => {
 export default Task;
 
 const Wrapper = styled.div`
-  border: ${({ $isDragging }) => $isDragging ? 'solid 1px grey' : 'solid 1px #DBDADB'};
+  border: ${({ $isDragging }) => $isDragging ? 'solid 1px grey' : 'solid 1px var(--light-gray)'};
   background-color: white;
   margin: 10px 0px;
   padding: 5px;
