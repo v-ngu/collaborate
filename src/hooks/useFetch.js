@@ -9,6 +9,7 @@ const useFetch = (api, otherParams, wait = false, initialValue = {}) => {
   const [state, setState] = useState(initialValue);
   const [isLoading, setIsLoading] = useState(true);
   const [headers, isLoadingHeaders] = useHeaders();
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -19,9 +20,9 @@ const useFetch = (api, otherParams, wait = false, initialValue = {}) => {
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoadingHeaders, wait]);
+  }, [isLoadingHeaders, wait, reload]);
 
-  return ([state, isLoading, setState]);
+  return ([state, isLoading, setState, setReload]);
 };
 
 export default useFetch;

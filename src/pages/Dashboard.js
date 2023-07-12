@@ -26,8 +26,10 @@ const Dashboard = () => {
   const {
     projects,
     isLoadingProjects,
+    setReloadProjects,
     sharedProjects,
-    isLoadingSharedProjects
+    isLoadingSharedProjects,
+    setReloadSharedProjects
   } = useUserProjectsContext();
 
   const navigate = useNavigate();
@@ -38,6 +40,8 @@ const Dashboard = () => {
     if (!isLoadingHeaders) {
       const newProjectId = await makeFetchRequest(() => createProject(headers, { userId }));
       console.log(`New project ${newProjectId} has been created`);
+      setReloadProjects(prevState => !prevState);
+      setReloadSharedProjects(prevState => !prevState);
       navigate(`/project/${newProjectId}`);
     }
   }

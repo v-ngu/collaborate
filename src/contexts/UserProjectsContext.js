@@ -13,19 +13,33 @@ export const UserProjectsProvider = ({ children }) => {
   const { profile, isLoadingProfile } = useProfileContext();
   const { _id: userId } = profile;
 
-  const [projects, isLoadingProjects] = useFetch(
+  const [
+    projects, 
+    isLoadingProjects, 
+    setProjects, 
+    setReloadProjects
+  ] = useFetch(
     getAllProjectsFromUser, userId, isLoadingProfile, []
   );
 
-  const [sharedProjects, isLoadingSharedProjects] = useFetch(
+  const [
+    sharedProjects, 
+    isLoadingSharedProjects, 
+    setSharedProjects, 
+    setReloadSharedProjects
+  ] = useFetch(
     getSharedProjects, userId, isLoadingProfile, []
   );
 
   const value = {
     projects,
     isLoadingProjects,
+    setProjects, 
+    setReloadProjects,
     sharedProjects,
-    isLoadingSharedProjects
+    isLoadingSharedProjects,
+    setSharedProjects, 
+    setReloadSharedProjects
   }
 
   return (
