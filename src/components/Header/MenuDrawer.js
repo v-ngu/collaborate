@@ -1,14 +1,33 @@
 import { styled } from "styled-components";
-import { NavLink } from "react-router-dom";
 import { Drawer } from '@mui/material';
 import { useMenuDrawerContext } from "../../contexts/MenuDrawerContext";
+import { useUserProjectsContext } from "../../contexts/UserProjectsContext";
 
 import { MdSpaceDashboard, MdCheckCircle, MdInbox } from "react-icons/md";
+import MenuLink from "./MenuLink";
 import ProjectIcon from "../ProjectIcon";
 
 const MenuDrawer = () => {
+  // states
   const { isMenuDrawerOpen } = useMenuDrawerContext();
+  const { projects, sharedProjects } = useUserProjectsContext();
 
+  // utils
+  const renderProjects = (projectList) => {
+    return projectList.map(project => {
+      const { _id, projectName, projectColor } = project;
+      return (
+        <MenuLink
+          key={`ML${_id}`}
+          path={`/project/${_id}`}
+          text={projectName}
+          children={<ProjectIcon color={projectColor} />}
+        />
+      )
+    })
+  };
+
+  // rendering
   return (
     <StyledDrawer
       anchor="left"
@@ -18,29 +37,26 @@ const MenuDrawer = () => {
       transitionDuration={500}
     >
       <Menu>
-        <Li>
-          <MdSpaceDashboard className="menu-icon" />
-          <MenuLink to="/dashboard">Dashboard</MenuLink>
-        </Li>
-        <Li>
-          <MdCheckCircle className="menu-icon" />
-          <MenuLink>My tasks</MenuLink>
-        </Li>
-        <Li>
-          <MdInbox className="menu-icon" />
-          <MenuLink>Inbox</MenuLink>
-        </Li>
+        <MenuLink
+          path="/dashboard"
+          text="Dashboard"
+          children={<MdSpaceDashboard className="menu-icon" />}
+        />
+        <MenuLink
+          path="/404"
+          text="My tasks"
+          children={<MdCheckCircle className="menu-icon" />}
+        />
+        <MenuLink
+          path="/404"
+          text="Inbox"
+          children={<MdInbox className="menu-icon" />}
+        />
         <SubMenu title="Projects">
-          <Li>
-            <ProjectIcon color="red" />
-            <MenuLink to="/project/64ac6a62a1cae114db08365f">Project 1</MenuLink>
-          </Li>
+          {renderProjects(projects)}
         </SubMenu>
         <SubMenu title="Share with me">
-          <Li>
-            <ProjectIcon color="yellow" />
-            <MenuLink>Shared 1</MenuLink>
-          </Li>
+          {renderProjects(sharedProjects)}
         </SubMenu>
       </Menu>
     </StyledDrawer>
@@ -73,27 +89,4 @@ const SubMenu = styled.ul`
     padding: var(--tiny-padding);
     margin-top: var(--small-margin);
   }
-`;
-const Li = styled.li`
-  padding: var(--tiny-padding);
-  display: flex;
-  align-items: center;
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-  }
-
-  & .menu-icon {
-    font-size: 1.2em;
-  }
-`;
-const MenuLink = styled(NavLink)`
-  padding-left: var(--small-padding);
-  text-decoration: none;
-  color: white;
-`;
-
-const DashboardIcon = styled(MdSpaceDashboard)`
-
 `;
