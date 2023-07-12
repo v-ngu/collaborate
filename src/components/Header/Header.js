@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { styled } from "styled-components";
 import { useProfileContext } from "../../contexts/ProfileContext";
+import { useMenuDrawerContext } from "../../contexts/MenuDrawerContext";
 import setAvatar from "../../utils/set-avatar";
 import Toolbar from "../Toolbar";
 import LogoutButton from "../buttons/LogoutButton";
+import MenuDrawer from "./MenuDrawer";
+
 import { Avatar, Menu } from "@mui/material";
 import { FiMenu } from "react-icons/fi"
 
 const Header = () => {
   // stages
   const [anchorEl, setAnchorEl] = useState(null);
+  const { setIsMenuDrawerOpen } = useMenuDrawerContext();
 
   const {
     profile: { firstName, lastName, email },
@@ -17,6 +21,10 @@ const Header = () => {
   } = useProfileContext();
 
   // utils
+  const handleMenuclick = (event) => {
+    setIsMenuDrawerOpen(prevState => !prevState)
+  };
+
   const handleAvatarClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -30,7 +38,8 @@ const Header = () => {
 
   return (
     <HeaderToolbar>
-      <MenuIcon />
+      <MenuIcon onClick={handleMenuclick}/>
+      <MenuDrawer />
       <ProfileAvatar onClick={handleAvatarClick} {...setAvatar(firstName, lastName)}/>
       <AccountMenu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleAvatarClose}>
         <AccountInfo>
@@ -56,13 +65,13 @@ export default Header;
 const HeaderToolbar = styled(Toolbar)`
   background-color: var(--gray-blue);
   padding: 0px var(--standard-padding);
-  border-bottom: var(--light-gray);
+  border-bottom: 1px solid var(--light-gray-blue);
 `;
 
 const MenuIcon = styled(FiMenu)`
   font-size: 1.3em;
   color: white;
-  padding: 5px;
+  padding: var(--tiny-padding);
 
   &:hover{
     background-color: rgba(255, 255, 255, 0.1);

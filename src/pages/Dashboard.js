@@ -18,6 +18,7 @@ import {
 
 // import components
 import LoadingCircle from "../components/LoadingCircle";
+import TransitionWrapper from "../components/TransitionWrapper";
 
 // Dashboard component
 const Dashboard = () => {
@@ -42,7 +43,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div>
+    <TransitionWrapper>
       <p>{email}</p>
       <button onClick={createNewProject}>Crate a new project</button>
       <p>List of projects</p>
@@ -61,7 +62,7 @@ const Dashboard = () => {
             <p key={project["_id"]}><Link to={`/project/${project["_id"]}`}>{project["_id"]}</Link></p>
           ))
       }
-    </div>
+    </TransitionWrapper>
   );
 };
 

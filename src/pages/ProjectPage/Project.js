@@ -10,6 +10,7 @@ import { TaskDrawerProvider } from "../../contexts/TaskDrawerContext";
 
 // import components
 import LoadingCircle from "../../components/LoadingCircle";
+import TransitionWrapper from "../../components/TransitionWrapper";
 import TasksColumn from "./TasksColumn";
 import TaskDrawer from "./TaskDrawer";
 import TeamMembers from "./TeamMembers";
@@ -67,7 +68,7 @@ const ProjectPage = () => {
   if (isLoadingProject) return <LoadingCircle />
 
   return (
-    <Wrapper>
+    <TransitionWrapper>
       <TaskDrawerProvider>
         <DragDropContext onDragEnd={handleDragEnd}>
           <Container>
@@ -91,14 +92,12 @@ const ProjectPage = () => {
         </div>
         <TaskDrawer />
       </TaskDrawerProvider>
-    </Wrapper>
+    </TransitionWrapper>
   );
 };
 
 export default ProjectPage;
 
-const Wrapper = styled.div`
-`;
 const Container = styled.div`
   display: flex;
 `;

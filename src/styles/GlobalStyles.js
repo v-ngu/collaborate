@@ -7,6 +7,7 @@ const GlobalStyle = createGlobalStyle`
       --light-gray-blue: #294A56;
       --gray-blue: #1B2E35;
 
+      --tiny-padding: 7px;
       --small-padding: 10px;
       --standard-padding: 20px;
       --large-padding: 65px;
