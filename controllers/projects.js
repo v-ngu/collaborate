@@ -45,9 +45,22 @@ const getAuthorizedProjectsForUser = async (req, res) => {
   });
 };
 
+const updateProject = async (req, res) => {
+  const { projectId } = req.params;
+  const { field, data } = req.body;
+  await client.updateProject(projectId, field, data);
+
+  res.status(StatusCodes.ACCEPTED).json({
+    status: StatusCodes.ACCEPTED, data: {
+      msg: "Project updated"
+    }
+  });
+};
+
 module.exports = {
   createProject,
   getProject,
   getAllProjectsFromUser,
   getAuthorizedProjectsForUser,
+  updateProject
 };

@@ -30,6 +30,7 @@ class ProjectSchema {
       },
     ];
     this.authorizedUsers = [];
+    this.screenshot = "";
   }
 }
 
