@@ -1,7 +1,10 @@
 // import basics
+import { useEffect } from "react";
 import { styled } from "styled-components";
+import html2canvas from "html2canvas";
 
 // import hooks and contexts
+import useHeaders from "../../hooks/useHeaders";
 import { useProjectContext } from "../../contexts/ProjectContext";
 import { DragDropContext } from "react-beautiful-dnd";
 import { useSocketContext } from "../../contexts/SocketContext";
@@ -14,17 +17,23 @@ import TasksColumn from "./TasksColumn";
 import TaskDrawer from "./TaskDrawer";
 import TeamMembers from "./TeamMembers";
 
+// import APIs and utils
+import makeFetchRequest from "../../utils/make-fetch-request";
+import { updateProject } from "../../services/projects-api";
+
 // ProjectPage component
 const ProjectPage = () => {
   // states and contexts
-  const { 
-    project, 
-    isLoadingProject, 
+  const {
+    project,
+    isLoadingProject,
     setProject,
     teamMembers,
     setTeamMembers
   } = useProjectContext();
   const { _id: projectId, projectLists } = project;
+
+  const [headers] = useHeaders();
 
   const socket = useSocketContext();
 
@@ -62,6 +71,23 @@ const ProjectPage = () => {
     })
   };
 
+  // take a screenshot of the project and save it to the db
+  useEffect(() => {
+    const element = document.getElementById("screenshot")
+    if (!element) return;
+
+    html2canvas(element)
+      .then((canvas) => {
+        const base64image = canvas.toDataURL("image/png");
+        const body = {
+          field: "screenshot",
+          data: base64image
+        };
+
+        makeFetchRequest(() => updateProject(headers, projectId, body));
+      });
+  }, [project])
+
   // rendering
   if (isLoadingProject) return <LoadingCircle />
 
@@ -69,7 +95,7 @@ const ProjectPage = () => {
     <TransitionWrapper>
       <TaskDrawerProvider>
         <DragDropContext onDragEnd={handleDragEnd}>
-          <Container>
+          <Container id="screenshot">
             {projectLists.map((list, index) => (
               <TasksColumn
                 key={list.columnId}

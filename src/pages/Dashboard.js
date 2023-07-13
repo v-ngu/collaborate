@@ -44,7 +44,7 @@ const Dashboard = () => {
       setReloadSharedProjects(prevState => !prevState);
       navigate(`/project/${newProjectId}`);
     }
-  }
+  };
 
   return (
     <TransitionWrapper>

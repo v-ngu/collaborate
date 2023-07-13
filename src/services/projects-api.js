@@ -38,3 +38,14 @@ export const getSharedProjects = async (headers, userId) => {
   const json = await res.json();
   return json.data;
 };
+
+export const updateProject = async (headers, projectId, body) => {
+  const res = await fetch(`/api/projects/${projectId}`, {
+    method: "PATCH",
+    headers: headers,
+    body: JSON.stringify(body)
+  });
+
+  const json = await res.json();
+  return json.data;
+};
