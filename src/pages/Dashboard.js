@@ -55,7 +55,10 @@ const Dashboard = () => {
         isLoadingProjects
           ? <LoadingCircle />
           : projects.map(project => (
-            <p key={project["_id"]}><Link to={`/project/${project["_id"]}`}>{project["_id"]}</Link></p>
+            <div key={project["_id"]}>
+              <p><Link to={`/project/${project["_id"]}`}>{project["_id"]}</Link></p>
+              <img src={project.screenshot} alt=""/>
+            </div>
           ))
       }
       <p>Projects Shared with me</p>

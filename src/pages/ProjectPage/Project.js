@@ -1,7 +1,8 @@
 // import basics
-import { useEffect } from "react";
 import { styled } from "styled-components";
-import html2canvas from "html2canvas";
+
+// import utils
+import takeScreenshot from "../../utils/take-screenshot";
 
 // import hooks and contexts
 import useHeaders from "../../hooks/useHeaders";
@@ -9,6 +10,7 @@ import { useProjectContext } from "../../contexts/ProjectContext";
 import { DragDropContext } from "react-beautiful-dnd";
 import { useSocketContext } from "../../contexts/SocketContext";
 import { TaskDrawerProvider } from "../../contexts/TaskDrawerContext";
+import { useUserProjectsContext } from "../../contexts/UserProjectsContext";
 
 // import components
 import LoadingCircle from "../../components/LoadingCircle";
@@ -16,10 +18,7 @@ import TransitionWrapper from "../../components/TransitionWrapper";
 import TasksColumn from "./TasksColumn";
 import TaskDrawer from "./TaskDrawer";
 import TeamMembers from "./TeamMembers";
-
-// import APIs and utils
-import makeFetchRequest from "../../utils/make-fetch-request";
-import { updateProject } from "../../services/projects-api";
+import { useEffect } from "react";
 
 // ProjectPage component
 const ProjectPage = () => {
@@ -34,6 +33,7 @@ const ProjectPage = () => {
   const { _id: projectId, projectLists } = project;
 
   const [headers] = useHeaders();
+  const { setReloadProjects } = useUserProjectsContext();
 
   const socket = useSocketContext();
 
@@ -53,13 +53,23 @@ const ProjectPage = () => {
     const newState = { ...project };
 
     // remove task from initial list
-    const sourceColumnIndex = newState.projectLists.findIndex(column => column.columnId === source.droppableId);
+    const sourceColumnIndex = (
+      newState.projectLists.findIndex(column => (
+        column.columnId === source.droppableId
+      ))
+    );
+
     const sourceTasks = newState.projectLists[sourceColumnIndex].tasks;
     const task = sourceTasks.find((_task, index) => index === source.index);
     sourceTasks.splice(source.index, 1);
 
     // move task to new location
-    const destinationColumnIndex = newState.projectLists.findIndex(column => column.columnId === destination.droppableId);
+    const destinationColumnIndex = (
+      newState.projectLists.findIndex(column => (
+        column.columnId === destination.droppableId
+      ))
+    );
+
     const destinationTasks = newState.projectLists[destinationColumnIndex].tasks;
     destinationTasks.splice(destination.index, 0, task)
     setProject(newState);
@@ -73,20 +83,11 @@ const ProjectPage = () => {
 
   // take a screenshot of the project and save it to the db
   useEffect(() => {
-    const element = document.getElementById("screenshot")
-    if (!element) return;
-
-    html2canvas(element)
-      .then((canvas) => {
-        const base64image = canvas.toDataURL("image/png");
-        const body = {
-          field: "screenshot",
-          data: base64image
-        };
-
-        makeFetchRequest(() => updateProject(headers, projectId, body));
-      });
-  }, [project])
+    (async () => {
+      await takeScreenshot(headers, projectId);
+      setReloadProjects(prevState => !prevState);
+    })();
+  }, [project, setReloadProjects, headers, projectId])
 
   // rendering
   if (isLoadingProject) return <LoadingCircle />
