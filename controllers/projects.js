@@ -51,9 +51,18 @@ const updateProject = async (req, res) => {
   await client.updateProject(projectId, field, data);
 
   res.status(StatusCodes.ACCEPTED).json({
-    status: StatusCodes.ACCEPTED, data: {
-      msg: "Project updated"
-    }
+    status: StatusCodes.ACCEPTED, 
+    data: { msg: "Project updated" }
+  });
+};
+
+const deleteProject = async (req, res) => {
+  const { projectId } = req.params;
+  await client.deleteProject(projectId);
+
+  res.status(StatusCodes.ACCEPTED).json({
+    status: StatusCodes.ACCEPTED,
+    data: { msg: "Project deleted" }
   });
 };
 
@@ -62,5 +71,6 @@ module.exports = {
   getProject,
   getAllProjectsFromUser,
   getAuthorizedProjectsForUser,
-  updateProject
+  updateProject,
+  deleteProject
 };

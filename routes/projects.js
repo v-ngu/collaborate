@@ -7,13 +7,17 @@ const {
   getProject,
   getAllProjectsFromUser,
   getAuthorizedProjectsForUser,
-  updateProject
+  updateProject,
+  deleteProject
  } = require('../controllers/projects');
 
 // routes
 router.route('/').post(createProject);
 router.route('/user/:userId').get(getAllProjectsFromUser);
 router.route('/shared/:userId').get(getAuthorizedProjectsForUser);
-router.route('/:projectId').get(getProject).patch(updateProject);
+router.route('/:projectId')
+  .get(getProject)
+  .patch(updateProject)
+  .delete(deleteProject);
 
 module.exports = router;

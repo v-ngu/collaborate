@@ -98,6 +98,11 @@ class DatabaseHandler {
     )
   };
 
+  async deleteProject(projectId) {
+    const result = await this.projects.deleteOne({ _id: new ObjectId(projectId) });
+    if (!result) throw new NotFoundError(`No project with id ${projectId}`);
+    return result;
+  };
 };
 
 module.exports = DatabaseHandler;
