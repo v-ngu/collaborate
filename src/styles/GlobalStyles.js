@@ -53,6 +53,8 @@ const GlobalStyle = createGlobalStyle`
       line-height: 1.5;
       margin: 0px auto;
       color: var(--gray-blue);
+      width: 100vw;
+      height: 100vh;
     }
     h1 {
       font-size: 1.5em;
