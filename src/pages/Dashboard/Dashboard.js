@@ -1,4 +1,5 @@
 // import basics
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
@@ -20,10 +21,13 @@ import ContentContainer from "../../components/ContentContainer";
 import Toolbar from "../../components/Toolbar";
 import Button from "../../components/buttons/Button";
 import ProjectCard from "./ProjectCard";
+import SucessSnackbar from "../../components/SuccessSnackbar";
 
 // Dashboard component
 const Dashboard = () => {
   const [headers, isLoadingHeaders] = useHeaders();
+
+  const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
 
   const { profile } = useProfileContext();
   const { _id: userId } = profile;
@@ -63,16 +67,34 @@ const Dashboard = () => {
           {
             isLoadingProjects
               ? <LoadingCircle />
-              : projects.map(project => <ProjectCard key={project["_id"]} project={project} />)
+              : projects.map(project => (
+                <ProjectCard 
+                  key={project["_id"]} 
+                  project={project} 
+                  setSnackbarIsOpen={setSnackbarIsOpen}
+                />
+              ))
           }
         </Container>
         <Subtitle>Projects Shared with me</Subtitle>
-        {
-          isLoadingSharedProjects
-            ? <LoadingCircle />
-            : sharedProjects.map(project => <ProjectCard key={project["_id"]} project={project} />)
-        }
+        <Container>
+          {
+            isLoadingSharedProjects
+              ? <LoadingCircle />
+              : sharedProjects.map(project => (
+                <ProjectCard 
+                  key={project["_id"]} 
+                  project={project} 
+                  setSnackbarIsOpen={setSnackbarIsOpen}
+                />
+              ))
+          }
+        </Container>
       </ContentContainer>
+      <SucessSnackbar
+        snackbarIsOpen={snackbarIsOpen}
+        setSnackbarIsOpen={setSnackbarIsOpen}
+      />
     </TransitionWrapper>
   );
 };

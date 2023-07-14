@@ -49,3 +49,13 @@ export const updateProject = async (headers, projectId, body) => {
   const json = await res.json();
   return json.data;
 };
+
+export const deleteProject = async (headers, projectId) => {
+  const res = await fetch(`/api/projects/${projectId}`, {
+    method: "DELETE",
+    headers: headers
+  });
+
+  const json = await res.json();
+  return json.data;
+};

@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 
 import Options from "./Options";
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project, setSnackbarIsOpen }) => {
   const { _id, projectName, screenshot } = project;
   const [isHovered, setIsHovered] = useState(false);
 
@@ -19,7 +19,12 @@ const ProjectCard = ({ project }) => {
         </Container>
         <ProjectName>{projectName}</ProjectName>
       </Link>
-      <Options isHovered={isHovered} setIsHovered={setIsHovered} />
+      <Options
+        isHovered={isHovered}
+        setIsHovered={setIsHovered}
+        projectId={_id}
+        setSnackbarIsOpen={setSnackbarIsOpen}
+      />
     </Wrapper>
   );
 };

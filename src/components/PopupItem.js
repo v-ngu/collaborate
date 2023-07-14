@@ -1,10 +1,10 @@
 import { styled } from "styled-components"
 import { Link } from "react-router-dom";
 
-const PopupItem = ({ children, text }) => {
+const PopupItem = ({ children, text, handleClick }) => {
   return (
     <Action>
-      <CustomLink>
+      <CustomLink onClick={handleClick}>
         {children}
         <span>{text}</span>
       </CustomLink>

@@ -1,15 +1,31 @@
+// import basics
 import { useState } from "react";
 import { styled } from "styled-components";
-import { BsThreeDots } from "react-icons/bs";
+
+// import hooks and contexts
+import useHeaders from "../../hooks/useHeaders";
+import { useUserProjectsContext } from "../../contexts/UserProjectsContext";
+
+// imports for making API call
+import makeFetchRequest from "../../utils/make-fetch-request";
+import { deleteProject } from "../../services/projects-api";
+
+// import components and icons
 import PopupMenu from "../../components/PopupMenu";
 import PopupItem from "../../components/PopupItem";
+import { BsThreeDots } from "react-icons/bs";
 import { BiCopy, BiLink, BiTrash } from "react-icons/bi";
 
-const Options = ({ isHovered, setIsHovered }) => {
+const Options = ({ isHovered, setIsHovered, projectId, setSnackbarIsOpen }) => {
+  // states
   const [mouseOn, setMouseOn] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
+  const [headers] = useHeaders();
+  const { setReloadProjects } = useUserProjectsContext();
+
+  // utils
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
     setIsClicked(true)
@@ -19,6 +35,13 @@ const Options = ({ isHovered, setIsHovered }) => {
     setAnchorEl(null);
     setIsClicked(false);
     setIsHovered(false);
+  };
+
+  const handleDelete = async () => {
+    await makeFetchRequest(() => deleteProject(headers, projectId));
+    setAnchorEl(null);
+    setSnackbarIsOpen(true);
+    setReloadProjects(prevState => !prevState);
   };
 
   return (
@@ -43,6 +66,7 @@ const Options = ({ isHovered, setIsHovered }) => {
         <PopupItem 
           text="Delete" 
           children={<BiTrash className="popup-icon" />}
+          handleClick={handleDelete}
         />
       </PopupMenu>
     </>
