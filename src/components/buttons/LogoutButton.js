@@ -22,4 +22,8 @@ export default LogoutButton;
 const Anchor = styled.a`
   text-decoration: none;
   color: var(--gray-blue);
+
+  &:hover {
+    color: var(--gray-blue);
+  }
 `;
