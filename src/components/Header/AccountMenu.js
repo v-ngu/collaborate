@@ -10,8 +10,12 @@ const AccountMenu = ({ anchorEl, setAnchorEl }) => {
     profile: { firstName, lastName, email }
   } = useProfileContext();
 
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
-    <PopupMenu anchorEl={anchorEl} setAnchorEl={setAnchorEl}>
+    <PopupMenu anchorEl={anchorEl} handleClose={handleClose}>
       <AccountInfo>
         <ProfileAvatar $large={true} firstName={firstName} lastName={lastName} />
         <div>
@@ -19,12 +23,12 @@ const AccountMenu = ({ anchorEl, setAnchorEl }) => {
           <Email>{email}</Email>
         </div>
       </AccountInfo>
-      <PopupItem>Account settings</PopupItem>
-      <PopupItem>Get help</PopupItem>
-      <PopupItem>Privacy policy</PopupItem>
-      <PopupItem>
-        <LogoutButton>Sign out</LogoutButton>
-      </PopupItem>
+      <PopupItem text="Account settings" />
+      <PopupItem text="Get help" />
+      <PopupItem text="Privacy policy" />
+      <PopupItem
+        children={<LogoutButton>Sign out</LogoutButton>}
+      />
     </PopupMenu>
   );
 };

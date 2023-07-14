@@ -2,6 +2,8 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
     :root {
+      --ultra-light-gray: #F3F4F6;
+
       --light-green: #59E4A8;
       --light-gray: #DBDADB;
       --light-gray-blue: #294A56;
@@ -83,6 +85,13 @@ const GlobalStyle = createGlobalStyle`
         font-family: "Open Sans", sans-serif;
         font-size: 1em;
         font-weight: 500;
+    }
+    a {
+      color: var(--gray-blue);
+      text-decoration: none;
+    }
+    a:hover {
+      color: var(--light-green);
     }
 `;
 

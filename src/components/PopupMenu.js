@@ -1,13 +1,16 @@
 import { styled } from "styled-components";
 import { Menu } from "@mui/material"
 
-const PopupMenu = ({ children, anchorEl, setAnchorEl }) => {
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
+const PopupMenu = ({ children, anchorEl, handleClose }) => {
   return (
-    <CustomMenu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
+    <CustomMenu 
+      anchorEl={anchorEl} 
+      open={Boolean(anchorEl)} 
+      onClose={handleClose}
+      getContentAnchorEl={null}
+      anchorOrigin={{vertical: "bottom", horizontal: "right"}}
+      transformOrigin={{vertical: "top", horizontal: "right"}}
+    >
       {children}
     </CustomMenu>
   );

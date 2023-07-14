@@ -1,5 +1,5 @@
 // import basics
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
 // import custom hooks and contexts
@@ -19,13 +19,14 @@ import TransitionWrapper from "../../components/TransitionWrapper";
 import ContentContainer from "../../components/ContentContainer";
 import Toolbar from "../../components/Toolbar";
 import Button from "../../components/buttons/Button";
+import ProjectCard from "./ProjectCard";
 
 // Dashboard component
 const Dashboard = () => {
   const [headers, isLoadingHeaders] = useHeaders();
 
   const { profile } = useProfileContext();
-  const { _id: userId, email } = profile;
+  const { _id: userId } = profile;
 
   const {
     projects,
@@ -53,27 +54,23 @@ const Dashboard = () => {
   return (
     <TransitionWrapper>
       <DashboardToolbar>
-        <Title>My Projects</Title>
-        <Button onClick={createNewProject}>Create a new project</Button>
+        <Title>Dashboard</Title>
+        <Button handleClick={createNewProject}>Create a new project</Button>
       </DashboardToolbar>
       <ContentContainer>
-        {
-          isLoadingProjects
-            ? <LoadingCircle />
-            : projects.map(project => (
-              <div key={project["_id"]}>
-                <p><Link to={`/project/${project["_id"]}`}>{project["_id"]}</Link></p>
-                <img src={project.screenshot} alt="" />
-              </div>
-            ))
-        }
-        <p>Projects Shared with me</p>
+        <Subtitle>My Projects</Subtitle>
+        <Container>
+          {
+            isLoadingProjects
+              ? <LoadingCircle />
+              : projects.map(project => <ProjectCard key={project["_id"]} project={project} />)
+          }
+        </Container>
+        <Subtitle>Projects Shared with me</Subtitle>
         {
           isLoadingSharedProjects
             ? <LoadingCircle />
-            : sharedProjects.map(project => (
-              <p key={project["_id"]}><Link to={`/project/${project["_id"]}`}>{project["_id"]}</Link></p>
-            ))
+            : sharedProjects.map(project => <ProjectCard key={project["_id"]} project={project} />)
         }
       </ContentContainer>
     </TransitionWrapper>
@@ -88,4 +85,15 @@ const DashboardToolbar = styled(Toolbar)`
 
 const Title = styled.h1`
   font-weight: bold;
+`;
+const Subtitle = styled.h3`
+  font-weight: bold;
+  margin-bottom: var(--standard-margin);
+`;
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 30px var(--standard-padding);
+  margin-bottom: 30px;
 `;
