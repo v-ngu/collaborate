@@ -1,4 +1,5 @@
 // import basics
+import { useEffect } from "react";
 import { styled } from "styled-components";
 
 // import utils
@@ -18,7 +19,9 @@ import TransitionWrapper from "../../components/TransitionWrapper";
 import TasksColumn from "./TasksColumn";
 import TaskDrawer from "./TaskDrawer";
 import TeamMembers from "./TeamMembers";
-import { useEffect } from "react";
+import Toolbar from "../../components/Toolbar";
+import InputField from "./InputField";
+import ProjectIcon from "../../components/ProjectIcon";
 
 // ProjectPage component
 const ProjectPage = () => {
@@ -30,7 +33,13 @@ const ProjectPage = () => {
     teamMembers,
     setTeamMembers
   } = useProjectContext();
-  const { _id: projectId, projectLists } = project;
+  // states
+  const {
+    _id: projectId,
+    projectName,
+    projectColor,
+    projectLists
+  } = project;
 
   const [headers] = useHeaders();
   const { setReloadProjects } = useUserProjectsContext();
@@ -96,16 +105,28 @@ const ProjectPage = () => {
     <TransitionWrapper>
       <TaskDrawerProvider>
         <DragDropContext onDragEnd={handleDragEnd}>
-          <Container id="screenshot">
-            {projectLists.map((list, index) => (
-              <TasksColumn
-                key={list.columnId}
-                columnId={list.columnId}
-                column={list.column}
-                columnIndex={index}
-              />
-            ))}
-          </Container>
+          <div id="screenshot">
+            <ProjectToolbar>
+              <Container>
+                <ProjectIcon color={projectColor} size="large" />
+                <InputField
+                  type="text"
+                  projectId={projectId}
+                  data={{projectName: projectName}}
+                />
+              </Container>
+            </ProjectToolbar>
+            <Container>
+              {projectLists.map((list, index) => (
+                <TasksColumn
+                  key={list.columnId}
+                  columnId={list.columnId}
+                  column={list.column}
+                  columnIndex={index}
+                />
+              ))}
+            </Container>
+          </div>
         </DragDropContext>
         <div>
           <p>Team Members</p>
@@ -123,6 +144,10 @@ const ProjectPage = () => {
 
 export default ProjectPage;
 
+const ProjectToolbar = styled(Toolbar)`
+  padding: var(--tiny-padding) var(--standard-padding);
+`;
 const Container = styled.div`
   display: flex;
+  align-items: center;
 `;
