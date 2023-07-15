@@ -4,6 +4,7 @@ require('express-async-errors');
 
 // server setup
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 
 const http = require('http');
@@ -38,7 +39,8 @@ const { authMiddleware, socketAuthMiddleware } = require('./middlewares/auth');
 
 // use middlewares
 app.use(morgan("tiny"));
-app.use(express.json());
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(cors());
 app.use(authMiddleware);
 
