@@ -44,14 +44,18 @@ export default TaskDrawer;
 const StyledDrawer = styled(Drawer)`
   && {
     & .MuiBackdrop-root {
-      margin-top: 50px;
       background-color: rgba(255, 255, 255, 0.4);
+      height: calc(100vh - 57px);
+      position: absolute;
+      top: 57px;
     };
 
     & .MuiDrawer-paper {
       width: 500px;
-      padding: 20px;
-      margin-top: 50px;
+      height: calc(100vh - 57px);
+      padding: var(--standard-padding);
+      position: absolute;
+      top: 57px;
     };
   };
 `;
