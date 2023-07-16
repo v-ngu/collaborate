@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { styled } from "styled-components";
+import Input from "../../components/Input";
 import { useSocketContext } from "../../contexts/SocketContext";
 
 const InputField = ({ data, projectId }) => {
@@ -26,13 +26,6 @@ const InputField = ({ data, projectId }) => {
     });
   };
 
-  const handleEnter = (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      event.target.blur();
-    }
-  };
-
   // update original project state
   useEffect(() => {
     setFormData(originalData);
@@ -46,21 +39,8 @@ const InputField = ({ data, projectId }) => {
       size={formData.length + 1}
       onChange={handleChange}
       onBlur={handleBlur}
-      onKeyDown={handleEnter}
     />
   )
 };
 
 export default InputField;
-
-const Input = styled.input`
-  font-size: 1.375em;
-  border: 1px solid transparent;
-  padding: var(--tiny-padding);
-  margin-left: var(--small-margin);
-
-  &:hover {
-    border: 1px solid grey;
-    border-radius: 5px;
-  }
-`;
