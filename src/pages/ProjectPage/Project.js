@@ -18,20 +18,12 @@ import LoadingCircle from "../../components/LoadingCircle";
 import TransitionWrapper from "../../components/TransitionWrapper";
 import TasksColumn from "./TasksColumn";
 import TaskDrawer from "./TaskDrawer";
-import TeamMembers from "./TeamMembers";
 import ProjectToolbar from "./ProjectToolbar";
 
 // ProjectPage component
 const ProjectPage = () => {
   // states and contexts
-  const {
-    project,
-    isLoadingProject,
-    setProject,
-    teamMembers,
-    setTeamMembers
-  } = useProjectContext();
-  // states
+  const { project, isLoadingProject, setProject } = useProjectContext();
   const { _id: projectId, projectLists } = project;
 
   const [headers] = useHeaders();
@@ -112,14 +104,6 @@ const ProjectPage = () => {
             </Container>
           </div>
         </DragDropContext>
-        <div>
-          <p>Team Members</p>
-          <TeamMembers
-            projectId={projectId}
-            teamMembers={teamMembers}
-            setTeamMembers={setTeamMembers}
-          />
-        </div>
         <TaskDrawer />
       </TaskDrawerProvider>
     </TransitionWrapper>

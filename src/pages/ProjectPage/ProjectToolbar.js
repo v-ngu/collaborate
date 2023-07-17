@@ -5,9 +5,10 @@ import { useProjectContext } from "../../contexts/ProjectContext";
 import Toolbar from "../../components/Toolbar";
 import InputField from "./InputField";
 import ProjectIcon from "../../components/ProjectIcon";
+import TeamMembers from "./TeamMembers";
 
 const ProjectToolbar = () => {
-  const { project } = useProjectContext();
+  const { project, teamMembers, setTeamMembers } = useProjectContext();
   const { _id: projectId, projectColor, projectName } = project;
 
   return (
@@ -20,6 +21,14 @@ const ProjectToolbar = () => {
           data={{ projectName: projectName }}
         />
       </Container>
+      <div>
+          <p>Team Members</p>
+          <TeamMembers
+            projectId={projectId}
+            teamMembers={teamMembers}
+            setTeamMembers={setTeamMembers}
+          />
+        </div>
     </CustomToolbar>
   );
 };
