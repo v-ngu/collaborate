@@ -33,7 +33,12 @@ const TasksColumn = ({ columnId, column, columnIndex }) => {
             {...provided.droppableProps}
           >
             {tasks.map((taskObject, index) => (
-              <Task key={taskObject.taskId} taskObject={taskObject} index={index} />
+              <Task
+                key={taskObject.taskId}
+                taskObject={taskObject}
+                taskIndex={index}
+                columnIndex={columnIndex}
+              />
             ))}
             {provided.placeholder}
           </TaskList>
@@ -55,6 +60,6 @@ const Wrapper = styled.div`
 `;
 
 const TaskList = styled.div`
-  background-color: ${({$isDraggingOver}) => $isDraggingOver ? "grey": "transparent" };
+  background-color: ${({ $isDraggingOver }) => $isDraggingOver ? "grey" : "transparent"};
   flex-grow: 1;
 `;

@@ -1,26 +1,16 @@
 import { styled } from "styled-components";
 import { useTaskDrawercontext } from '../../contexts/TaskDrawerContext';
 import { Drawer } from '@mui/material';
-
+import TaskDrawerInput
+ from "./TaskDrawerInput";
 const TaskDrawer = () => {
   const {
     isDrawerOpen,
-    setIsDrawerOpen,
-    drawerContent,
-    setDrawerContent
+    setIsDrawerOpen
   } = useTaskDrawercontext();
-
-  const {
-    task,
-    assignee,
-    dueDate,
-    labels,
-    description
-  } = drawerContent;
 
   const handleClose = () => {
     setIsDrawerOpen(false);
-    setDrawerContent({});
   };
 
   return (
@@ -30,11 +20,14 @@ const TaskDrawer = () => {
       onClose={handleClose}
       elevation={5}
     >
-      <p>{task}</p>
-      <p>Assignee: {assignee}</p>
-      <p>Due Date: {dueDate}</p>
+      <TaskDrawerInput
+        type="text"
+        field="task"
+      />
+      <p>Assignee</p>
+      <p>Due Date:</p>
       <p>Labels:</p>
-      <p>Description: {description}</p>
+      <p>Description:</p>
     </StyledDrawer>
   );
 };

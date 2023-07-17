@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { Draggable } from "react-beautiful-dnd";
 import { useTaskDrawercontext } from "../../contexts/TaskDrawerContext";
 
-const Task = ({ taskObject, index }) => {
+const Task = ({ taskObject, taskIndex, columnIndex }) => {
   const {
     taskId,
     task,
@@ -15,7 +15,11 @@ const Task = ({ taskObject, index }) => {
 
   const handleClick = () => {
     setIsDrawerOpen(true);
-    setDrawerContent(taskObject);
+    setDrawerContent({
+      taskObject: { ...taskObject },
+      taskIndex: taskIndex,
+      columnIndex: columnIndex
+    });
   };
 
   const renderComponent = (provided, snapshot) => {
@@ -34,7 +38,7 @@ const Task = ({ taskObject, index }) => {
         <p>{dueDate}</p>
       </Wrapper>
     );
-    
+
     // a portal is needed to offset the transformation
     // effect during the dragging stage
     return (
@@ -45,7 +49,7 @@ const Task = ({ taskObject, index }) => {
   };
 
   return (
-    <Draggable draggableId={taskId} index={index}>
+    <Draggable draggableId={taskId} index={taskIndex}>
       {(provided, snapshot) => renderComponent(provided, snapshot)}
     </Draggable>
   );
