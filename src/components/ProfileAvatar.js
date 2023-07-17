@@ -1,7 +1,17 @@
 import { styled } from "styled-components";
 import { Avatar } from "@mui/material";
 
-const ProfileAvatar = ({ firstName, lastName, handleAvatarClick, $large }) => {
+const ProfileAvatar = ({ firstName, lastName, handleAvatarClick, size }) => {
+  const circleSize = {
+    small: "30px",
+    large: "70px"
+  };
+
+  const fontSize = {
+    small: "15px",
+    large: "35px"
+  }
+
   const setAvatar = () => {
     const initials = firstName.charAt(0) + lastName.charAt(0);
   
@@ -13,7 +23,8 @@ const ProfileAvatar = ({ firstName, lastName, handleAvatarClick, $large }) => {
   
   return (
     <CustomAvatar
-      $large={$large}
+      $circleSize={circleSize[size]}
+      $fontSize={fontSize[size]}
       onClick={handleAvatarClick}
       {...setAvatar()}
     />
@@ -24,12 +35,12 @@ export default ProfileAvatar;
 
 const CustomAvatar = styled(Avatar)`
   && {
-    width: ${({ $large }) => $large ? "70px" : null};
-    height: ${({ $large }) => $large ? "70px" : null};
-    font-size: ${({ $large }) => $large ? "35px" : null};
+    width: ${({ $circleSize }) => $circleSize};
+    height: ${({ $circleSize }) => $circleSize};
+    font-size: ${({ $fontSize }) => $fontSize};
 
     &:hover {
-      cursor: ${({ $large }) => $large ? null : "pointer"};
+      cursor: ${({ $circleSize }) => $circleSize !== "70px" ? "pointer" : null};
     }
   }
 `;

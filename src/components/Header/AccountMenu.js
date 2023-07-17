@@ -17,7 +17,7 @@ const AccountMenu = ({ anchorEl, setAnchorEl }) => {
   return (
     <PopupMenu anchorEl={anchorEl} handleClose={handleClose}>
       <AccountInfo>
-        <ProfileAvatar $large={true} firstName={firstName} lastName={lastName} />
+        <ProfileAvatar size="large" firstName={firstName} lastName={lastName} />
         <div>
           <Name>{firstName} {lastName}</Name>
           <Email>{email}</Email>
