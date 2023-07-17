@@ -27,7 +27,6 @@ const TaskDrawer = () => {
       <p>Assignee</p>
       <p>Due Date:</p>
       <p>Labels:</p>
-      <p>Description:</p>
     </StyledDrawer>
   );
 };
