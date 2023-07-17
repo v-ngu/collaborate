@@ -1,8 +1,11 @@
 import { useEffect, useRef } from "react";
 import { styled } from "styled-components";
 import { useSocketContext } from "../../contexts/SocketContext";
+import { useProjectContext } from "../../contexts/ProjectContext";
 
-const TeamMembers = ({ teamMembers, setTeamMembers, projectId }) => {
+const TeamMembers = ({ projectId }) => {
+  const { teamMembers, setTeamMembers } = useProjectContext();
+
   const socket = useSocketContext();
 
   const teamRef = useRef();

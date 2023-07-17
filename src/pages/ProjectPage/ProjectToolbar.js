@@ -8,7 +8,7 @@ import ProjectIcon from "../../components/ProjectIcon";
 import TeamMembers from "./TeamMembers";
 
 const ProjectToolbar = () => {
-  const { project, teamMembers, setTeamMembers } = useProjectContext();
+  const { project } = useProjectContext();
   const { _id: projectId, projectColor, projectName } = project;
 
   return (
@@ -23,11 +23,7 @@ const ProjectToolbar = () => {
       </Container>
       <div>
           <p>Team Members</p>
-          <TeamMembers
-            projectId={projectId}
-            teamMembers={teamMembers}
-            setTeamMembers={setTeamMembers}
-          />
+          <TeamMembers projectId={projectId} />
         </div>
     </CustomToolbar>
   );
