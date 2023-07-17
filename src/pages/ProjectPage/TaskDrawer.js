@@ -24,6 +24,11 @@ const TaskDrawer = () => {
         type="text"
         field="task"
       />
+      <FieldName>Description</FieldName>
+      <TaskDrawerInput
+        type="textarea"
+        field="description"
+      />
       <p>Assignee</p>
       <p>Due Date:</p>
       <p>Labels:</p>
@@ -50,4 +55,10 @@ const StyledDrawer = styled(Drawer)`
       top: 57px;
     };
   };
+`;
+
+const FieldName = styled.p`
+  color: var(--medium-gray);
+  margin-left: var(--small-margin);
+  padding: var(--tiny-padding);
 `;

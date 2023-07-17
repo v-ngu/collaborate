@@ -7,6 +7,7 @@ const GlobalStyle = createGlobalStyle`
       --light-green: #59E4A8;
       --light-gray: #DBDADB;
       --light-gray-blue: #294A56;
+      --medium-gray: #7B7B7C;
       --gray-blue: #1B2E35;
 
       --tiny-padding: 7px;
@@ -94,6 +95,10 @@ const GlobalStyle = createGlobalStyle`
     }
     a:hover {
       color: var(--light-green);
+    }
+    textarea {
+      font-family: "Open Sans", sans-serif;
+      font-size: 1em;
     }
 `;
 
