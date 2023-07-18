@@ -34,7 +34,6 @@ const CustomInput = styled.input`
   border: 1px solid transparent;
   padding: var(--tiny-padding);
   margin-left: var(--small-margin);
-  margin-bottom: var(--small-margin);
 
   &:hover {
     border: 1px solid grey;
