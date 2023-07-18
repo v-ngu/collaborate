@@ -1,85 +1,45 @@
-import { useEffect, useRef } from "react";
-import { styled } from "styled-components";
-import { useSocketContext } from "../../contexts/SocketContext";
+import { useState } from "react";
 import { useProjectContext } from "../../contexts/ProjectContext";
+import ProfileAvatar from "../../components/ProfileAvatar";
+import AvatarGroup from '@mui/material/AvatarGroup';
+import TeamMembersMenu from "./TeamMembersMenu";
 
-const TeamMembers = ({ projectId }) => {
-  const { teamMembers, setTeamMembers } = useProjectContext();
-
-  const socket = useSocketContext();
-
-  const teamRef = useRef();
-  teamRef.current = teamMembers;
-
-  // utils
-  const handleClick = (event, index, userId, isOwner, isAuthorized) => {
-    event.preventDefault();
-    if (isOwner) return;
-
-    isAuthorized
-      ? socket.emit("projects:remove-user", { projectId, userId, index })
-      : socket.emit("projects:add-user", { projectId, userId, index })
-  };
-
-  // update authorized users on project
-  useEffect(() => {
-    if (!socket) return;
-
-    const handleUser = ({ index }) => {
-      const newState = [...teamRef.current];
-      newState[index].isAuthorized = !newState[index].isAuthorized
-      setTeamMembers(newState);
-    };
-
-    // listners
-    socket.on("projects:user-added", handleUser);
-    socket.on("projects:user-removed", handleUser);
-
-    return () => {
-      socket.off("projects:user-added");
-      socket.off("projects:user-removed");
-    }
-  }, [socket, setTeamMembers])
+const TeamMembers = () => {
+  const { teamMembers } = useProjectContext();
+  const [anchorEl, setAnchorEl] = useState(null);
 
   // rendering
   return (
     <>
-      {
-        teamMembers.map((teamMember, index) => {
-          const {
-            _id: userId,
-            firstName,
-            lastName,
-            isOwner,
-            isAuthorized
-          } = teamMember;
+      <AvatarGroup max={3} onClick={(event) => setAnchorEl(event.currentTarget)}>
+        {
+          teamMembers.map((teamMember, index) => {
+            const colors = ["#EB6868", "#526DC6", "#AD67CC", "#5A9B7E"];
+            const {
+              _id,
+              firstName,
+              lastName,
+              isOwner,
+              isAuthorized
+            } = teamMember;
 
-          return (
-            <Wrapper key={`TM${userId}`}>
-              <p>{firstName} {lastName}</p>
-              <button
-                onClick={event => {
-                  handleClick(event, index, userId, isOwner, isAuthorized)
-                }}
-              >
-                {
-                  isOwner
-                    ? "Owner"
-                    : isAuthorized
-                      ? "Remove"
-                      : "Add"
-                }
-              </button>
-            </Wrapper>
-          )
-        })
-      }
+            if (!isAuthorized && !isOwner) return null;
+
+            return (
+              <ProfileAvatar
+                key={`PA${_id}`}
+                firstName={firstName}
+                lastName={lastName}
+                size="small"
+                bgColor={colors[index]}
+              />
+            );
+          })
+        }
+      </AvatarGroup>
+      <TeamMembersMenu anchorEl={anchorEl} setAnchorEl={setAnchorEl}/>
     </>
   );
 };
 
 export default TeamMembers;
-
-const Wrapper = styled.div`
-  display: flex;
-`;

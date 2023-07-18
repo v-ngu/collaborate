@@ -21,10 +21,7 @@ const ProjectToolbar = () => {
           data={{ projectName: projectName }}
         />
       </Container>
-      <div>
-          <p>Team Members</p>
-          <TeamMembers projectId={projectId} />
-        </div>
+      <TeamMembers projectId={projectId} />
     </CustomToolbar>
   );
 };
@@ -32,6 +29,8 @@ const ProjectToolbar = () => {
 export default ProjectToolbar;
 
 const CustomToolbar = styled(Toolbar)`
+  display: flex;
+  align-items: center;
   padding: var(--tiny-padding) var(--standard-padding);
 `;
 
