@@ -1,5 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { styled } from "styled-components"
+import { Link } from "react-router-dom";
 
 const LogoutButton = () => {
   const { logout } = useAuth0();
@@ -11,15 +12,15 @@ const LogoutButton = () => {
   };
 
   return (
-    <Anchor href="" onClick={handleClick}>
+    <CustomLink href="" onClick={handleClick}>
       Log Out
-    </Anchor>
+    </CustomLink>
   );
 };
 
 export default LogoutButton;
 
-const Anchor = styled.a`
+const CustomLink = styled(Link)`
   text-decoration: none;
   color: var(--gray-blue);
 
