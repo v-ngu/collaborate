@@ -12,7 +12,7 @@ const LogoutButton = () => {
   };
 
   return (
-    <CustomLink href="" onClick={handleClick}>
+    <CustomLink onClick={handleClick}>
       Log Out
     </CustomLink>
   );

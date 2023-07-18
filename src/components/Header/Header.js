@@ -20,7 +20,7 @@ const Header = () => {
   const { setIsMenuDrawerOpen } = useMenuDrawerContext();
 
   const {
-    profile: { firstName, lastName, email },
+    profile: { firstName, lastName },
     isLoadingProfile
   } = useProfileContext();
 
