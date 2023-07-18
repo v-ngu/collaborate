@@ -1,9 +1,9 @@
 import { styled } from "styled-components"
 import { Link } from "react-router-dom";
 
-const PopupItem = ({ children, text, handleClick }) => {
+const PopupItem = ({ className, children, text, handleClick }) => {
   return (
-    <Action>
+    <Action className={className}>
       <CustomLink onClick={handleClick}>
         {children}
         <span>{text}</span>
@@ -29,6 +29,7 @@ const CustomLink = styled(Link)`
 
   &:hover {
     color: var(--gray-blue);
+    cursor: default;
   }
 
   & .popup-icon {
