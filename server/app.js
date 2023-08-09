@@ -2,6 +2,10 @@
 require('dotenv').config();
 require('express-async-errors');
 
+/**
+ * Setting up the server, socket and database
+ */
+
 // server setup
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -20,44 +24,56 @@ const io = new Server(server, {
 });
 
 // mongoDB instance, handlers, and schemas
-const DatabaseHandler = require('./db/dbHandler');
-const client = new DatabaseHandler();
+const client = require('./db/dbHandler');
 
-// import routes and controllers
+/**
+ * Imports
+ */
+// importing routes and controllers
 const projectsRouter = require('./routes/projects');
 const { login, getTeamMembersForProject } = require('./controllers/users');
 
-// import event listeners
+// importing event listeners
 const handleConnection = require('./events/handle-connection');
 
-// import middlewares
+// importing middlewares
 const morgan = require('morgan');
 const cors = require('cors');
 const notFoundMiddleware = require('./middlewares/not-found');
 const errorHandlerMiddleWare = require('./middlewares/error-handler')
 const { authMiddleware, socketAuthMiddleware } = require('./middlewares/auth');
 
-// use middlewares
+/**
+ * Middlewares
+ */
 app.use(morgan("tiny"));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(cors());
 app.use(authMiddleware);
 
-// routes
+/**
+ * Routes
+ */
 app.post('/api/users', login);
 app.get('/api/team/project/:projectId', getTeamMembersForProject);
 app.use('/api/projects', projectsRouter);
 
-// handling socket connection
+/**
+ * Handling socket connection
+ */
 io.use(socketAuthMiddleware);
 io.on('connection', (socket) => handleConnection(io, socket));
 
-// error handling middlewares
+/**
+ * Error handling middlewares
+ */
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleWare);
 
-// starting server and connecting to database
+/**
+ * Starting server and connecting to database
+ */
 const port = process.env.PORT || 8000;
 const start = async () => {
   try {
