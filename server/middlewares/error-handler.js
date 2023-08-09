@@ -1,4 +1,3 @@
-const { CustomApiError } = require('../errors')
 const { StatusCodes } = require('http-status-codes');
 
 const errorHandlerMiddleWare = (err, _req, res, _next) => {
