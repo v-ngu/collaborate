@@ -8,6 +8,9 @@ const { findTeamMembersPipeline } = require("./pipelines");
  */
 
 class DatabaseHandler {
+  /**
+   * Constructor
+   */
   constructor() {
     this.client = new MongoClient(process.env.MONGO_URI);
     this.db = this.client.db("collaborate");
@@ -17,13 +20,18 @@ class DatabaseHandler {
     this.projects = this.db.collection("projects");
   }
 
-  // connection method
+  /**
+   * Connection method
+   */
   connect() {
     this.client.connect();
   }
 
-  // users collections handlers
+  /**
+   * Users collection handlers
+   */
   async findTeamMembers(projectId) {
+    //Return all users with added fields isOwner and isAuthorized.
     const pipeline = findTeamMembersPipeline(projectId);
     const aggCursor = await this.users.aggregate(pipeline);
     return await aggCursor.toArray();
@@ -37,7 +45,9 @@ class DatabaseHandler {
     return await this.users.insertOne(newUser);
   }
 
-  // projects collections handlers
+  /**
+   * Projects collection handlers
+   */
   async createProject(newProject) {
     return await this.projects.insertOne(newProject);
   }

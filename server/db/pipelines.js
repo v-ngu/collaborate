@@ -1,4 +1,7 @@
-// aggregation pipelines
+/**
+ * Aggregation pipeline to get all team members.
+ * Return all users with added fields isOwner and isAuthorized.
+ */
 
 const { ObjectId } = require('mongodb');
 
