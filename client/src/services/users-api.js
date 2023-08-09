@@ -8,7 +8,8 @@ export const login = async (headers, userFromAuth0) => {
     body: JSON.stringify({ id, email })
   });
 
-  return await res.json();
+  const json =  await res.json();
+  return json.data;
 };
 
 export const getTeamMembersForProject = async (headers, projectId) => {
