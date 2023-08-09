@@ -1,9 +1,15 @@
 const TaskSchema = require('../models/TaskSchema');
-
 const client = require('../db/dbHandler');
 
+/**
+ * Handlers for all WebSockets events.
+ * 
+ */
 const registerProjectsHandlers = (io, socket) => {
-  // handlers
+  /**
+   * Handlers
+   * 
+   */
   const onAddTask = async ({ projectId, column, columnIndex, data }) => {
     const body = new TaskSchema(data);
 
@@ -34,7 +40,9 @@ const registerProjectsHandlers = (io, socket) => {
     io.to(socket.activeRoom).emit('projects:updated', { field, formData });
   };
 
-  // listeners and emitters
+  /**
+   * Listeners and emitters
+   */
   socket.on('projects:add-task', onAddTask);
   socket.on('projects:add-user', onAddUser);
   socket.on('projects:remove-user', onRemoveUser);

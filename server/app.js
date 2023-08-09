@@ -50,7 +50,7 @@ app.use(morgan("tiny"));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(cors());
-// app.use(authMiddleware);
+app.use(authMiddleware);
 
 /**
  * Routes

@@ -1,5 +1,10 @@
 const registerProjectsHandlers = require('./projects');
 
+/**
+ * Handleling WebSocket connection
+ * 
+ */
+
 const handleConnection = (io, socket) => {
   // active room ID
   const roomId = socket.handshake.query.roomId;
