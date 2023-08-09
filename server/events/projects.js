@@ -1,7 +1,6 @@
 const TaskSchema = require('../models/TaskSchema');
 
-const DatabaseHandler = require('../db/dbHandler');
-const client = new DatabaseHandler();
+const client = require('../db/dbHandler');
 
 const registerProjectsHandlers = (io, socket) => {
   // handlers

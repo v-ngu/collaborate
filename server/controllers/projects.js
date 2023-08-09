@@ -1,8 +1,7 @@
 const Project = require('../models/ProjectSchema');
 const { StatusCodes } = require('http-status-codes');
 
-const DatabaseHandler = require('../db/dbHandler');
-const client = new DatabaseHandler();
+const client = require('../db/dbHandler');
 
 // controllers related to projects collection
 const createProject = async (req, res) => {

@@ -3,7 +3,10 @@ const { MongoClient, ObjectId } = require('mongodb');
 const { NotFoundError } = require('../errors');
 const { findTeamMembersPipeline } = require('./pipelines');
 
-// DatabaseHandler is used to handle MongoDB and its connection
+/**
+ *  Database handler is used to handle MongoDB and its connection
+ */
+
 class DatabaseHandler {
   constructor() {
     this.client = new MongoClient(process.env.MONGO_URI);
@@ -105,4 +108,6 @@ class DatabaseHandler {
   };
 };
 
-module.exports = DatabaseHandler;
+const client = new DatabaseHandler();
+
+module.exports = client;

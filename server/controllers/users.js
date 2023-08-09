@@ -1,8 +1,7 @@
 const User = require('../models/UserSchema');
 const { StatusCodes } = require('http-status-codes');
 
-const DatabaseHandler = require('../db/dbHandler');
-const client = new DatabaseHandler();
+const client = require('../db/dbHandler');
 
 // controllers realted to users collection
 const login = async (req, res) => {
