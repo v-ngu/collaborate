@@ -14,8 +14,8 @@ const StyledButton = styled.button`
   padding: var(--small-padding) var(--standard-padding);
   border: none;
   border-radius: 5px;
-  color: var(--gray-blue);
-  background-color: ${({$color}) => $color ? $color : "var(--light-green)"};
+  color: var(--main-green);
+  background-color: ${({$color}) => $color ? $color : "var(--main-yellow)"};
   cursor: pointer;
 
   &:hover {

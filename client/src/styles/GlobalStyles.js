@@ -2,9 +2,21 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
     :root {
-      --ultra-light-gray: #F3F4F6;
+    // Colors
+      --main-beige: #ECE2CC;
+      --main-green: #004C3E;
+      --main-yellow: #ffb000;
 
-      --light-green: #59E4A8;
+    // Spacing
+      --tiny-space: 7px;
+      --standard-space: 21px;
+      --large-space: 65px;
+
+
+
+    // Old Styling to refactor 
+      --ultra-light-gray: #F3F4F6;
+      --light-green: #80A894;
       --light-gray: #DBDADB;
       --light-gray-blue: #294A56;
       --medium-gray: #7B7B7C;
