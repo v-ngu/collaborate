@@ -1,5 +1,7 @@
-// create a request headers with appropriate
-// access token for authentification
+/**
+ * Create a request headers with appropriate
+ * access token for authentification
+ */
 
 import { useState, useEffect } from "react";
 import { useAuth0 } from '@auth0/auth0-react';
