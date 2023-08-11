@@ -47,7 +47,8 @@ const Dashboard = () => {
   const createNewProject = async (e) => {
     e.preventDefault();
     if (!isLoadingHeaders) {
-      const newProjectId = await makeFetchRequest(() => createProject(headers, { userId }));
+      const response = await makeFetchRequest(() => createProject(headers, { userId }));
+      const newProjectId = response.projectId;
       console.log(`New project ${newProjectId} has been created`);
       setReloadProjects(prevState => !prevState);
       setReloadSharedProjects(prevState => !prevState);
