@@ -1,14 +1,22 @@
+/**
+ * The Profile Context get the user profile information,
+ * and makes it available to the entire application.
+ */
+
 import { createContext, useContext, useEffect, useState } from "react";
 import { useAuth0 } from '@auth0/auth0-react';
 import useFetch from "../hooks/useFetch";
 import { login } from "../services/users-api";
 
+/**
+ * Create ProfileContext and export as a custom hook
+ */
 const ProfileContext = createContext(null);
-
-// export context as a custom hook
 export const useProfileContext = () => useContext(ProfileContext);
 
-// provider
+/**
+ * Setting up the provider
+ */
 export const ProfileProvider = ({ children }) => {
   // Session storage is used to determine the sign up stage
   const userAcessInitialValue = () => {
