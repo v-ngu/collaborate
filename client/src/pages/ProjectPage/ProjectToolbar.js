@@ -31,7 +31,7 @@ export default ProjectToolbar;
 const CustomToolbar = styled(Toolbar)`
   display: flex;
   align-items: center;
-  padding: var(--tiny-padding) var(--standard-padding);
+  padding: var(--tiny-space) var(--standard-space);
 `;
 
 const Container = styled.div`

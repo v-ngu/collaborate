@@ -11,10 +11,10 @@ const Button = ({ className, children, $color, handleClick }) => {
 export default Button;
 
 const StyledButton = styled.button`
-  padding: var(--small-padding) var(--standard-padding);
+  padding: 10px var(--standard-space);
   border: none;
-  border-radius: 5px;
-  color: var(--main-green);
+  border-radius: var(--border-radius);
+  color: var(--main-gray);
   background-color: ${({$color}) => $color ? $color : "var(--main-yellow)"};
   cursor: pointer;
 

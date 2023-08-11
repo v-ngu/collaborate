@@ -5,30 +5,28 @@ const GlobalStyle = createGlobalStyle`
     // Colors
       --main-beige: #ECE2CC;
       --main-green: #004C3E;
+      --main-gray: #2E2E30;
       --main-yellow: #ffb000;
+
+      --ultra-light-gray: #F3F4F6;
+      --light-gray: #DBDADB;
+      --medium-gray: #7B7B7C;
+
+      --hover-color: rgba(255, 255, 255, 0.1);
 
     // Spacing
       --tiny-space: 7px;
+      --small-space: 14px;
       --standard-space: 21px;
-      --large-space: 65px;
+      --large-space: 63px;
 
+    // Border
+      --border-radius: 5px;
+      --standard-border: 1px solid var(--light-gray);
+      --dark-border: 1px solid var(--main-gray);
 
-
-    // Old Styling to refactor 
-      --ultra-light-gray: #F3F4F6;
-      --light-green: #80A894;
-      --light-gray: #DBDADB;
-      --light-gray-blue: #294A56;
-      --medium-gray: #7B7B7C;
-      --gray-blue: #1B2E35;
-
-      --tiny-padding: 7px;
-      --small-padding: 10px;
-      --standard-padding: 20px;
-      --large-padding: 65px;
-
-      --small-margin: 10px;
-      --standard-margin: 20px;
+    // Others
+      --header-height: 57px;
     }
 
     /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -65,7 +63,7 @@ const GlobalStyle = createGlobalStyle`
       font-family: "Open Sans", sans-serif;
       line-height: 1.5;
       margin: 0px auto;
-      color: var(--gray-blue);
+      color: var(--main-gray);
       width: 100vw;
       height: 100vh;
     }
@@ -102,11 +100,11 @@ const GlobalStyle = createGlobalStyle`
         font-weight: 500;
     }
     a {
-      color: var(--gray-blue);
+      color: var(--main-gray);
       text-decoration: none;
     }
     a:hover {
-      color: var(--light-green);
+      color: var(--main-yellow);
     }
     textarea {
       font-family: "Open Sans", sans-serif;

@@ -50,11 +50,11 @@ const TasksColumn = ({ columnId, column, columnIndex }) => {
 
 export default TasksColumn;
 const Wrapper = styled.div`
-  padding: var(--standard-padding);
+  padding: var(--standard-space);
   width: 200px;
   min-height: 200px;
   border: solid 1px #DBDADB;
-  margin: 10px;
+  margin: var(--small-space);
   display: flex;
   flex-direction: column;
 `;

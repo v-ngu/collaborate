@@ -33,7 +33,7 @@ export default ProjectCard;
 
 const Wrapper = styled.div`
   cursor: pointer;
-  flex: 0 calc(20% - var(--standard-padding));
+  flex: 0 calc(20% - var(--standard-space));
   position: relative;
 `;
 const Container = styled.div`
@@ -50,5 +50,5 @@ const Screenshot = styled.img`
 `;
 const ProjectName = styled.p`
   font-weight: bold;
-  padding-top: var(--small-padding);
+  padding-top: var(--small-space);
 `;

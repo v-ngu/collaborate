@@ -39,13 +39,12 @@ const AccountInfo = styled.li`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border-bottom: 1px solid var(--light-gray);
-  padding: var(--standard-padding);
+  border-bottom: var(--standard-border);
+  padding: var(--standard-space);
 `;
 const Name = styled.p`
   font-weight: bold;
 `;
 const Email = styled.p`
   font-size: 0.7em;
-  color: gray;
 `;

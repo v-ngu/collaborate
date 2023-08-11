@@ -42,23 +42,23 @@ const StyledDrawer = styled(Drawer)`
   && {
     & .MuiBackdrop-root {
       background-color: rgba(255, 255, 255, 0.4);
-      height: calc(100vh - 57px);
+      height: calc(100vh - var(--header-height));
       position: absolute;
-      top: 57px;
+      top: var(--header-height);
     };
 
     & .MuiDrawer-paper {
       width: 500px;
-      height: calc(100vh - 57px);
-      padding: var(--standard-padding);
+      height: calc(100vh - var(--header-height));
+      padding: var(--standard-space);
       position: absolute;
-      top: 57px;
+      top: var(--header-height);
     };
   };
 `;
 
 const FieldName = styled.p`
   color: var(--medium-gray);
-  margin-left: var(--small-margin);
-  padding: var(--tiny-padding);
+  margin-left: var(--small-space);
+  padding: var(--tiny-space);
 `;

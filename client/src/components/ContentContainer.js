@@ -11,5 +11,5 @@ const ContentContainer = ({ children }) => {
 export default ContentContainer;
 
 const Container = styled.div`
-  padding: var(--standard-padding);
+  padding: var(--standard-space);
 `;

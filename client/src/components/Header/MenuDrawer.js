@@ -69,24 +69,24 @@ const StyledDrawer = styled(Drawer)`
   && {
     & .MuiDrawer-paper {
       width: 250px;
-      height: calc(100vh - 57px);
-      background-color: var(--gray-blue);
+      height: calc(100vh - var(--header-height));
+      background-color: black;
       color: white;
       position: absolute;
-      top: 57px;
+      top: var(--header-height);
     };
   };
 `;
 
 const Menu = styled.ul`
-  padding: var(--standard-padding);
+  padding: var(--standard-space);
 `;
 const SubMenu = styled.ul`
   &:before {
     content:attr(title);
     display: block;
     font-weight: bold;
-    padding: var(--tiny-padding);
-    margin-top: var(--small-margin);
+    padding: var(--tiny-space);
+    margin-top: var(--small-space);
   }
 `;

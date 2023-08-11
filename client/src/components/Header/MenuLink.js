@@ -20,22 +20,22 @@ const Link = styled(NavLink)`
   width: 94%;
   text-decoration: none;
   color: white;
-  padding: var(--tiny-padding);
+  padding: var(--tiny-space);
 
   & .menu-icon {
     font-size: 1.2em;
   }
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
+    background-color: var(--hover-color);
+    border-radius: var(--border-radius);
   }
 
   &.active {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
+    background-color: var(--hover-color);
+    border-radius: var(--border-radius);
   }
 `;
 const Text = styled.span`
-  padding-left: var(--small-padding);
+  padding-left: var(--small-space);
 `;

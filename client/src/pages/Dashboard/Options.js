@@ -78,16 +78,16 @@ export default Options;
 const Icon = styled(BsThreeDots)`
   visibility: ${({ $isVisible }) => $isVisible ? "visible" : "hidden"};
   position: absolute;
-  top: var(--tiny-padding);
-  right: var(--tiny-padding);
-  padding: var(--tiny-padding);
+  top: var(--tiny-space);
+  right: var(--tiny-space);
+  padding: var(--tiny-space);
   font-size: 1.4em;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   background-color: ${({ $mouseOn, $isClicked }) => (
-    $mouseOn || $isClicked ? "var(--light-green)" : null
+    $mouseOn || $isClicked ? "var(--main-yellow)" : null
   )};
   color: ${({ $mouseOn, $isClicked }) => (
-    $mouseOn || $isClicked ? "white" : "var(--gray-blue)"
+    $mouseOn || $isClicked ? "white" : "var(--main-gray)"
   )};
 
 `;

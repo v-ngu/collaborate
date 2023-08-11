@@ -12,6 +12,6 @@ export default LoadingCircle;
 const CustomLoading = styled(CircularProgress)`
   && {
     margin: auto;
-    color: var(--light-green);
+    color: var(--main-yellow);
   }
 `;

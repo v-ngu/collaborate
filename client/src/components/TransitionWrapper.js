@@ -14,7 +14,7 @@ const TransitionWrapper = ({ children }) => {
 export default TransitionWrapper;
 
 const Wrapper = styled.div`
-  height: calc(100vh - 57px);
+  height: calc(100vh - var(--header-height));
   overflow-y: auto;
   width: ${({ $isMenuDrawerOpen }) => $isMenuDrawerOpen ? "calc(100vw - 251px)" : "100vw"};
   transform: ${({ $isMenuDrawerOpen }) => $isMenuDrawerOpen ? "translateX(251px)" : null};

@@ -32,23 +32,23 @@ export default Input;
 const CustomInput = styled.input`
   font-size: 1.375em;
   border: 1px solid transparent;
-  padding: var(--tiny-padding);
-  margin-left: var(--small-margin);
+  padding: var(--tiny-space);
+  margin-left: var(--small-space);
 
   &:hover {
-    border: 1px solid grey;
-    border-radius: 5px;
+    border: var(--standard-border);
+    border-radius: var(--border-radius);
   }
 `;
 
 const Textarea = styled.textarea`
   border: 1px solid transparent;
-  padding: var(--tiny-padding);
-  margin-left: var(--small-margin);
+  padding: var(--tiny-space);
+  margin-left: var(--small-space);
   resize: none;
 
   &:hover {
-    border: 1px solid grey;
-    border-radius: 5px;
+    border: var(--standard-border);
+    border-radius: var(--border-radius);
   }
 `;

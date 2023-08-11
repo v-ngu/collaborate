@@ -20,7 +20,7 @@ export default PopupMenu;
 
 const CustomMenu = styled(Menu)`
 && {
-  margin-top: var(--small-margin);
+  margin-top: var(--small-space);
 
   & .MuiMenu-list{
     padding: 0px;

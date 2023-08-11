@@ -15,7 +15,7 @@ const PopupItem = ({ className, children, text, handleClick }) => {
 export default PopupItem;
 
 const Action = styled.li`
-  padding: var(--standard-padding);
+  padding: var(--standard-space);
 
   &:hover {
     background-color: rgba(219, 218, 219, 0.4);
@@ -28,12 +28,12 @@ const CustomLink = styled(Link)`
   width: 100%;
 
   &:hover {
-    color: var(--gray-blue);
-    cursor: default;
+    color: var(--main-gray);
+    cursor: pointer;
   }
 
   & .popup-icon {
-    padding-right: var(--small-padding);
+    padding-right: var(--small-space);
     font-size: 1.2em;
   }
 `;

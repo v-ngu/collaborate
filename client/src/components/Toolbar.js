@@ -15,6 +15,6 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px var(--large-padding);
-  padding-top: var(--tiny-padding);
+  padding: 0px var(--large-space);
+  padding-top: var(--tiny-space);
 `;

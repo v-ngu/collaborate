@@ -68,7 +68,7 @@ const TeamMembersMenu = ({ anchorEl, setAnchorEl }) => {
 export default TeamMembersMenu;
 
 const Title = styled.p`
-  padding: var(--standard-padding);
+  padding: var(--standard-space);
   padding-bottom: 0px;
   font-weight: bold;
 `;

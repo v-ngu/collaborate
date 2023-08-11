@@ -49,19 +49,19 @@ const Header = () => {
 export default Header;
 
 const HeaderToolbar = styled(Toolbar)`
-  background-color: var(--gray-blue);
-  padding: 0px var(--standard-padding);
-  border-bottom: 1px solid var(--light-gray-blue);
+  background-color: black;
+  padding: 0px var(--standard-space);
+  border-bottom: var(--standard-border);
 `;
 
 const MenuIcon = styled(FiMenu)`
   font-size: 1.3em;
   color: white;
-  padding: var(--tiny-padding);
+  padding: var(--tiny-space);
 
   &:hover{
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
+    background-color: var(--hover-color);
+    border-radius: var(--border-radius);
     cursor: pointer;
   }
 `;

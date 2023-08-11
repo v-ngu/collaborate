@@ -58,13 +58,13 @@ const Task = ({ taskObject, taskIndex, columnIndex }) => {
 export default Task;
 
 const Wrapper = styled.div`
-  border: ${({ $isDragging }) => $isDragging ? 'solid 1px grey' : 'solid 1px var(--light-gray)'};
+  border: ${({ $isDragging }) => $isDragging ? 'var(--dark-border)' : 'var(--standard-border)'};
   background-color: white;
-  margin: 10px 0px;
-  padding: 5px;
+  margin: var(--small-space) 0px;
+  padding: var(--tiny-space);
 
   &:hover {
     cursor: pointer;
-    border: solid 1px grey;
+    border: var(--standard-border);
   }
 `;

@@ -102,7 +102,7 @@ const Dashboard = () => {
 export default Dashboard;
 
 const DashboardToolbar = styled(Toolbar)`
-  padding: var(--standard-padding);
+  padding: var(--standard-space);
 `;
 
 const Title = styled.h1`
@@ -110,12 +110,12 @@ const Title = styled.h1`
 `;
 const Subtitle = styled.h3`
   font-weight: bold;
-  margin-bottom: var(--standard-margin);
+  margin-bottom: var(--standard-space);
 `;
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  gap: 30px var(--standard-padding);
+  gap: 30px var(--standard-space);
   margin-bottom: 30px;
 `;

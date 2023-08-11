@@ -22,9 +22,9 @@ export default LogoutButton;
 
 const CustomLink = styled(Link)`
   text-decoration: none;
-  color: var(--gray-blue);
+  color: var(--main-gray);
 
   &:hover {
-    color: var(--gray-blue);
+    color: var(--main-gray);
   }
 `;
