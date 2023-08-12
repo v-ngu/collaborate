@@ -22,6 +22,7 @@ const GlobalStyle = createGlobalStyle`
 
     // Border
       --border-radius: 5px;
+      --large-radius: 10px;
       --standard-border: 1px solid var(--light-gray);
       --dark-border: 1px solid var(--main-gray);
 

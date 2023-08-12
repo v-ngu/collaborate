@@ -59,12 +59,13 @@ export default Task;
 
 const Wrapper = styled.div`
   border: ${({ $isDragging }) => $isDragging ? 'var(--dark-border)' : 'var(--standard-border)'};
+  border-radius: var(--large-radius);
   background-color: white;
   margin: var(--small-space) 0px;
-  padding: var(--tiny-space);
+  padding: var(--small-space);
 
   &:hover {
     cursor: pointer;
-    border: var(--standard-border);
+    border: var(--dark-border);
   }
 `;

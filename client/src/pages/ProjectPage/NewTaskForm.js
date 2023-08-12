@@ -1,5 +1,6 @@
 // import basics
 import { useEffect, useState } from "react";
+import { styled } from "styled-components";
 
 // import custom hooks and contexts
 import { useActiveFormContext } from "../../contexts/ActiveFormContext";
@@ -24,18 +25,18 @@ const NewTaskForm = ({ column, columnIndex }) => {
   };
 
   const handleKeyDown = async (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       event.preventDefault();
 
       socket.emit("projects:add-task", {
         projectId,
         column,
         columnIndex,
-        data: formData
+        data: formData,
       });
 
       setActiveNewForm("none");
-    };
+    }
   };
 
   // effect to clear the form data
@@ -43,21 +44,32 @@ const NewTaskForm = ({ column, columnIndex }) => {
     if (activeNewForm === "none") {
       setFormData("");
     }
-  }, [activeNewForm])
+  }, [activeNewForm]);
 
   // rendering
   return (
-    <form>
-      <textarea
+    <Form>
+      <Textarea
         autoFocus
         value={formData}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        onClick={event => event.stopPropagation()}
+        onClick={(event) => event.stopPropagation()}
         placeholder="What needs to be done?"
       />
-    </form>
+    </Form>
   );
 };
 
 export default NewTaskForm;
+const Form = styled.form`
+  display: flex;
+`;
+const Textarea = styled.textarea`
+  border: var(--dark-border);
+  border-radius: var(--large-radius);
+  background-color: white;
+  margin: 0px;
+  padding: var(--small-space);
+  width: 100%;
+`;

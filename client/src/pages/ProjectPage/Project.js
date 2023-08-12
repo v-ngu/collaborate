@@ -90,7 +90,7 @@ const ProjectPage = () => {
     <TransitionWrapper>
       <TaskDrawerProvider>
         <DragDropContext onDragEnd={handleDragEnd}>
-          <div id="screenshot">
+          <Div id="screenshot">
             <ProjectToolbar />
             <Container>
               {projectLists.map((list, index) => (
@@ -102,7 +102,7 @@ const ProjectPage = () => {
                 />
               ))}
             </Container>
-          </div>
+          </Div>
         </DragDropContext>
         <TaskDrawer />
       </TaskDrawerProvider>
@@ -111,8 +111,11 @@ const ProjectPage = () => {
 };
 
 export default ProjectPage;
-
+const Div = styled.div`
+  height: 100%
+`;
 const Container = styled.div`
   display: flex;
   align-items: center;
+  height: calc(100% - 90px);
 `;
