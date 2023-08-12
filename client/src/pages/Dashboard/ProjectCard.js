@@ -15,7 +15,7 @@ const ProjectCard = ({ project, setSnackbarIsOpen }) => {
     >
       <Link to={`/project/${_id}`}>
         <Container>
-          <Screenshot src={screenshot} alt="" />
+          <Screenshot src={screenshot} alt={projectName} />
         </Container>
         <ProjectName>{projectName}</ProjectName>
       </Link>
@@ -38,7 +38,7 @@ const Wrapper = styled.div`
 `;
 const Container = styled.div`
   width: 100%;
-  padding-top: 40%;
+  padding-top: 10%;
   background-color: var(--ultra-light-gray);
   border-radius: 7px;
   display: flex;
