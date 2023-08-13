@@ -28,6 +28,7 @@ const GlobalStyle = createGlobalStyle`
 
     // Others
       --header-height: 57px;
+      --task-height: 63px;
     }
 
     /* http://meyerweb.com/eric/tools/css/reset/ 

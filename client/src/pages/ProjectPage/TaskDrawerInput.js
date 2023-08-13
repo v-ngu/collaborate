@@ -1,7 +1,7 @@
 import { useTaskDrawercontext } from '../../contexts/TaskDrawerContext';
 import Input from "../../components/Input"
 
-const TaskDrawerInput = ({ type, field }) => {
+const TaskDrawerInput = ({ type, field, placeholder }) => {
   const {
     drawerContent: { taskObject },
     handleContentChange,
@@ -15,6 +15,7 @@ const TaskDrawerInput = ({ type, field }) => {
       value={taskObject[field]}
       onChange={(event) => handleContentChange(event, field)}
       onBlur={() => emitUpdate(field)}
+      placeholder={placeholder}
     />
   );
 };
