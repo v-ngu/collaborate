@@ -39,11 +39,12 @@ const Wrapper = styled.div`
 const Container = styled.div`
   width: 100%;
   padding-top: 10%;
+  max-height: 100px;
   background-color: var(--ultra-light-gray);
   border-radius: 7px;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: flex-start;
 `;
 const Screenshot = styled.img`
   width: 85%;
