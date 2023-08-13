@@ -70,6 +70,8 @@ const Textarea = styled.textarea`
   border-radius: var(--large-radius);
   background-color: white;
   margin: 0px;
+  margin-top: var(--small-space);
   padding: var(--small-space);
   width: 100%;
+  height: var(--task-height);
 `;

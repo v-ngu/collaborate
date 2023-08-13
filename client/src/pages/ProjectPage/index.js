@@ -6,7 +6,7 @@ import Project from "./Project";
 
 const ProjectPage = () => {
   const { projectId } = useParams();
-  console.log(projectId)
+
   return (
     <SocketProvider roomId={projectId}>
       <ProjectProvider projectId={projectId}>
