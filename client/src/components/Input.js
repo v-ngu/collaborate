@@ -46,6 +46,7 @@ const Textarea = styled.textarea`
   padding: var(--tiny-space);
   margin-left: var(--small-space);
   resize: none;
+  width: 93%;
 
   &:hover {
     border: var(--standard-border);
