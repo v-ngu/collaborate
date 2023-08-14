@@ -16,7 +16,6 @@ const Assignee = ({ taskObject }) => {
     <Wrapper>
       {firstName && (
         <ProfileAvatar
-          key={`TA${assigneeId}`}
           firstName={firstName}
           lastName={lastName}
           size="small"
