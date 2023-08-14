@@ -1,20 +1,22 @@
 import { styled } from "styled-components";
+import { useState } from "react";
 import { useTaskDrawercontext } from "../../contexts/TaskDrawerContext";
 import { Drawer } from "@mui/material";
 import TaskDrawerInput from "./TaskDrawerInput";
 import TaskDrawerAssigneeSelection from "./TaskDrawerAssigneeSelection";
+import Calendar from "./Calendar";
+import CalendarButton from "./CalendarButton";
+import CalendarClearButton from "./CalendarClearButton";
+
 const TaskDrawer = () => {
   const { isDrawerOpen, setIsDrawerOpen } = useTaskDrawercontext();
-
-  const handleClose = () => {
-    setIsDrawerOpen(false);
-  };
+  const [calendarIsOpen, setCalendarIsOpen] = useState(false);
 
   return (
     <StyledDrawer
       anchor="right"
       open={isDrawerOpen}
-      onClose={handleClose}
+      onClose={() => setIsDrawerOpen(false)}
       elevation={5}
     >
       <TaskDrawerInput type="text" field="task" />
@@ -24,7 +26,15 @@ const TaskDrawer = () => {
           <TaskDrawerAssigneeSelection />
         </Field>
 
-        <FieldName>Due Date</FieldName>
+        <Field>
+          <FieldName>Due Date</FieldName>
+          <CalendarButton
+            calendarIsOpen={calendarIsOpen}
+            setCalendarIsOpen={setCalendarIsOpen}
+          />
+          <CalendarClearButton />
+          {calendarIsOpen && <Calendar setIsOpen={setCalendarIsOpen} />}
+        </Field>
         <FieldName>Labels</FieldName>
         <FieldName>Description</FieldName>
         <TaskDrawerInput

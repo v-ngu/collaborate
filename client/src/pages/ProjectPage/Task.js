@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { styled } from "styled-components";
 import { createPortal } from "react-dom";
 import { Draggable } from "react-beautiful-dnd";
@@ -30,8 +31,10 @@ const Task = ({ taskObject, taskIndex, columnIndex }) => {
         {...provided.dragHandleProps}
       >
         <p>{task}</p>
-        <Assignee taskObject={taskObject}/>
-        <p>{dueDate}</p>
+        <Container>
+          <Assignee taskObject={taskObject} />
+          <DueDate>{dueDate && dayjs(dueDate).format("MMM D, YYYY")}</DueDate>
+        </Container>
       </Wrapper>
     );
 
@@ -62,4 +65,15 @@ const Wrapper = styled.div`
     cursor: pointer;
     border: var(--dark-border);
   }
+`;
+const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+`;
+const DueDate = styled.p`
+  margin-top: 18px;
+  margin-left: var(--small-space);
+  color: var(--medium-gray);
+  font-size: 0.8rem;
 `;

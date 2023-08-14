@@ -25,6 +25,12 @@ export const TaskDrawerProvider = ({ children }) => {
     setDrawerContent(newState);
   };
 
+  const handleCalendarChange = (newDate) => {
+    const newState = { ...drawerContent };
+    newState.taskObject.dueDate = newDate;
+    setDrawerContent(newState);
+  };
+
   const emitUpdate = (field) => {
     const originalContent = (
       projectLists[columnIndex].tasks[taskIndex][field]
@@ -49,6 +55,7 @@ export const TaskDrawerProvider = ({ children }) => {
     drawerContent,
     setDrawerContent,
     handleContentChange,
+    handleCalendarChange,
     emitUpdate
   };
 
