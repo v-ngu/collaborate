@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import Select from "../../components/Select";
 import { useProjectContext } from "../../contexts/ProjectContext";
 import { useTaskDrawercontext } from "../../contexts/TaskDrawerContext";
 
@@ -13,7 +13,8 @@ const TaskDrawerAssigneeSelection = () => {
   return (
     <Select
       value={taskObject.assignee}
-      onChange={(event) => {
+      handleChange={(event) => {
+        console.log("printing")
         handleContentChange(event, "assignee");
         emitUpdate("assignee");
       }}
@@ -35,17 +36,3 @@ const TaskDrawerAssigneeSelection = () => {
 };
 
 export default TaskDrawerAssigneeSelection;
-
-const Select = styled.select`
-  box-sizing: border-box;
-  margin-left: var(--small-space);
-  padding: var(--tiny-space);
-  width: 175px;
-  border-radius: var(--large-radius);
-  border: 1px solid transparent;
-  cursor: pointer;
-
-  &:hover {
-    border: var(--standard-border);
-  }
-`;

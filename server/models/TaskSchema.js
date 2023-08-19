@@ -6,7 +6,7 @@ class TaskSchema {
     this.task = data;
     this.assignee = "";
     this.dueDate = "";
-    this.labels = [];
+    this.priority = "";
     this.description = "";
   }
 }

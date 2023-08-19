@@ -12,6 +12,8 @@ const GlobalStyle = createGlobalStyle`
       --light-gray: #DBDADB;
       --medium-gray: #7B7B7C;
 
+      --light-green: #599B7E;
+
       --hover-color: rgba(255, 255, 255, 0.1);
 
     // Spacing

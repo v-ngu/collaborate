@@ -22,6 +22,7 @@ export default CalendarButton;
 const Button = styled.button`
   margin-left: var(--small-space);
   padding: var(--tiny-space);
+  padding-left: 10px;
   border-radius: var(--large-radius);
   border: 1px solid transparent;
   background-color: transparent;

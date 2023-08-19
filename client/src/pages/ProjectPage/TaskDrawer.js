@@ -7,6 +7,7 @@ import TaskDrawerAssigneeSelection from "./TaskDrawerAssigneeSelection";
 import Calendar from "./Calendar";
 import CalendarButton from "./CalendarButton";
 import CalendarClearButton from "./CalendarClearButton";
+import TaskDrawerPriority from "./TaskDrawerPriority";
 
 const TaskDrawer = () => {
   const { isDrawerOpen, setIsDrawerOpen } = useTaskDrawercontext();
@@ -35,7 +36,12 @@ const TaskDrawer = () => {
           <CalendarClearButton />
           {calendarIsOpen && <Calendar setIsOpen={setCalendarIsOpen} />}
         </Field>
-        <FieldName>Labels</FieldName>
+
+        <Field>
+          <FieldName>Priority</FieldName>
+          <TaskDrawerPriority />
+        </Field>
+        
         <FieldName>Description</FieldName>
         <TaskDrawerInput
           type="textarea"
@@ -75,10 +81,11 @@ const Field = styled.div`
   align-items: center;
 `;
 const FieldName = styled.p`
+  box-sizing: border-box;
   color: var(--medium-gray);
   margin: var(--tiny-space);
   margin-left: var(--small-space);
   padding: var(--tiny-space);
-  padding-right: var(--large-space);
   font-size: 0.8rem;
+  width: 100px;
 `;

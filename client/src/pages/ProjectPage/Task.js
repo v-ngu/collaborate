@@ -4,9 +4,10 @@ import { createPortal } from "react-dom";
 import { Draggable } from "react-beautiful-dnd";
 import { useTaskDrawercontext } from "../../contexts/TaskDrawerContext";
 import Assignee from "./Assignee";
+import Chip from "../../components/Chip";
 
 const Task = ({ taskObject, taskIndex, columnIndex }) => {
-  const { taskId, task, dueDate } = taskObject;
+  const { taskId, task, dueDate, priority } = taskObject;
 
   const { setIsDrawerOpen, setDrawerContent } = useTaskDrawercontext();
 
@@ -35,6 +36,7 @@ const Task = ({ taskObject, taskIndex, columnIndex }) => {
           <Assignee taskObject={taskObject} />
           <DueDate>{dueDate && dayjs(dueDate).format("MMM D, YYYY")}</DueDate>
         </Container>
+        {priority && <Chip priority={priority} />}
       </Wrapper>
     );
 
@@ -53,11 +55,13 @@ const Task = ({ taskObject, taskIndex, columnIndex }) => {
 export default Task;
 
 const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   border: ${({ $isDragging }) =>
     $isDragging ? "var(--dark-border)" : "var(--standard-border)"};
   border-radius: var(--large-radius);
   background-color: white;
-  height: var(--task-height);
+  min-height: var(--task-height);
   margin: var(--small-space) 0px;
   padding: var(--small-space);
 
