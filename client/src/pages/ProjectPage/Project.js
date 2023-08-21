@@ -37,20 +37,17 @@ const ProjectPage = () => {
 
     if (!destination) return;
 
-    const noChange = (
+    const noChange =
       destination.droppableId === source.droppableId &&
-      destination.index === source.index
-    );
+      destination.index === source.index;
 
     if (noChange) return;
 
     const newState = { ...project };
 
     // remove task from initial list
-    const sourceColumnIndex = (
-      newState.projectLists.findIndex(column => (
-        column.columnId === source.droppableId
-      ))
+    const sourceColumnIndex = newState.projectLists.findIndex(
+      (column) => column.columnId === source.droppableId
     );
 
     const sourceTasks = newState.projectLists[sourceColumnIndex].tasks;
@@ -58,33 +55,38 @@ const ProjectPage = () => {
     sourceTasks.splice(source.index, 1);
 
     // move task to new location
-    const destinationColumnIndex = (
-      newState.projectLists.findIndex(column => (
-        column.columnId === destination.droppableId
-      ))
+    const destinationColumnIndex = newState.projectLists.findIndex(
+      (column) => column.columnId === destination.droppableId
     );
 
-    const destinationTasks = newState.projectLists[destinationColumnIndex].tasks;
-    destinationTasks.splice(destination.index, 0, task)
+    const destinationTasks =
+      newState.projectLists[destinationColumnIndex].tasks;
+    destinationTasks.splice(destination.index, 0, task);
     setProject(newState);
 
     // emit event to server to update db
     socket.emit("projects:task-dragged", {
       projectId,
-      projectLists: newState.projectLists
-    })
+      projectLists: newState.projectLists,
+    });
   };
 
   // take a screenshot of the project and save it to the db
   useEffect(() => {
     (async () => {
       await takeScreenshot(headers, projectId);
-      setReloadProjects(prevState => !prevState);
+      setReloadProjects((prevState) => !prevState);
     })();
-  }, [project, setReloadProjects, headers, projectId])
+  }, [project, setReloadProjects, headers, projectId]);
 
   // rendering
-  if (isLoadingProject) return <LoadingCircle />
+  if (isLoadingProject) {
+    return (
+      <Container>
+        <LoadingCircle />
+      </Container>
+    );
+  }
 
   return (
     <TransitionWrapper>
@@ -112,7 +114,7 @@ const ProjectPage = () => {
 
 export default ProjectPage;
 const Div = styled.div`
-  height: 100%
+  height: 100%;
 `;
 const Container = styled.div`
   display: flex;
