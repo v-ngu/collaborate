@@ -38,7 +38,7 @@ const Wrapper = styled.div`
 `;
 const Container = styled.div`
   width: 100%;
-  padding-top: 10%;
+  padding-top: 8%;
   max-height: 100px;
   background-color: var(--ultra-light-gray);
   border-radius: 7px;
