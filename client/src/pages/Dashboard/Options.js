@@ -81,10 +81,11 @@ const Icon = styled(BsThreeDots)`
   top: var(--tiny-space);
   right: var(--tiny-space);
   padding: var(--tiny-space);
-  font-size: 1.6em;
+  font-size: 1.4em;
   border-radius: var(--border-radius);
+  border: var(--standard-border);
   background-color: ${({ $mouseOn, $isClicked }) => (
-    $mouseOn || $isClicked ? "var(--main-yellow)" : null
+    $mouseOn || $isClicked ? "var(--main-yellow)" : "white"
   )};
   color: ${({ $mouseOn, $isClicked }) => (
     $mouseOn || $isClicked ? "white" : "var(--main-gray)"
