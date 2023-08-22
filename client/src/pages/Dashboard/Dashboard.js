@@ -104,6 +104,7 @@ export default Dashboard;
 
 const DashboardToolbar = styled(Toolbar)`
   padding: var(--standard-space);
+  padding-bottom: 0px;
 `;
 
 const Title = styled.h1`
