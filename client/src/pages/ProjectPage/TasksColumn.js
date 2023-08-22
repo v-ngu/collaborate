@@ -51,7 +51,6 @@ const TasksColumn = ({ columnId, column, columnIndex }) => {
 
 export default TasksColumn;
 const Wrapper = styled.div`
-  /* padding: var(--standard-space); */
   width: 275px;
   height: 100%;
   margin: var(--small-space);
@@ -60,7 +59,7 @@ const Wrapper = styled.div`
   border-radius: var(--border-radius);
 `;
 const Title = styled.h4`
-  padding-bottom: var(--small-space);
+  padding: var(--small-space);
   font-weight: 600;
 `;
 const Form = styled.div`

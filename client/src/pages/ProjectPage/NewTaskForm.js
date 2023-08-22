@@ -28,7 +28,7 @@ const NewTaskForm = ({ column, columnIndex }) => {
     if (event.key === "Enter") {
       event.preventDefault();
 
-      socket.emit("projects:add-task", {
+      await socket.emit("projects:add-task", {
         projectId,
         column,
         columnIndex,
@@ -48,7 +48,7 @@ const NewTaskForm = ({ column, columnIndex }) => {
 
   // rendering
   return (
-    <Form>
+    <Div>
       <Textarea
         autoFocus
         value={formData}
@@ -57,18 +57,17 @@ const NewTaskForm = ({ column, columnIndex }) => {
         onClick={(event) => event.stopPropagation()}
         placeholder="What needs to be done?"
       />
-    </Form>
+    </Div>
   );
 };
 
 export default NewTaskForm;
-const Form = styled.form`
+const Div = styled.div`
   display: flex;
 `;
 const Textarea = styled.textarea`
-  border: var(--dark-border);
   border-radius: var(--large-radius);
-  background-color: white;
+  background-color: rgba(173, 103, 204, 0.2);
   margin: 0px;
   margin-top: var(--small-space);
   padding: var(--small-space);

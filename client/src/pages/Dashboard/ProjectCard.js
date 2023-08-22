@@ -45,6 +45,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  overflow: hidden;
 `;
 const Screenshot = styled.img`
   width: 85%;
